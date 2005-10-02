@@ -18,7 +18,8 @@
 \newif\ifprint
 \include{preamble}
 
-\parindent0pt\hfuzz2pt
+\parindent0pt
+%\hfuzz2pt
 \setlength{\textwidth}{360pt}
 
 \setlength{\hoffset}{1cm}
@@ -105,10 +106,12 @@
 
 \begin{document}
 
+% =====================================================================
+
 \title{%An Extension of the \LaTeX-Theorem Evironment%
-%\thanks{This 
-%         file has version number \fileversion{}, last revised \filedate.}
-Mở rộng môi trường định lý của \LaTeX{}
+	%\thanks{This 
+	%         file has version number \fileversion{}, last revised \filedate.}
+	Mở rộng môi trường định lý của \LaTeX{}
 }
 \author{%
 	Wolfgang May\thanks{\url{may@informatik.uni-freiburg.de}}
@@ -122,8 +125,10 @@ Mở rộng môi trường định lý của \LaTeX{}
 
 \maketitle          
 
+% =====================================================================
+
 \begin{abstract}
-% \noindent
+%\noindent
 %%  |ntheorem.sty| is a package for handling theorem-like environments.
 %%  Aditionally to several features for defining the layout of
 %%  theorem-like environments which can be regarded to be standard
@@ -185,6 +190,8 @@ của Frank Mitterbach.
 
 \tableofcontents
 
+% =====================================================================
+
 \section{Introduction}
 
 %% For our purposes here, ``theorems'' are labelled enunciations,
@@ -233,8 +240,12 @@ kê danh sách |TH|, gói |newthm.sty|. Sau đó, Frank Mittelbach đề nghị
 kết hợp các hỗ trợ của hai gói này vào cùng một gói mới (sẽ là chuẩn).
 Đó chính là gói |ntheorem.sty| ;)
 
+% =====================================================================
+
 %\section{The User-Interface}
 \section{Sử dụng gói}
+
+% =====================================================================
 
 %\subsection{How to include the package}
 \subsection{Nạp gói}
@@ -251,7 +262,7 @@ với \meta{options} là danh sách các tuỳ chọn và các yêu cầu đặc
 %% The following \meta{options} are available by now, concerning three
 %% independent issues:
 \medskip
-Các tuỳ chọn được cho nhờ \meta{options} liên quan đến ba vấn đề độc lập:
+Các tuỳ chọn được cho nhờ \meta{options} như sau: % liên quan đến ba vấn đề độc lập:
 \begin{description}
 %% \item[Predefining environments:] (see Section~\ref{sec:standard})
 %%   With [standard] and [noconfig], it can be chosen, if and what
@@ -303,11 +314,12 @@ Với cách nạp gói như trên, bạn sẽ phải tự định nghĩa các m�
 các dấu kết thúc sẽ được định vị tự động. Vì ta dùng gói |hyperref|,
 ta phải bảo đảm tính tương thích nhờ tuỳ chọn |hyperref|.
 
+% =====================================================================
+
 %\subsection{Defining New Theorem Sets}
 \subsection{Định nghĩa TH mới}
 
-
-\DescribeMacro\newtheorem
+\DescribeMacro{\newtheorem}
 %% The syntax and semantics is exactly the same as in standard
 %% \LaTeX{}: the command |\newtheorem| defines a new ``theorem set'' 
 %% or ``theorem-like structure''.
@@ -319,58 +331,95 @@ Lệnh sẽ định nghĩa một |TH| mới. Có hai tham số bắt buộc là 
 của môi trường và |text| thể hiện. Tham số bổ sung chỉ ra cách đánh số
 môi trường.
 \begin{description}
-   \item[\ttfamily \bslash newtheorem\{foo\}\{bar\}]
+   \item[\ttfamily \bslash newtheorem\{vidu\}\{Ví dụ\}]
 %%       The theorem set {\envfont foo} (whose name is \texttt{bar})
 %%       uses its own counter.
-	
-   \item[\ttfamily \bslash newtheorem\{foo2\}{[foo]}\{bar2\}]
-      The theorem set {\envfont foo2} (printed name \texttt{bar2})
-      uses the same counter as the theorem set \texttt{foo}.
-   \item[\ttfamily \bslash newtheorem\{foo3\}\{bar\}{[section]}]
-      The theorem set {\envfont foo3} (printed name \texttt{bar}) is
-      enumerated within the counter \texttt{section}, i.e.\ with every
-      new |\section| the enumeration begins again with 1, and
-      the enumeration is composed from the section-number and the
-      theorem counter itself.
+	Định nghĩa môi trường |vidu|, với |text| thể hiện là |Ví dụ|
+	(như vậy, bạn sẽ có |Ví dụ 1|, |Ví dụ 2|, \ldots). Môi trường
+	này sử dụng bộ đếm riêng.
+   \item[\ttfamily \bslash newtheorem\{vidu2\}{[vidu]}\{Ví dụ khác\}]
+%%       The theorem set {\envfont foo2} (printed name \texttt{bar2})
+%%       uses the same counter as the theorem set \texttt{foo}.
+	Định nghĩa môi trường |vidu2|, với |text| thể hiện là |Ví dụ khác|.
+	Môi trường này sẽ sử dụng cùng bộ đếm của môi trường |vidu|
+	trong ví dụ trước.
+   \item[\ttfamily \bslash newtheorem\{baitap\}\{Bài tập\}{[section]}]
+%%       The theorem set {\envfont foo3} (printed name \texttt{bar}) is
+%%       enumerated within the counter \texttt{section}, i.e.\ with every
+%%       new |\section| the enumeration begins again with 1, and
+%%       the enumeration is composed from the section-number and the
+%%       theorem counter itself.
+	Định nghĩa môi trường |baitap| (với |text| thể hiện là |Bài tập|), sử
+	dụng bộ đếm thay đổi theo mục (|section|). Nếu bạn đang ở Mục số 5 chẳng hạn,
+	bạn sẽ có |Bài tập 5.1|, |Bài tập 5.2|, \ldots Mỗi khi chuyển qua mục mới,
+	bộ đếm sẽ được đặt về không, nghĩa là bạn sẽ có |Bài tập 6.1|, |Bài tập 6.2|, \ldots,
+	|Bài tập 7.1|, |Bài tập 7.2|, \ldots
 \end{description}
 
-For every environment \meta{name}\ defined by |\newtheorem|,
-\emph{two} enviroments \meta{name} and \meta{name|*|}\ are defined.
-In the main document, they have exactly the same effect, but
-the latter causes no entry in the respective list of theorems
-(cf.\ |\section| and |\section*|), see also Section 
-\ref{sec:thmlists}.
+%% For every environment \meta{name}\ defined by |\newtheorem|,
+%% \emph{two} enviroments \meta{name} and \meta{name|*|}\ are defined.
+%% In the main document, they have exactly the same effect, but
+%% the latter causes no entry in the respective list of theorems
+%% (cf.\ |\section| and |\section*|), see also Section 
+Khi gọi lệnh |\newtheorem| để tạo môi trường \meta{name}, thực ra sẽ có hai môi
+trường được tạo ra, là \meta{name} và \meta{name|*|}. Điểm khác biệt duy nhất
+giữa hai môi trường  này, cũng giống như sự khác biệt duy nhất giữa hai lệnh
+|\section| và |\section*|, là môi trường \meta{name|*|} sẽ không đưa |TH|
+vào trong danh sách liệt kê các |TH|. Trong các ví dụ ở trên, bạn sẽ có chẳng hạn
+hai môi trường |baitap| và |baitap*|. Xem thêm Mục~\vref{sec:thmlists}.
 
 \DescribeMacro\renewtheorem
-Theorem sets can be redefined by |\renewtheorem|, with the same arguments
-as explained for |\newtheorem|. When redefining a theorem set, the 
-counter is not re-initialized. 
+%%
+%% Theorem sets can be redefined by |\renewtheorem|, with the same arguments
+%% as explained for |\newtheorem|. When redefining a theorem set, the 
+%% counter is not re-initialized. 
+Định nghĩa lại môi trường đã có. Cách dùng tương tự như của |\newtheorem|.
+Bộ đếm sẽ được khởi tạo lại.
 
-\subsection{Defining the Layout of Theorem Sets}\label{sec:general}
+% =====================================================================
 
-For theorem-like environments, the user can set parameters
-by setting several switches and then calling |\newtheorem|.
-The layout of a theorem set is defined with the values of the switches
-at the time |\newtheorem| is called.
+%% \subsection{Defining the Layout of Theorem Sets}
+\subsection{Thay đổi kiểu dáng}
 
-\subsubsection{Common Parameters for all Theorem Sets}
+\label{sec:general}
+
+%% For theorem-like environments, the user can set parameters
+%% by setting several switches and then calling |\newtheorem|.
+%% The layout of a theorem set is defined with the values of the switches
+%% at the time |\newtheorem| is called.
+Với các môi trường tựa định lý, bạn có thể thay đổi vài tham số (tuỳ chọn) trước
+khi gọi lệnh |\newtheorem| để tinh chỉnh cách thể hiện môi trường
+như ý bạn; các cài đặt nhờ tham số đó sẽ có tác dụng mỗi khi bạn
+sử dụng môi trường.
+
+% =====================================================================
+
+%% \subsubsection{Common Parameters for all Theorem Sets}
+\subsubsection{Các tham số chung}
 
 \DescribeMacro\theorempreskipamount
 \DescribeMacro\theorempostskipamount 
-These additional parameters affect the vertical space around 
-theorem environments:
-|\theorempreskipamount| and |\theorempostskipamount| define,
-respectively, the spacing before and after such an environment.
-These parameters apply for all theorem sets and can be manipulated
-with the ordinary length macros.  They are rubber lengths,
-(`\textsf{skips}'), and therefore can contain \texttt{plus} and
-\texttt{minus} parts.
+%% These additional parameters affect the vertical space around 
+%% theorem environments:
+%% |\theorempreskipamount| and |\theorempostskipamount| define,
+%% respectively, the spacing before and after such an environment.
+%% These parameters apply for all theorem sets and can be manipulated
+%% with the ordinary length macros.  They are rubber lengths,
+%% (`\textsf{skips}'), and therefore can contain \texttt{plus} and
+%% \texttt{minus} parts.
+Các tham số bổ sung này ảnh hưởng đến khoảng cách theo chiều đứng --
+trên (|\theorempreskipamount|) và dưới (|\theorempostskipamount|) môi trường |TH|.
+Hai tham số này ảnh hưởng đến mọi môi trường |TH| và có thể điều chỉnh
+nhờ các lệnh thông thường điều khiển biến độ dài. Chúng là các chiều dài
+dạng |rubber|, vì thế có thể chứa các phần với dấu cộng hoặc trừ.
 
-\subsubsection{Parameters for Individual Sets}
+%\subsubsection{Parameters for Individual Sets}
+\subsubsection{Cho từng TH cụ thể}
 
-The layout of individual theorem sets can be further determined
-by switches controlling the appearance of the headers and the
-header-body-layout:
+%% The layout of individual theorem sets can be further determined
+%% by switches controlling the appearance of the headers and the
+%% header-body-layout:
+Cách thể hiện của mỗi |TH| có thể 
 
 \begin{itemize}
 \item
@@ -438,12 +487,14 @@ these parameters can be set to the values which were used when
 With |\theoremclass{LaTeX}|, the standard \LaTeX\ layout can be
 chosen.
 
-\subsubsection{Font Selection}
+%\subsubsection{Font Selection}
+\subsubsection{Lựa chọn font}
 
-From the document structuring point of view, theorem environments 
-are regarded as special parts inside a document. Furthermore,
-the theorem header is only a distinguished part of a theorem
-environment.
+%% From the document structuring point of view, theorem environments 
+%% are regarded as special parts inside a document. Furthermore,
+%% the theorem header is only a distinguished part of a theorem
+%% environment.
+
 Thus, |\theoremheaderfont| inherits characteristics of 
 |\theorembodyfont| which also inherits in characteristics of 
 the font of the surrounding environment.
@@ -482,10 +533,14 @@ from |theorem.sty|:
       No number, no name. Only the optional argument is typeset.
 \end{deflist}
 
-\subsubsection{Default Setting}
+%\subsubsection{Default Setting}
+\subsubsection{Thiết lập mặc định}
 
-If no option is given, i.e.\ |ntheorem.sty| is loaded by
-|\usepackage{ntheorem.sty}|, the following default is set up:
+%% If no option is given, i.e.\ |ntheorem.sty| is loaded by
+%% |\usepackage{ntheorem.sty}|, the following default is set up:
+Khi không có tùy chọn nào được chỉ ra, nghĩa là gói |ntheorem.sty|
+được nạp đơn giản nhờ |\usepackage{ntheorem}|, các thiết lập sau
+sẽ được dùng:
 \begin{quote} 
 |\theoremstyle{plain}|,\\
 |\theoremheaderfont{\normalfont\bfseries}| and\\
@@ -495,9 +550,10 @@ If no option is given, i.e.\ |ntheorem.sty| is loaded by
 |\theoremnumbering{arabic}|, \\
 |\theoremsymbol{}|.
 \end{quote}
-Thus, by only saying |\newtheorem{...}{...}|, the user gets
-the same layout as in standard \LaTeX.
-
+%% Thus, by only saying |\newtheorem{...}{...}|, the user gets
+%% the same layout as in standard \LaTeX.
+Vì vậy, bằng cách dùng |\newtheorem{...}{...}|, bạn thu được
+cách thể hiện giống hệt trong \LaTeX{} chuẩn.
 
 \subsubsection{A Standard Set of Theorems}\label{sec:standard}
 
@@ -1617,117 +1673,115 @@ that there is a line of text.
 If someone has a solution to one of those questions, please inform us.
 (You can be sure to be mentioned in the Acknowledgements.)
 
-\section{Code Documentation}\label{sec:code}
-
-\subsection{The Standard Configuration}
-
-
-\section{History and Acknowledgements}
-
-\subsection{The endmark-Story (Wolfgang May)}
-
-In 1995, I started a hack for setting endmarks semiautomatically
-at the end of displayed formulas.
-The work on |thmmarks.sty| was initiated in October 1996
-by a thread asking for a routine for setting endmarks in 
-\emph{de.comp.tex}
-founded by Boris Piwinger.
-Version 0.1 incorporated the main features for setting endmarks
-automagically by using the |.aux| file. Version 0.2 included
-some bugfixes and was the first one accessible on the internet.
-Boris suggested to include |fleqn| and |leqno| which has been
-done in version 0.3 (which was never made public).
-Since at this point, |thmmarks.sty| was incompatible to the widely 
-used |theorem.sty| written by Frank Mittelbach, in Version 0.4, 
-the features of theorem.sty have been integrated.
-
-With version 0.5, the case of ``empty'' end symbols has been handled,
-|\qed| has been added (also suggested by Boris), and
-the handling of theoremstyles by |\newtheoremstyle| has been
-included.
-
-For version 0.6, the handling of endmarks in displaymaths has been
-changed in order to adjust them with the bottom of the displayed
-math.
-
-Version 0.6 was the first one announced in \emph{comp.text.tex}.
-For version 0.7, I added the handling of |amsmath| features,
-suggested by my colleague Peter Neuhaus.
-
-Versions 0.71 and 0.72 incorporated minor bugfixes.
-
-\subsection{Lists, Lists, Lists (Andreas Schlechte)}
-
-I often saw questions on theoremlists in the
-german newsgroup \emph{de.comp.text.tex}, but I never
-spent any attention on those postings. This changed in
-summer 1996, when I needed those lists for myself. Thus, I
-asked the holy question. But none of the given answers
-satisfied my wish for a simple, easy to use and short
-solution. 
-
-I decided to take a look at Frank Mittelbachs
-|theorem.sty|. First I didn't understand much of the code,
-but Bernd Raichle helped me a lot by answering my
-boring questions and I finally understood it. 
-
-I started the coding and within a few days, a first
-experimental version was born. Not only that I had implemented
-the lists, I also inserted a separator and a flexible numbering
-of the theorems.
-
-After a long period of
-testing, I wanted to share the new features with other
-\TeX-Freaks and wrote an article for the ``Die \TeX nische Kom\"odie''
-(Journal of german tug, DANTE e.V.). As soon as I had sent
-the article to DANTE, I got first reactions on the style. 
-Gerd Neugebauer gave me many hints. I hided several
-cryptical notations in easy definitions and improved the
-user interface. 
-
-In January 1997, I released ``newthm'' to the world and it
-was uploaded to the CTAN-Archives. Few days later I sent
-my files to Frank Mittelbach in order to show him my extensions.
-He told me, that already other extensions were made, and that
-it would be good to combine alltogether.
-
-\subsection{Let's come together}
-
-With version 0.8, in February 1997, the combination of
-|thmmarks.sty| with |newthm.sty| to |ntheorem.sty| has been started.
-On April 21, 1997, version 0.94 beta has been made public as 
-version 1.0.
-
-In course of the development, the following changes were made:
-
-\GlossaryPrologue{}
-
-\IfFileExists{ntheorem.gls}{\PrintChanges}
-{\begin{quote}You should create the list of changes by 
-
-~~~ \texttt{makeindex -s gglo.ist -o ntheorem.gls ntheorem.glo}
-
-and running \texttt{latex ntheorem.drv} again.\end{quote}}
-
-
-\subsection{Acknowledgements}
-
-This place is dedicated to all those, who helped us developing
-our separate styles and this combined package. Thanks to
-(listed in alphabetical order):
-\begin{quote}
- Donald Arseneau,
- Giovanni Dore,
- Oliver Karch,
- Frank Mittelbach, 
- Gerd Neugebauer, 
- Heiko Oberdiek,
- Boris Piwinger,
- Bernd Raichle,
- Rainer Sch\"opf,
- Didier Verna.
-\end{quote}
-
+%% \section{Code Documentation}\label{sec:code}
+%% 
+%% \subsection{The Standard Configuration}
+%%
+%% \section{History and Acknowledgements}
+%% 
+%% \subsection{The endmark-Story (Wolfgang May)}
+%% 
+%% In 1995, I started a hack for setting endmarks semiautomatically
+%% at the end of displayed formulas.
+%% The work on |thmmarks.sty| was initiated in October 1996
+%% by a thread asking for a routine for setting endmarks in 
+%% \emph{de.comp.tex}
+%% founded by Boris Piwinger.
+%% Version 0.1 incorporated the main features for setting endmarks
+%% automagically by using the |.aux| file. Version 0.2 included
+%% some bugfixes and was the first one accessible on the internet.
+%% Boris suggested to include |fleqn| and |leqno| which has been
+%% done in version 0.3 (which was never made public).
+%% Since at this point, |thmmarks.sty| was incompatible to the widely 
+%% used |theorem.sty| written by Frank Mittelbach, in Version 0.4, 
+%% the features of theorem.sty have been integrated.
+%% 
+%% With version 0.5, the case of ``empty'' end symbols has been handled,
+%% |\qed| has been added (also suggested by Boris), and
+%% the handling of theoremstyles by |\newtheoremstyle| has been
+%% included.
+%% 
+%% For version 0.6, the handling of endmarks in displaymaths has been
+%% changed in order to adjust them with the bottom of the displayed
+%% math.
+%% 
+%% Version 0.6 was the first one announced in \emph{comp.text.tex}.
+%% For version 0.7, I added the handling of |amsmath| features,
+%% suggested by my colleague Peter Neuhaus.
+%% 
+%% Versions 0.71 and 0.72 incorporated minor bugfixes.
+%% 
+%% \subsection{Lists, Lists, Lists (Andreas Schlechte)}
+%% 
+%% I often saw questions on theoremlists in the
+%% german newsgroup \emph{de.comp.text.tex}, but I never
+%% spent any attention on those postings. This changed in
+%% summer 1996, when I needed those lists for myself. Thus, I
+%% asked the holy question. But none of the given answers
+%% satisfied my wish for a simple, easy to use and short
+%% solution. 
+%% 
+%% I decided to take a look at Frank Mittelbachs
+%% |theorem.sty|. First I didn't understand much of the code,
+%% but Bernd Raichle helped me a lot by answering my
+%% boring questions and I finally understood it. 
+%% 
+%% I started the coding and within a few days, a first
+%% experimental version was born. Not only that I had implemented
+%% the lists, I also inserted a separator and a flexible numbering
+%% of the theorems.
+%% 
+%% After a long period of
+%% testing, I wanted to share the new features with other
+%% \TeX-Freaks and wrote an article for the ``Die \TeX nische Kom\"odie''
+%% (Journal of german tug, DANTE e.V.). As soon as I had sent
+%% the article to DANTE, I got first reactions on the style. 
+%% Gerd Neugebauer gave me many hints. I hided several
+%% cryptical notations in easy definitions and improved the
+%% user interface. 
+%% 
+%% In January 1997, I released ``newthm'' to the world and it
+%% was uploaded to the CTAN-Archives. Few days later I sent
+%% my files to Frank Mittelbach in order to show him my extensions.
+%% He told me, that already other extensions were made, and that
+%% it would be good to combine alltogether.
+%% 
+%% \subsection{Let's come together}
+%% 
+%% With version 0.8, in February 1997, the combination of
+%% |thmmarks.sty| with |newthm.sty| to |ntheorem.sty| has been started.
+%% On April 21, 1997, version 0.94 beta has been made public as 
+%% version 1.0.
+%% 
+%% In course of the development, the following changes were made:
+%% 
+%% \GlossaryPrologue{}
+%% 
+%% \IfFileExists{ntheorem.gls}{\PrintChanges}
+%% {\begin{quote}You should create the list of changes by 
+%% 
+%% ~~~ \texttt{makeindex -s gglo.ist -o ntheorem.gls ntheorem.glo}
+%% 
+%% and running \texttt{latex ntheorem.drv} again.\end{quote}}
+%% 
+%% 
+%% \subsection{Acknowledgements}
+%% 
+%% This place is dedicated to all those, who helped us developing
+%% our separate styles and this combined package. Thanks to
+%% (listed in alphabetical order):
+%% \begin{quote}
+%%  Donald Arseneau,
+%%  Giovanni Dore,
+%%  Oliver Karch,
+%%  Frank Mittelbach, 
+%%  Gerd Neugebauer, 
+%%  Heiko Oberdiek,
+%%  Boris Piwinger,
+%%  Bernd Raichle,
+%%  Rainer Sch\"opf,
+%%  Didier Verna.
+%% \end{quote}
 
 \end{document}
 
