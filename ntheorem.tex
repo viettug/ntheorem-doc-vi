@@ -23,7 +23,7 @@
 
 \setlength{\hoffset}{1cm}
 \setlength{\voffset}{-1cm}
-\setlength{\textwidth}{12cm}
+\setlength{\textwidth}{13.5cm}
 \setlength{\textheight}{23cm}
 
 \MakeShortVerb{\|}
@@ -294,7 +294,7 @@ Các tuỳ chọn được cho nhờ \meta{options} liên quan đến ba vấn �
 	Xem Mục~\vref{sec:hyperref}.
 \end{description}
 
-Dưới đây là một ví dụ cách nạp gói:
+Dưới đây là một ví dụ:
 \begin{example}
   \usepackage{hyperref}
   \usepackage[hyperref,thmmarks,noconfig]{ntheorem}
@@ -303,19 +303,26 @@ Với cách nạp gói như trên, bạn sẽ phải tự định nghĩa các m�
 các dấu kết thúc sẽ được định vị tự động. Vì ta dùng gói |hyperref|,
 ta phải bảo đảm tính tương thích nhờ tuỳ chọn |hyperref|.
 
-\subsection{Defining New Theorem Sets}
+%\subsection{Defining New Theorem Sets}
+\subsection{Định nghĩa TH mới}
+
 
 \DescribeMacro\newtheorem
-The syntax and semantics is exactly the same as in standard
-\LaTeX{}: the command |\newtheorem| defines a new ``theorem set'' 
-or ``theorem-like structure''.
-Two required arguments name the new environment set and give the 
-text to be typeset with each instance of the new ``set'', while
-an optional argument determines how the ``set'' is enumerated:
+%% The syntax and semantics is exactly the same as in standard
+%% \LaTeX{}: the command |\newtheorem| defines a new ``theorem set'' 
+%% or ``theorem-like structure''.
+%% Two required arguments name the new environment set and give the 
+%% text to be typeset with each instance of the new ``set'', while
+%% an optional argument determines how the ``set'' is enumerated:
+Cú pháp của lệnh hoàn toàn giống như của lệnh chuẩn |\newtheorem|.
+Lệnh sẽ định nghĩa một |TH| mới. Có hai tham số bắt buộc là tên
+của môi trường và |text| thể hiện. Tham số bổ sung chỉ ra cách đánh số
+môi trường.
 \begin{description}
    \item[\ttfamily \bslash newtheorem\{foo\}\{bar\}]
-      The theorem set {\envfont foo} (whose name is \texttt{bar})
-      uses its own counter.
+%%       The theorem set {\envfont foo} (whose name is \texttt{bar})
+%%       uses its own counter.
+	
    \item[\ttfamily \bslash newtheorem\{foo2\}{[foo]}\{bar2\}]
       The theorem set {\envfont foo2} (printed name \texttt{bar2})
       uses the same counter as the theorem set \texttt{foo}.
