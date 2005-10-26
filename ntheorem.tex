@@ -419,59 +419,82 @@ dạng |rubber|, vì thế có thể chứa các phần với dấu cộng hoặ
 %% The layout of individual theorem sets can be further determined
 %% by switches controlling the appearance of the headers and the
 %% header-body-layout:
-Cách thể hiện của mỗi |TH| có thể 
+Cách thể hiện của mỗi |TH| có thể tinh chỉnh nhờ các lệnh điều khiển sau đây.
 
 \begin{itemize}
 \item
 \DescribeMacro\theoremstyle
-  |\theoremstyle{|\meta{style}|}|: The general structure of the 
-  theorem layout is defined via its |\theoremstyle|. |\ntheorem|
-  provides several predefined styles including those of
-  Frank Mittelbach's |theorem.sty| 
-  (cf.\ Section \ref{sec:predefdstyles}. 
-  Additional styles can be defined by |\newtheoremstyle| 
-  (cf.\ Section\ref{sec:newtheoremstyle}).
+  |\theoremstyle{|\meta{style}|}|:
+%%  The general structure of the 
+%%  theorem layout is defined via its |\theoremstyle|. |\ntheorem|
+%%  provides several predefined styles including those of
+%%  Frank Mittelbach's |theorem.sty| 
+	Xác định kiểu của |TH|. Các kiểu được cung cấp với với |\ntheorem|
+	bao gồm cả kiểu có trong gói |theorem.sty|. Xem liệt kê các kiểu
+	ở Mục~\vref{sec:predefdstyles}.
+%  Additional styles can be defined by |\newtheoremstyle| 
+	Ở Mục~\vref{sec:newtheoremstyle} có nói về cách định nghĩa kiểu mới.
 \item
 \DescribeMacro\theoremheaderfont
-  |\theoremheaderfont{|\meta{fontcmds}|}|: The theorem header is set
-  in the font specified by \meta{fontcmds}.
+  |\theoremheaderfont{|\meta{fontcmds}|}|: %% The theorem header is set
+  %%in the font specified by \meta{fontcmds}.
+  Dùng \meta{fontcmds} để xác định |font| cho |header| của |TH|
 
-  In contrast to |theorem.sty|, |\theoremheaderfont| can be set 
-  individually for each environment type. 
+%%   In contrast to |theorem.sty|, |\theoremheaderfont| can be set 
+%%   individually for each environment type. 
+	Không như |theorem.sty|, lệnh |\theoremheaderfont| cho phép đổi
+	|font| cho từng kiểu |TH|.
 \item
 \DescribeMacro\theorembodyfont
-  |\theorembodyfont{|\meta{fontcmds}|}|: The theorem body is set
-  in the font specified by \meta{fontcmds}.
+  |\theorembodyfont{|\meta{fontcmds}|}|: %The theorem body is set
+  %%in the font specified by \meta{fontcmds}.
+  Xác định |font| cho phần nội dung |TH|.
 \item 
 \DescribeMacro\theoremseparator
-  |\theoremseparator{|\meta{thing}|}|: \meta{thing} separates the 
-  header from the body of the theorem-environment. 
-  E.g., \meta{thing} can be
-  ``:'' or ``.''.
+  |\theoremseparator{|\meta{thing}|}|: %%\meta{thing} %%separates the 
+%%   header from the body of the theorem-environment. 
+%%   E.g., \meta{thing} can be
+%%   ``:'' or ``.''.
+	Dùng \meta{thing} để ngăn cách phần |header| và phần nội dung định lý (|body|).
+	Thường thì \meta{thing} là dấu hai chấm (|:|) hoặc chấm (|.|).
 \item 
 \DescribeMacro\theoremindent
-  |\theoremindent{|\meta{dimen}|}| can be used to indent the theorem wrt.\
-  the surrounding text.
+%%   |\theoremindent{|\meta{dimen}|}| can be used to indent the theorem wrt.\
+%%   the surrounding text.
+	|\theoremindent{|\meta{dimen}|}| dùng để xác định |indent| (khoảng cách so với
+	lề bên trái).
 
-\DANGER It's a `\textsf(dimen)', so the user shouldn't try to specify a
-\texttt{plus} or \texttt{minus} part, cause this leads to an error.
+\DANGER
+%% It's a `\textsf(dimen)', so the user shouldn't try to specify a
+%% \texttt{plus} or \texttt{minus} part, cause this leads to an error.
+	Ở đây là \meta{dimen}, kích thước thật sự. Nếu bạn dùng kiểu |rubber|
+	với các dấu |plus| hoặc |minus| trong phần \meta{dimen}, bạn sẽ gặp lỗi.
 \item
 \DescribeMacro\theoremnumbering
-  |\theoremnumbering{|\meta{style}|}| specifies the appearance of
-  the numbering of the theorem set. Possible \meta{styles} are
+  |\theoremnumbering{|\meta{style}|}|:
+%%   specifies the appearance of
+%%   the numbering of the theorem set. Possible \meta{styles} are
+   Kiểu đánh số cho |TH|. Các giá trị có thể là:
   |arabic| (default), |alph|, |Alph|, |roman|,
-  |Roman|, |greek|, |Greek|, and |fnsymbol|. 
+  |Roman|, |greek|, |Greek| và |fnsymbol|. 
 
-  Clearly, if a theorem-environment uses the counter of another
-  environment type, also the numbering style of that environment
-  is used. 
+%%   Clearly, if a theorem-environment uses the counter of another
+%%   environment type, also the numbering style of that environment
+%%   is used. 
+	Rõ ràng, nếu môi trường |TH| sử dụng bộ đếm từ môi trường |XYZ| khác,
+	thì kiểu đánh số của môi trường |TH| sẽ thừa hưởng từ |XYZ|.
 \item
 \DescribeMacro\theoremsymbol
-  |\theoremsymbol{|\meta{thing}|}|: This is only active if
-  |ntheorem.sty| is loaded with option |[thmmarks]|. 
-  \meta{thing} is set as an endmark at the end of every instance
-  of the environment.
-  If no symbol should appear, say |\theoremsymbol{}|.
+  |\theoremsymbol{|\meta{thing}|}|:
+%%   This is only active if
+%%   |ntheorem.sty| is loaded with option |[thmmarks]|. 
+%%   \meta{thing} is set as an endmark at the end of every instance
+%%   of the environment.
+%%   If no symbol should appear, say |\theoremsymbol{}|.
+	Lệnh này chỉ các tác dụng khi gói |ntheorem.sty| được nạp với tuỳ chọn |thmmarks|.
+	Ở đây, \meta{thing} sẽ được dùng như |endmark|, tức dấu kết thúc cho |TH|.
+	Nếu không muốn dùng |endmark| cho riêng môi trường |TH| nào, 
+	dùng lệnh |\theoremsymbol{}|.
 \end{itemize}
 
   The flexibility provided by these command should relieve the
