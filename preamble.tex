@@ -21,6 +21,20 @@
 		\fcolorbox{black}{red!20}{\texttt{#1}}\vspace*{.2cm}%
 	\fi%
 }
+\def\exmacro#1{
+	\ifprint
+		\fcolorbox{black}{white}{\texttt{\bslash#1}}\vspace*{.2cm}%
+	\else
+		\fcolorbox{black}{blue!20}{\texttt{\bslash#1}}\vspace*{.2cm}%
+	\fi%
+}
+\def\macro#1{
+	\ifprint
+		\fcolorbox{black}{white}{\texttt{\bslash#1}}\vspace*{.2cm}%
+	\else
+		\fcolorbox{black}{red!20}{\texttt{\bslash#1}}\vspace*{.2cm}%
+	\fi%
+}
 \def\mktitledecor{%
   \rput[tl]{90}(-5.5,-25.51){%
     \psline[linewidth=1pt](0,1.5)(\paperheight,1.5)%
@@ -56,14 +70,14 @@
 \def\DescribeOption#1{\leavevmode\@bsphack
               \marginpar{\raggedleft\PrintDescribeOption{#1}}%
               \SpecialOptionIndex{#1}\@esphack\ignorespaces}
-\def\PrintDescribeOption#1{\strut\emph{option}\\\MacroFont #1\ }
+\def\PrintDescribeOption#1{\MacroFont #1\ }
 \def\SpecialOptionIndex#1{\@bsphack
     \index{#1\actualchar{\protect\ttfamily#1}
            (option)\encapchar usage}\@esphack}
 \def\DescribeOptions#1{\leavevmode\@bsphack
-  \marginpar{\raggedleft\strut\emph{options}%
+  \marginpar{\raggedleft%\strut\emph{options}%
   \@for\@tempa:=#1\do{%
-    \\\strut\MacroFont\@tempa\SpecialOptionIndex\@tempa
+    \strut\MacroFont\@tempa\\\SpecialOptionIndex\@tempa
   }}\@esphack\ignorespaces}
 \def\SpecialEnvIndex#1{\@bsphack
     \index{#1\actualchar{\protect\ttfamily#1}
