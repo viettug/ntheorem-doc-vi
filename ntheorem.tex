@@ -224,10 +224,10 @@ của môi trường \texttt{THM} và tên của \texttt{THM} có sự tương �
 \texttt{dinhly} ứng với \texttt{Định lý}. Do đó, trong đa số trường hợp,
 sự phân biệt này không có ý nghĩa quan trọng\ldots --- kyanh}
 Trong ví dụ sau,
-\begin{verbatim}
-  \newtheorem{foobar}{Mệnh đề}
-\end{verbatim}
-ta có |THM| với tên là |Mệnh đề|, nhưng tên của môi trường
+\begin{example}
+  \newtheorem{foobar}{Menh de}
+\end{example}
+ta có |THM| với tên là |Menh de|, nhưng tên của môi trường
 tương ứng là |foobar|. Đôi khi, ta sẽ gọi \emph{môi trường} |THM| thay cho
 \emph{tên của môi trường} |THM|.
 %% dùng để chỉ loại của cấu trúc (ví dụ định lý hay
@@ -270,7 +270,7 @@ kết hợp các hỗ trợ của hai gói này vào cùng một gói mới (s�
 	\ifpdf
 		\includegraphics[scale=.6]{thm.png}
 	\else
-		\includegraphics[scale=.7]{thm.ps}
+		\includegraphics[scale=.6]{thm.ps}
 	\fi
 \end{center}
 \caption{Môi trường THM}
@@ -289,9 +289,9 @@ kết hợp các hỗ trợ của hai gói này vào cùng một gói mới (s�
 
 %The package |ntheorem.sty| is included by
 Gói |ntheorem.sty| có thể nạp như sau
-\begin{quote}
-|\usepackage[|\meta{options}|]{ntheorem.sty}|,
-\end{quote}
+\begin{command}
+  \usepackage[`\meta{options}']{ntheorem}
+\end{command}
 %% where the optional parameter \meta{options} selects predefined
 %% configurations and special requirements. 
 với \meta{options} là danh sách các tuỳ chọn và các yêu cầu đặc biệt.
@@ -462,10 +462,10 @@ dạng |rubber|, vì thế có thể chứa các phần với dấu cộng hoặ
 %% header-body-layout:
 Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh điều khiển sau đây.
 
-\begin{itemize}
+\begin{description}
 \item
 \DescribeMacro\theoremstyle
-  |\theoremstyle{|\meta{style}|}|:
+  \exmacro{theoremstyle\{\meta{style}\}}\\
 %%  The general structure of the 
 %%  theorem layout is defined via its |\theoremstyle|. |\ntheorem|
 %%  provides several predefined styles including those of
@@ -477,7 +477,8 @@ Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh đ
 	Ở Mục~\vref{sec:newtheoremstyle} có nói về cách định nghĩa kiểu mới.
 \item
 \DescribeMacro\theoremheaderfont
-  |\theoremheaderfont{|\meta{fontcmds}|}|: %% The theorem header is set
+  \exmacro{theoremheaderfont\{\meta{fontcmds}\}}\\
+  %% The theorem header is set
   %%in the font specified by \meta{fontcmds}.
   Dùng \meta{fontcmds} để xác định |font| cho phần |header| của |THM|
 
@@ -487,12 +488,14 @@ Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh đ
 	|font| cho từng kiểu |THM|.
 \item
 \DescribeMacro\theorembodyfont
-  |\theorembodyfont{|\meta{fontcmds}|}|: %The theorem body is set
+  \exmacro{theorembodyfont\{\meta{fontcmds}\}}\\
+  %The theorem body is set
   %%in the font specified by \meta{fontcmds}.
   Xác định |font| cho phần thân (nội dung) |THM|.
 \item 
 \DescribeMacro\theoremseparator
-  |\theoremseparator{|\meta{sep}|}|: %%\meta{thing} %%separates the 
+  \exmacro{theoremseparator\{\meta{sep}\}}\\
+%%\meta{thing} %%separates the 
 %%   header from the body of the theorem-environment. 
 %%   E.g., \meta{thing} can be
 %%   ``:'' or ``.''.
@@ -502,17 +505,17 @@ Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh đ
 \DescribeMacro\theoremindent
 %%   |\theoremindent{|\meta{dimen}|}| can be used to indent the theorem wrt.\
 %%   the surrounding text.
-	|\theoremindent{|\meta{dimen}|}| dùng để xác định |indent| (khoảng cách so với
-	lề bên trái).
+	\exmacro{theoremindent\{\meta{dimen}\}}\\
+	dùng để xác định |indent| (khoảng cách so với lề bên trái).
 
 \DANGER
 %% It's a `\textsf(dimen)', so the user shouldn't try to specify a
 %% \texttt{plus} or \texttt{minus} part, cause this leads to an error.
-	Ở đây là \meta{dimen}, kích thước thật sự. Nếu bạn dùng kiểu |rubber|
+	Ở đây, \meta{dimen} là kích thước thật sự. Nếu bạn dùng kiểu |rubber|
 	với các dấu |plus| hoặc |minus| trong phần \meta{dimen}, bạn sẽ gặp lỗi.
 \item
 \DescribeMacro\theoremnumbering
-  |\theoremnumbering{|\meta{style}|}|:
+  \exmacro{theoremnumbering\{\meta{style}\}}\\
 %%   specifies the appearance of
 %%   the numbering of the theorem set. Possible \meta{styles} are
    Kiểu đánh số cho |THM|. Các giá trị có thể là:
@@ -526,7 +529,7 @@ Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh đ
 	thì kiểu đánh số của môi trường |THM| sẽ thừa hưởng từ |XYZ|.
 \item
 \DescribeMacro\theoremsymbol
-  |\theoremsymbol{|\meta{thing}|}|:
+  \exmacro{theoremsymbol\{\meta{thing}\}}\\
 %%   This is only active if
 %%   |ntheorem.sty| is loaded with option |[thmmarks]|. 
 %%   \meta{thing} is set as an endmark at the end of every instance
@@ -536,7 +539,7 @@ Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh đ
 	Ở đây, \meta{thing} sẽ được dùng như |endmark|, tức dấu kết thúc cho |THM|.
 	Nếu không muốn dùng |endmark| cho riêng môi trường |THM| nào, 
 	dùng lệnh |\theoremsymbol{}|.
-\end{itemize}
+\end{description}
 
 %% The flexibility provided by these command should relieve the
 %% users from the ugly hacking in |\newtheorem| to fit most of  
@@ -544,14 +547,19 @@ Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh đ
 Nhờ các lệnh điều khiển trên, bạn có thể linh hoạt tạo ra các |THM| như ý,
 mà không phải nhọc công và phải quan tâm nhiều đến yếu tố kỹ thuật.
 
-\DescribeMacro\theoremclass\option{\bslash theoremclass}\\
-With the command |\theoremclass{|\meta{theorem-type}|}| 
-(where \meta{theorem-type} must be an already defined theorem type),
-these parameters can be set to the values which were used when
-|\newtheorem| was called for \meta{theorem-type}. 
+\medskip
+\DescribeMacro\theoremclass\exmacro{theoremclass\{\meta{theorem-type}\}}\\
+%% With the command |\theoremclass{|\meta{theorem-type}|}| 
+%% (where \meta{theorem-type} must be an already defined theorem type),
+%% these parameters can be set to the values which were used when
+%% |\newtheorem| was called for \meta{theorem-type}. 
+Với lệnh này, \meta{theomrem-type} là kiểu |THM| đã được định nghĩa.
+Với cách gọi này, các thiết lập về kiểu dáng ?????????
 
-With |\theoremclass{LaTeX}|, the standard \LaTeX\ layout can be
-chosen.
+%% With |\theoremclass{LaTeX}|, the standard \LaTeX\ layout can be
+%% chosen.
+Với |\theoremclass{LaTeX}|, kiểu dáng chuẩn của \LaTeX{} cho các |THM|
+sẽ được dùng.
 
 %\subsubsection{Font Selection}
 \subsubsection{Lựa chọn font}
@@ -560,43 +568,77 @@ chosen.
 %% are regarded as special parts inside a document. Furthermore,
 %% the theorem header is only a distinguished part of a theorem
 %% environment.
+Xét về mặt cấu trúc, mỗi |THM| là một phần đặc biệt
+của tài liệu, trong đó, phần |header| được thiết kế để dễ dàng
+phân biệt với phần còn lại của môi trường.
 
-Thus, |\theoremheaderfont| inherits characteristics of 
-|\theorembodyfont| which also inherits in characteristics of 
-the font of the surrounding environment.
-Thus, if for example |\theorembodyfont| is |\itshape| and 
-|\theoremheaderfont| is |\bfseries| the font selected for the 
-header will have the characteristics `bold extended italic'. 
-If this is not desired, the corresponding property has to be
-explicitly overwritten in |\theoremheaderfont|, e.g.
-by |\theoremheaderfont{\normalfont\bfseries}|
+%% Thus, |\theoremheaderfont| inherits characteristics of 
+%% |\theorembodyfont| which also inherits in characteristics of 
+%% the font of the surrounding environment.
+%% Thus, if for example |\theorembodyfont| is |\itshape| and 
+%% |\theoremheaderfont| is |\bfseries| the font selected for the 
+%% header will have the characteristics `bold extended italic'. 
+%% If this is not desired, the corresponding property has to be
+%% explicitly overwritten in |\theoremheaderfont|, e.g.
+%% by |\theoremheaderfont{\normalfont\bfseries}|
+Vì vậy, lệnh |\theoremheaderfont| thừa hưởng các đặc trưng của |\theorembodyfont|,
+và đến lượt mình, |\theorembodyfont| thừa hưởng các thuộc tính của phần
+tài liệu bên ngoài |THM| đang xét.
 
-\subsubsection{Predefined theorem styles}\label{sec:predefdstyles}
+\medskip
+Ví dụ:
+nếu |\theorembodyfont| là |\itshape| và |\theoremheaderfont| là |\bfseries|,
+thì phần |header| thực tế có kiểu \textbf{\textit{đậm và nghiêng}}.
 
-The following theorem styles are predefined, covering those
-from |theorem.sty|:
+\medskip
+Nếu điều này làm bạn không vừa ý, cụ thể là bạn muốn phần |header|
+chỉ được in đậm, có thể làm như sau:
+\begin{example}
+  \theoremheaderfont{\normalfont\bfseries}
+\end{example}
+
+
+%% \subsubsection{Predefined theorem styles}
+\subsubsection{Các kiểu đã định nghĩa}
+
+\label{sec:predefdstyles}
+
+%% The following theorem styles are predefined, covering those
+%% from |theorem.sty|:
+Các kiểu dáng định lý sau đã có sẵn (như trong gói |theorem.sty|):
 \begin{deflist}{nonumberbreak:}
    \item[plain]
-      This theorem style emulates the original \LaTeX{} definition,
-      except that additionally the parameters
-      |\theorem...skipamount| are used.
+%%       This theorem style emulates the original \LaTeX{} definition,
+%%       except that additionally the parameters
+%%       |\theorem...skipamount| are used.
+		Như kiểu dáng của \LaTeX{} chuẩn,
+		ngoại trừ tham số bổ sung |\theorem...skipamount|  được dùng.
    \item[break]
-      In this style, the theorem header is followed by a line
-      break.
+%%       In this style, the theorem header is followed by a line break.
+		Phần |header| ngăn cách với phần thân |THM| bởi dòng mới\footnote{thực ra là một dấu ngắt dòng}.
    \item[change]
-      Header number and text are interchanged, without a line break.
+%%       Header number and text are interchanged, without a line break.
+		Chỉ số và tên |THM| hoán đổi vị trí. Tuy nhiên, phần
+		|header| sẽ theo sau ngay bởi phần thân |THM| (so sánh với kiểu
    \item[changebreak]
-      Like \texttt{change}, but with a line break after the header.
+%%       Like \texttt{change}, but with a line break after the header.
+		Là sự kết hợp hai kiểu |change| và |break|.
    \item[margin]
-      The number is set in the left margin, without a line break.
+%%       The number is set in the left margin, without a line break.
+		Chỉ số được bố trí ở lề trái, không ngắt dòng sau phần |header|.
    \item[marginbreak]
-      Like \texttt{margin}, but with a line break after the header.
+%%       Like \texttt{margin}, but with a line break after the header.
+		Như |margin|, nhưng ngắt dòng sau phần |header|.
    \item[nonumberplain]
-      Like \texttt{plain}, without number (e.g.\ for proofs).
+%%       Like \texttt{plain}, without number (e.g.\ for proofs).
+		Như |plain|, nhưng không đánh số (dùng cho chứng minh,\ldots)
    \item[nonumberbreak]
-      Like \texttt{break}, without number.
+%%       Like \texttt{break}, without number.
+		Tổ hợp |break| và |nonumberplain|.
    \item[empty]
-      No number, no name. Only the optional argument is typeset.
+%%       No number, no name. Only the optional argument is typeset.
+		Phần |header| chỉ gồm tên riêng (nếu có), còn chỉ số và tên của
+		|THM| được bỏ qua.
 \end{deflist}
 
 %\subsubsection{Default Setting}
@@ -607,15 +649,15 @@ from |theorem.sty|:
 Khi không có tùy chọn nào được chỉ ra, nghĩa là gói |ntheorem.sty|
 được nạp đơn giản nhờ |\usepackage{ntheorem}|, các thiết lập sau
 sẽ được dùng:
-\begin{quote} 
-|\theoremstyle{plain}|,\\
-|\theoremheaderfont{\normalfont\bfseries}| and\\
-|\theorembodyfont{\itshape}|,\\
-|\theoremseparator{}|,\\
-|\theoremindent0cm|,\\
-|\theoremnumbering{arabic}|, \\
-|\theoremsymbol{}|.
-\end{quote}
+\begin{example} 
+  \theoremstyle{plain}
+  \theoremheaderfont{\normalfont\bfseries}
+  \theorembodyfont{\itshape}
+  \theoremseparator{}
+  \theoremindent0cm
+  \theoremnumbering{arabic}
+  \theoremsymbol{}
+\end{example}
 %% Thus, by only saying |\newtheorem{...}{...}|, the user gets
 %% the same layout as in standard \LaTeX.
 Vì vậy, bằng cách dùng |\newtheorem{...}{...}|, bạn thu được
