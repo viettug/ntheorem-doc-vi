@@ -1,3 +1,8 @@
+\newif\ifpdf
+\ifx\pdfoutput\undefined\relax
+\else\ifnum\pdfoutput>0\relax
+\pdftrue\fi\fi
+
 \def\filedate{2002/01/07}
 \def\docdate{2001/01/13}
 \def\fileversion{1.203}
@@ -14,6 +19,7 @@
 \usepackage{url}
 \usepackage{varioref}
 \usepackage[varioref]{vnhook}
+\usepackage{graphicx}
 
 \newif\ifprint
 \include{preamble}
@@ -135,8 +141,8 @@
 %%  requirements for a theorem-package, it provides solutions for
 %%  two related problems: placement of endmarks and generation of
 %%  lists of theorem-like environments.
-|ntherem.sty| là gói thể hiện các môi trường tựa định lý.
-Bên cạnh các tính năng giúp thay đổi cách thể hiện môi trường tựa định lý,
+|ntherem.sty| là gói thể hiện các môi trường (tựa) định lý.
+Bên cạnh các tính năng giúp thay đổi cách thể hiện môi trường (tựa) định lý,
 gói còn giúp giải quyết vài vấn đề liên quan: đặt dấu kết thúc (|endmarks|),
 tạo bảng liệt kê các định lý.
 
@@ -190,9 +196,11 @@ của Frank Mitterbach.
 
 \tableofcontents
 
+\pagebreak
+
 % =====================================================================
 
-\section{Introduction}
+\section{Giới thiệu. Ghi chú}
 
 %% For our purposes here, ``theorems'' are labelled enunciations,
 %% often set off from the main text by extra space and a font change.
@@ -203,10 +211,27 @@ của Frank Mitterbach.
 %% (such as \textsc{Theorem} or \textsc{Remark}), a number 
 %% which serializes the instances of the same type throughout the
 %% document, and an optional name (such as ``Correctness Theorem'').
-Để cho gọn, định lý, hệ quả, bổ đề, tiên đề,
-định nghĩa, ví dụ, ghi chú, chứng minh sẽ được gọi chung là |theorem|.
-Trong khi đó, |header| dùng để chỉ loại của cấu trúc (ví dụ định lý hay
-định nghĩa), chỉ số của cấu trúc và tên tuỳ chọn (ví dụ |Tiên đề chọn|).
+Một môi trường tựa định lý, ta gọi tắt là |THM|, được minh họa
+như ở Hình~\ref{fig:THM}. Với mỗi |THM|, các tên |định lý|, |hệ quả|, |bổ đề|, |tiên đề|,
+|định nghĩa|, |ví dụ|, |ghi chú|, |chứng minh|,\ldots
+được gọi là \emph{tên của} |THM|.
+Phần |header| của |THM| bao gồm tên của |THM|, chỉ số của |THM|,
+tên tuỳ chọn (hay tên riêng) của |THM|. Phần nội dung của |THM|
+còn gọi là \emph{thân} của |THM|. Để ý rằng, tên của |THM| khác
+với tên của môi trường |THM|.\footnote{Trong thực tế, thường tên
+của môi trường \texttt{THM} và tên của \texttt{THM} có sự tương ứng
+1-1, ví dụ \texttt{menhde} ứng với \texttt{Mệnh đề},
+\texttt{dinhly} ứng với \texttt{Định lý}. Do đó, trong đa số trường hợp,
+sự phân biệt này không có ý nghĩa quan trọng\ldots --- kyanh}
+Trong ví dụ sau,
+\begin{verbatim}
+  \newtheorem{foobar}{Mệnh đề}
+\end{verbatim}
+ta có |THM| với tên là |Mệnh đề|, nhưng tên của môi trường
+tương ứng là |foobar|. Đôi khi, ta sẽ gọi \emph{môi trường} |THM| thay cho
+\emph{tên của môi trường} |THM|.
+%% dùng để chỉ loại của cấu trúc (ví dụ định lý hay
+%% định nghĩa), chỉ số của cấu trúc và tên tuỳ chọn (ví dụ |Tiên đề chọn|).
 %% Các (tựa) định lý thường phải được trình bày rõ ràng, tách biệt
 %% với các phần khác cùa tài liệu, bằng cách thêm các khoảng trắng
 %% thích hợp, thay đổi kiểu chữ. 
@@ -218,9 +243,9 @@ Trong khi đó, |header| dùng để chỉ loại của cấu trúc (ví dụ đ
 %% dealing with theorem layout was developed by Frank Mittelbach
 %% which was the standard theorem-environment for long time.
 \medskip
-Cách thể hiện |theorem| có thể được thay đổi nhờ các tham số về
-kiểu chữ cho |header|, cho thân |TH|, các bố trí tiêu đề, khoảng trắng
-thụt đầu dòng, cách đánh số. Để thỏa mãn các yêu cầu thay đổi này,
+Cách thể hiện |THM| có thể được thay đổi nhờ các tham số về
+kiểu chữ cho |header|, cho thân |THM|, các bố trí |header|, khoảng trắng
+thụt đầu dòng, cách đánh số,\ldots Để thỏa mãn các yêu cầu thay đổi này,
 gói |theorem.sty| của Fran Mittelbach đã được viết và trở thành
 gói chuẩn của \LaTeX{} từ rất lâu.
 
@@ -236,9 +261,21 @@ Tuy nhiên, các tính năng khác nhưng dấu kết thúc |endmarks|, danh sá
 các |theorem| vẫn chưa được hỗ trợ bởi gói chuẩn đó. Giải quyết vấn đề này,
 có hai mở rộng của gói |theorem.sty| được phát triển: một gói chuyên về
 điều khiển |endmarks|, gói |thmmarks.sty|, và một gói chuyên về liệt
-kê danh sách |TH|, gói |newthm.sty|. Sau đó, Frank Mittelbach đề nghị
+kê danh sách |THM|, gói |newthm.sty|. Sau đó, Frank Mittelbach đề nghị
 kết hợp các hỗ trợ của hai gói này vào cùng một gói mới (sẽ là chuẩn).
 Đó chính là gói |ntheorem.sty| ;)
+
+\begin{figure}[bht]
+\begin{center}
+	\ifpdf
+		\includegraphics[scale=.6]{thm.png}
+	\else
+		\includegraphics[scale=.7]{thm.ps}
+	\fi
+\end{center}
+\caption{Môi trường THM}
+\label{fig:THM}
+\end{figure}
 
 % =====================================================================
 
@@ -268,18 +305,19 @@ Các tuỳ chọn được cho nhờ \meta{options} như sau: % liên quan đế
 %%   With [standard] and [noconfig], it can be chosen, if and what
 %%   file is used for activating a (user-defined) standard set of 
 %%   theorem environments.
-\item[môi trường đã có:] Xem Mục~\vref{sec:standard}. Với một
+\item\DescribeOptions{standard,noconfig}\option{standard} \option{noconfig}\\
+	xem Mục~\vref{sec:standard}. Với một
 	trong hai tùy chọn |standard| và |noconfig|,
 	bạn có thể lựa chọn việc sử dụng hoặc không tập hợp
-	các môi trường |TH| đã được định nghĩa sẵn.
+	các môi trường |THM| đã được định nghĩa sẵn.
 %% \item[Compatibility with amsthm:] option [amsthm] provides 
 %%        compatibility with the theorem-layout
 %%       commands of the |amsthm|-package (see Section~\ref{sec:amslatex}).
-\item[tương thích với amsthm:]
+\item\DescribeOption{amsthm}\option{amsthm}\\
 	tùy chọn |amsthm| khi được dùng sẽ bảo đảm tính tương thích với các môi trường
-	|TH| cung cấp bởi gói |amsthm|. Xem Mục~\vref{sec:amslatex}.
+	|THM| cung cấp bởi gói |amsthm|. Xem Mục~\vref{sec:amslatex}.
 %\item[Activation of endmarks:]
-\item[đặt enmarks:]
+\item\DescribeOption{thmmarks}\option{thmmarks}\\
 %% [thmmarks] enables the automatical placement of endmarks 
 %%     (see \ref{sec:general}); when using the |amsmath|-package,
 %%     [thmmarks] must be complemented by [amsmath] 
@@ -293,15 +331,15 @@ Các tuỳ chọn được cho nhờ \meta{options} như sau: % liên quan đế
 %%     (see Section~\ref{sec-ExtRef}); when using the |amsmath|-package,
 %%     [thref] must be complemented by [amsmath] 
 %%     (see Section~\ref{sec:amslatex}).
-\item[tham khảo mở rộng:]
+\item\DescribeOption{thref}\option{thmref}\\
 	tuỳ chọn |thref| cho phép mở rộng khả năng tham khảo chéo. Xem Mục~\vref{sec-ExtRef};
 	khi dùng với gói |amsthm|, tuỳ chọn này phải đi kèm với tuỳ chọn |amsmath|.
 	Xem thêm ở Mục~\ref{sec:amslatex}.
 %% \item[Compatibility with hyperref:] option [hyperref] provides
 %%       compability with the |hyperref|-package 
 %%       (see section~\ref{sec:hyperref}).
-\item[tương thích với gói hyperref:]
-	tuỳ chọn |hyperref| bảod đảm tương thích với gói |hyperref|.
+\item\DescribeOption{hyperref}\option{hyperref}\\
+	tuỳ chọn |hyperref| bảo đảm tương thích với gói |hyperref|.
 	Xem Mục~\vref{sec:hyperref}.
 \end{description}
 
@@ -310,16 +348,16 @@ Dưới đây là một ví dụ:
   \usepackage{hyperref}
   \usepackage[hyperref,thmmarks,noconfig]{ntheorem}
 \end{example}
-Với cách nạp gói như trên, bạn sẽ phải tự định nghĩa các môi trường |TH|,
+Với cách nạp gói như trên, bạn sẽ phải tự định nghĩa các môi trường |THM|,
 các dấu kết thúc sẽ được định vị tự động. Vì ta dùng gói |hyperref|,
 ta phải bảo đảm tính tương thích nhờ tuỳ chọn |hyperref|.
 
 % =====================================================================
 
 %\subsection{Defining New Theorem Sets}
-\subsection{Định nghĩa TH mới}
+\subsection{Định nghĩa THM mới}
 
-\DescribeMacro{\newtheorem}
+\DescribeMacro{\newtheorem}\macro{newtheorem}\\
 %% The syntax and semantics is exactly the same as in standard
 %% \LaTeX{}: the command |\newtheorem| defines a new ``theorem set'' 
 %% or ``theorem-like structure''.
@@ -327,29 +365,30 @@ ta phải bảo đảm tính tương thích nhờ tuỳ chọn |hyperref|.
 %% text to be typeset with each instance of the new ``set'', while
 %% an optional argument determines how the ``set'' is enumerated:
 Cú pháp của lệnh hoàn toàn giống như của lệnh chuẩn |\newtheorem|.
-Lệnh sẽ định nghĩa một |TH| mới. Có hai tham số bắt buộc là tên
-của môi trường và |text| thể hiện. Tham số bổ sung chỉ ra cách đánh số
+Lệnh sẽ định nghĩa một |THM| mới. Có hai tham số bắt buộc là tên
+của môi trường và tên của |THM|. Tham số bổ sung chỉ ra cách đánh số
 môi trường.
 \begin{description}
-   \item[\ttfamily \bslash newtheorem\{vidu\}\{Ví dụ\}]
+   \item\exmacro{newtheorem\{vidu\}\{Ví dụ\}}\\
 %%       The theorem set {\envfont foo} (whose name is \texttt{bar})
 %%       uses its own counter.
-	Định nghĩa môi trường |vidu|, với |text| thể hiện là |Ví dụ|
+	Định nghĩa môi trường |vidu|, với tên là |Ví dụ|
 	(như vậy, bạn sẽ có |Ví dụ 1|, |Ví dụ 2|, \ldots). Môi trường
-	này sử dụng bộ đếm riêng.
-   \item[\ttfamily \bslash newtheorem\{vidu2\}{[vidu]}\{Ví dụ khác\}]
+	này sử dụng bộ đếm riêng |vidu|, và bạn có thể thay đổi giá trị
+	giá trị bộ đếm này, chẳng hạn |\setcounter{vidu}0|.
+   \item\exmacro{newtheorem\{vidu2\}{[vidu]}\{Ví dụ khác\}}\\
 %%       The theorem set {\envfont foo2} (printed name \texttt{bar2})
 %%       uses the same counter as the theorem set \texttt{foo}.
-	Định nghĩa môi trường |vidu2|, với |text| thể hiện là |Ví dụ khác|.
+	Định nghĩa môi trường |vidu2|, với tên là |Ví dụ khác|.
 	Môi trường này sẽ sử dụng cùng bộ đếm của môi trường |vidu|
 	trong ví dụ trước.
-   \item[\ttfamily \bslash newtheorem\{baitap\}\{Bài tập\}{[section]}]
+   \item\exmacro{newtheorem\{baitap\}\{Bài tập\}{[section]}}\\
 %%       The theorem set {\envfont foo3} (printed name \texttt{bar}) is
 %%       enumerated within the counter \texttt{section}, i.e.\ with every
 %%       new |\section| the enumeration begins again with 1, and
 %%       the enumeration is composed from the section-number and the
 %%       theorem counter itself.
-	Định nghĩa môi trường |baitap| (với |text| thể hiện là |Bài tập|), sử
+	Định nghĩa môi trường |baitap| (với tên là |Bài tập|), sử
 	dụng bộ đếm thay đổi theo mục (|section|). Nếu bạn đang ở Mục số 5 chẳng hạn,
 	bạn sẽ có |Bài tập 5.1|, |Bài tập 5.2|, \ldots Mỗi khi chuyển qua mục mới,
 	bộ đếm sẽ được đặt về không, nghĩa là bạn sẽ có |Bài tập 6.1|, |Bài tập 6.2|, \ldots,
@@ -364,11 +403,12 @@ môi trường.
 Khi gọi lệnh |\newtheorem| để tạo môi trường \meta{name}, thực ra sẽ có hai môi
 trường được tạo ra, là \meta{name} và \meta{name|*|}. Điểm khác biệt duy nhất
 giữa hai môi trường  này, cũng giống như sự khác biệt duy nhất giữa hai lệnh
-|\section| và |\section*|, là môi trường \meta{name|*|} sẽ không đưa |TH|
-vào trong danh sách liệt kê các |TH|. Trong các ví dụ ở trên, bạn sẽ có chẳng hạn
+|\section| và |\section*|, là môi trường \meta{name|*|} sẽ không đưa |THM|
+vào trong danh sách liệt kê các |THM|. Trong các ví dụ ở trên, bạn sẽ có chẳng hạn
 hai môi trường |baitap| và |baitap*|. Xem thêm Mục~\vref{sec:thmlists}.
 
-\DescribeMacro\renewtheorem
+\medskip
+\DescribeMacro\renewtheorem\macro{renewtheorem}\\
 %%
 %% Theorem sets can be redefined by |\renewtheorem|, with the same arguments
 %% as explained for |\newtheorem|. When redefining a theorem set, the 
@@ -398,7 +438,8 @@ sử dụng môi trường.
 \subsubsection{Các tham số chung}
 
 \DescribeMacro\theorempreskipamount
-\DescribeMacro\theorempostskipamount 
+\DescribeMacro\theorempostskipamount
+\macro{theorempreskipamount} \macro{theorempreskipamount}\\ 
 %% These additional parameters affect the vertical space around 
 %% theorem environments:
 %% |\theorempreskipamount| and |\theorempostskipamount| define,
@@ -408,18 +449,18 @@ sử dụng môi trường.
 %% (`\textsf{skips}'), and therefore can contain \texttt{plus} and
 %% \texttt{minus} parts.
 Các tham số bổ sung này ảnh hưởng đến khoảng cách theo chiều đứng --
-trên (|\theorempreskipamount|) và dưới (|\theorempostskipamount|) môi trường |TH|.
-Hai tham số này ảnh hưởng đến mọi môi trường |TH| và có thể điều chỉnh
+trên (|\theorempreskipamount|) và dưới (|\theorempostskipamount|) môi trường |THM|.
+Hai tham số này ảnh hưởng đến mọi môi trường |THM| và có thể điều chỉnh
 nhờ các lệnh thông thường điều khiển biến độ dài. Chúng là các chiều dài
 dạng |rubber|, vì thế có thể chứa các phần với dấu cộng hoặc trừ.
 
 %\subsubsection{Parameters for Individual Sets}
-\subsubsection{Cho từng TH cụ thể}
+\subsubsection{Cho từng THM cụ thể}
 
 %% The layout of individual theorem sets can be further determined
 %% by switches controlling the appearance of the headers and the
 %% header-body-layout:
-Cách thể hiện của mỗi |TH| có thể tinh chỉnh nhờ các lệnh điều khiển sau đây.
+Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh điều khiển sau đây.
 
 \begin{itemize}
 \item
@@ -429,7 +470,7 @@ Cách thể hiện của mỗi |TH| có thể tinh chỉnh nhờ các lệnh đi
 %%  theorem layout is defined via its |\theoremstyle|. |\ntheorem|
 %%  provides several predefined styles including those of
 %%  Frank Mittelbach's |theorem.sty| 
-	Xác định kiểu của |TH|. Các kiểu được cung cấp với với |\ntheorem|
+	Xác định kiểu dáng của |THM|. Các kiểu được cung cấp với với |\ntheorem|
 	bao gồm cả kiểu có trong gói |theorem.sty|. Xem liệt kê các kiểu
 	ở Mục~\vref{sec:predefdstyles}.
 %  Additional styles can be defined by |\newtheoremstyle| 
@@ -438,25 +479,25 @@ Cách thể hiện của mỗi |TH| có thể tinh chỉnh nhờ các lệnh đi
 \DescribeMacro\theoremheaderfont
   |\theoremheaderfont{|\meta{fontcmds}|}|: %% The theorem header is set
   %%in the font specified by \meta{fontcmds}.
-  Dùng \meta{fontcmds} để xác định |font| cho |header| của |TH|
+  Dùng \meta{fontcmds} để xác định |font| cho phần |header| của |THM|
 
 %%   In contrast to |theorem.sty|, |\theoremheaderfont| can be set 
 %%   individually for each environment type. 
 	Không như |theorem.sty|, lệnh |\theoremheaderfont| cho phép đổi
-	|font| cho từng kiểu |TH|.
+	|font| cho từng kiểu |THM|.
 \item
 \DescribeMacro\theorembodyfont
   |\theorembodyfont{|\meta{fontcmds}|}|: %The theorem body is set
   %%in the font specified by \meta{fontcmds}.
-  Xác định |font| cho phần nội dung |TH|.
+  Xác định |font| cho phần thân (nội dung) |THM|.
 \item 
 \DescribeMacro\theoremseparator
-  |\theoremseparator{|\meta{thing}|}|: %%\meta{thing} %%separates the 
+  |\theoremseparator{|\meta{sep}|}|: %%\meta{thing} %%separates the 
 %%   header from the body of the theorem-environment. 
 %%   E.g., \meta{thing} can be
 %%   ``:'' or ``.''.
-	Dùng \meta{thing} để ngăn cách phần |header| và phần nội dung định lý (|body|).
-	Thường thì \meta{thing} là dấu hai chấm (|:|) hoặc chấm (|.|).
+	Dùng \meta{sep} để ngăn cách phần |header| và phần thân của |THM|.
+	Thường thì \meta{sep} là dấu hai chấm (|:|) hoặc chấm (|.|).
 \item 
 \DescribeMacro\theoremindent
 %%   |\theoremindent{|\meta{dimen}|}| can be used to indent the theorem wrt.\
@@ -474,15 +515,15 @@ Cách thể hiện của mỗi |TH| có thể tinh chỉnh nhờ các lệnh đi
   |\theoremnumbering{|\meta{style}|}|:
 %%   specifies the appearance of
 %%   the numbering of the theorem set. Possible \meta{styles} are
-   Kiểu đánh số cho |TH|. Các giá trị có thể là:
+   Kiểu đánh số cho |THM|. Các giá trị có thể là:
   |arabic| (default), |alph|, |Alph|, |roman|,
   |Roman|, |greek|, |Greek| và |fnsymbol|. 
 
 %%   Clearly, if a theorem-environment uses the counter of another
 %%   environment type, also the numbering style of that environment
 %%   is used. 
-	Rõ ràng, nếu môi trường |TH| sử dụng bộ đếm từ môi trường |XYZ| khác,
-	thì kiểu đánh số của môi trường |TH| sẽ thừa hưởng từ |XYZ|.
+	Rõ ràng, nếu môi trường |THM| sử dụng bộ đếm từ môi trường |XYZ| khác,
+	thì kiểu đánh số của môi trường |THM| sẽ thừa hưởng từ |XYZ|.
 \item
 \DescribeMacro\theoremsymbol
   |\theoremsymbol{|\meta{thing}|}|:
@@ -492,16 +533,18 @@ Cách thể hiện của mỗi |TH| có thể tinh chỉnh nhờ các lệnh đi
 %%   of the environment.
 %%   If no symbol should appear, say |\theoremsymbol{}|.
 	Lệnh này chỉ các tác dụng khi gói |ntheorem.sty| được nạp với tuỳ chọn |thmmarks|.
-	Ở đây, \meta{thing} sẽ được dùng như |endmark|, tức dấu kết thúc cho |TH|.
-	Nếu không muốn dùng |endmark| cho riêng môi trường |TH| nào, 
+	Ở đây, \meta{thing} sẽ được dùng như |endmark|, tức dấu kết thúc cho |THM|.
+	Nếu không muốn dùng |endmark| cho riêng môi trường |THM| nào, 
 	dùng lệnh |\theoremsymbol{}|.
 \end{itemize}
 
-  The flexibility provided by these command should relieve the
-  users from the ugly hacking in |\newtheorem| to fit most of  
-  the requirements stated by publishers or supervisors.
+%% The flexibility provided by these command should relieve the
+%% users from the ugly hacking in |\newtheorem| to fit most of  
+%% the requirements stated by publishers or supervisors.
+Nhờ các lệnh điều khiển trên, bạn có thể linh hoạt tạo ra các |THM| như ý,
+mà không phải nhọc công và phải quan tâm nhiều đến yếu tố kỹ thuật.
 
-\DescribeMacro\theoremclass
+\DescribeMacro\theoremclass\option{\bslash theoremclass}\\
 With the command |\theoremclass{|\meta{theorem-type}|}| 
 (where \meta{theorem-type} must be an already defined theorem type),
 these parameters can be set to the values which were used when
