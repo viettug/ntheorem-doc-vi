@@ -1,0 +1,121 @@
+\section{The End Mark Algorithm}
+
+ \subsection{The Idea}
+
+ The handling of endmarks with |thmmarks.sty| is based on the same
+ two-pass principle as the handling of labels: the necessary information
+ about endmarks is contained in the |.aux| file.
+
+ With |thmmarks.sty|, \TeX\ is always aware whether it is in
+ some theorem-like environment.
+ There, potential positions for endmarks can be
+ \begin{enumerate}
+  \item\label{elist:1} at the end of simple text lines in open text, 
+  \item\label{elist:2} at the end of displaymaths, 
+  \item\label{elist:3} at the end of equations or equationarrays, or 
+  \item\label{elist:4} at the end of text lines at the end of lists (or, more general, 
+   |trivlists|, such as |verbatim| or |center|).
+ \end{enumerate}
+
+ The problem is, that in the cases (\ref{elist:2})--(\ref{elist:4}), the endmarks has to
+ be placed in a box which is already shipped out, when
+ |\end{...}| is processed.
+ Thus, in those situations, \TeX\ needs to know from the |.aux|
+ file, whether is has to put an endmark.
+
+ When \TeX\ is in a theorem-like environment and comes to one of 
+ the points mentioned in (\ref{elist:2})--(\ref{elist:4}),
+ and the |.aux| file says that there is an endmark, then
+ it is put there.
+ Anyway, it maintains a counter of the potential positions of an end 
+ mark in the current theorem-like environment.
+ When it comes to an |\end{theorem}|, it looks if it is in
+ situation (\ref{elist:1}) (then the endmark is simply put at the end of the
+ current line).
+ Otherwise, the last horizontal box is already shipped out
+ (thus it contains a situation (\ref{elist:2})--(\ref{elist:4})) and the endmark must be
+ set in it.
+ In this case, a note is written in the |.aux| file, where the
+ endmark actually has to be set (ie, at the latest potential point for
+ setting an endmark inside the theorem).
+
+ \subsection{The Realization}
+
+ Let \env\ be a theorem-like environment. Then, additional to
+ the counter \env, \TeX\ maintains two counters
+ |curr|\env|ctr| and |end|\env|ctr|.
+ In the $i$th environment of type \env, |curr|\env|ctr|$=i$
+ (the \LaTeX\ counter \env\ cannot be used since a)
+ environments can use the counter of other environments, and b) 
+ often  counters are reinitialized inside a document).
+ |end|\env|ctr| counts the potential situations for
+ putting an endmark inside an environment.
+ It is set to 1 when starting an environment. Each time, when
+ a situation (\ref{elist:2})--(\ref{elist:4}) is reached, the command
+ \begin{quote}
+   |\mark|$<$|\roman{curr|env|ctr}|$>$\env
+               $<$|\roman{end|\env|ctr}|$>$
+ \end{quote}
+ is called
+ ($<$|\roman{curr|\env|ctr}|$>$\env
+  $<$|\roman{end|\env|ctr}|$>$
+  uniquely identifies all situations (\ref{elist:2})--(\ref{elist:4}) in a document).
+
+ If at this position an endmark has to be set, 
+ \begin{quote}
+  |\mark|$<$|\roman{curr|\env|ctr}|$>$\env
+              $<$|\roman{end|\env|ctr}|$>$ 
+ \end{quote}
+ is defined in the |.aux| file to be |\end|\env|Symbol|,
+ otherwise it is undefined and simply ignored.
+
+ When \TeX\ comes to an |\end{|\env|}|, it looks if it is in
+ situation (\ref{elist:1}). If so, the endmark is simply put at the end of the
+ current line.
+ Otherwise,
+ \begin{quote}
+   |\def\mark|$<$|\roman{curr|env|ctr}|$>$\env|%|\\
+      $<$|\roman{end|\env|ctr}|$>$|{|\env|Symbol}| 
+ \end{quote}
+ is written to the |.aux| file for setting the endmark
+ at the latest potential position inside the theorem in the next run.
+
+ \begin{Theorem}[Correctness]
+  \begin{enumerate}
+ \item For a |.tex| file, which does not contain nested theorem-like
+ environments of the same type, in the above situation, the following 
+ holds:
+ When compiling, at the $i$th situation in the $j$th environment of type
+ \env, |mark|$\;j\,$\env$\;i$ is handled. 
+
+ For |.tex| files which contain nested theorem-like environments of
+ the same type, |mark|$\;k\,$\env$\;l$ is handled, where
+ $k$ is the number of the latest environment of type \env\ which
+ has been called at this moment, and $l$ is the number of situations
+ (\ref{elist:2})--(\ref{elist:4}) which have occurred in
+ environments of type \env\ since
+ the the $k$th |\begin{|\env|}|. 
+
+ \item When finishing an environment, either an endmark is set directly
+ (when in a text line) or an order to put the end symbol at the latest
+ potential position is written to the |.aux| file.
+ \end{enumerate}
+ \end{Theorem}
+
+ \begin{Theorem}[Completeness]
+ The handling of endmarks is complete wrt.\ plain text, |displaymath|,
+ |equation|,\\ |eqnarray|, |eqnarray*|, and all environments
+ ended by |endtrivlist|, including |center| and
+ |verbatim|.
+ \end{Theorem}
+
+ So, where can be bugs ? 
+ \begin{itemize}
+  \item in the plain \TeX\ handling of endmarks, 
+  \item in some special situations which have not been tested yet, 
+  \item in some special environments which have not been tested yet. 
+  \item in the |amsmath| environments. We seldom use them, so we do not
+   know their pitfalls, and we ran only general test cases.
+ \end{itemize}
+ 
+\endinput

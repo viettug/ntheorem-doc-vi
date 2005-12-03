@@ -1,0 +1,116 @@
+\section{Problems and Questions}
+\subsection{Known Limitations}
+
+\begin{itemize}
+ \item Since |ntheorem.sty| uses the |.aux| file for storing
+  information about the positions of endmarks, \LaTeX\ must be
+  run twice for correctly setting the endmarks.
+ \item Since |ntheorem.sty| uses the |.aux| file for storing
+  information about lists in the |.thm| file, a minimum of
+  two runs is needed. If theorems move in any of these
+  runs up to five runs can be needed to generate correct lists.
+ \item Since we need to expand the optional argument of theorems
+  in various ways for the lists, we decided to copy the text verbatim
+  into the |.thm| file. Thus, if you use things like |\thesection|
+  etc., the list won't show the correct text. Therefore you shouldn't
+  use any command that needs to be expanded.
+ \item In nested environments ending at the same time,
+  only the endmark for the inner environment is set, as the following
+  example shows:
+ \begin{verbatim}
+  \begin{Lemma}
+   Some text.
+   \begin{Proof} The Proof \end{Proof}
+  \end{Lemma}\end{verbatim}
+ yields to
+ \begin{Lemma}
+  Some text.
+  \begin{Proof} The Proof \end{Proof}
+ \end{Lemma}
+
+ You can handle this by specifying something invisible after the end
+ of the inner theorem. Then the endmark for the outer theorem is
+ set in the next line:
+ \begin{verbatim}
+  \begin{Lemma}
+   Some text.
+   \begin{Proof} The Proof \end{Proof}~
+  \end{Lemma}\end{verbatim}
+ yields to
+ \begin{Lemma}
+  Some text.
+  \begin{Proof} The Proof \end{Proof}~
+ \end{Lemma}
+
+ \item Document option |fleqn| is problematic: |fleqn| handles
+  equations not by |$$| but by lists (check what happens for
+  \begin{quote}
+  |\begin{theorem} \[ displaymath \] \end{theorem}| 
+  \end{quote}
+  in standard \LaTeX:
+  The displaymath is \emph{not} set in an own line).
+  Also, for long formulas, the equation number and the endmark are
+  smashed into the formula at the right text margin.
+ \item Naturally, |ntheorem.sty| will not work correctly in
+  combination with other styles which change the handling
+  of
+  \begin{enumerate}
+   \item theorem-like environments, or 
+   \item environments concerned with the handling of endmarks, e.g.
+     |\[...\]|, |eqnarray|, etc.
+  \end{enumerate}
+ \item |ntheorem.sty| is compatible with Frank Mittelbach's
+  |theorem.sty|, which is the most widespread style for setting
+  theorems.
+
+  It cannot be used \emph{with} |theorem.sty|, but it can be
+  used instead of it.
+\end{itemize}
+
+\subsection{Known ``Bugs'' and Problems}
+
+\begin{itemize}
+ \item Ending a theorem \emph{directly} after the text, e.g.
+ \begin{quote}
+ |\begin{Theorem} text\end{Theorem}| 
+ \end{quote}
+ suppresses the endmark:
+ \begin{Theorem} text\end{Theorem}
+  Therefore a space or a newline should be inserted 
+  before |\end{...}|.
+ \item With theoremstyle break, if the linebreak would cause
+  ugly linebreaking in the following text, it is suppressed.
+\end{itemize}
+
+\subsection{Open Questions}
+\begin{itemize}
+\item
+For |equation|s, we decided to put the endmark after the equation
+number, which is vertically centered.
+Currently, we do not know, how to get the equation number centered and
+the endmark at the bottom (one has to know the internal height of the
+math material).
+\item
+The placement of endmarks is mainly based on a check whether \LaTeX\
+is in an ordinary text line when encountering an end-of-environment.
+This question is \emph{partially} answered by |\ifhmode|: In a text
+line, \LaTeX\ is always in |\hmode|. 
+But, after an displaymath, \LaTeX\ is also in |\hmode|. Thus,
+additionally |\lastskip| is checked: after a displaymath, 
+|\lastskip|=0 holds.
+In most situations, when text has been written into a line, 
+|\lastskip| $\neq$ 0. But, this does not hold, if the source code
+is of the following form: |...text\label{bla}|: then, |\lastskip|=0.
+In those situations, the endmark is suppressed. \\
+?? How can it be detected whether \LaTeX\ has just ended a displaymath?
+\item 
+The above problem with the label: The break style enforces a linebreak
+by |\hfill\penalty-8000| after the |\trivlist|-item. Thus, \TeX\
+gets back into the horizontal mode. The label places a ``whatsit''
+somewhere ... and, it seems that the ``whatsit'' makes \TeX\ think
+that there is a line of text. 
+\end{itemize}
+If someone has a solution to one of those questions, please inform us.
+(You can be sure to be mentioned in the Acknowledgements.)
+
+\endinput

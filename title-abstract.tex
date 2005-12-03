@@ -1,0 +1,85 @@
+% =====================================================================
+
+\title{%An Extension of the \LaTeX-Theorem Evironment%
+	%\thanks{This 
+	%         file has version number \fileversion{}, last revised \filedate.}
+	Mở rộng môi trường định lý của \LaTeX{}
+}
+\author{%
+	Wolfgang May\thanks{\url{may@informatik.uni-freiburg.de}}
+	\qquad 
+	Andreas Schlechte\thanks{\url{ntheorem@andreas-schlechte.de}}\\[2mm]
+	\emph{\underline{Biên dịch:}} kyanh\thanks{\url{kyanh@o2.pl}}%
+}
+\date{%
+	Bản dịch số \textbf{\the\buildnum}\\[2mm]
+	\fcolorbox{black}{red!20}{cho \textbf{ntheorem} bản \textbf{1.24} (2004/09/20)}}
+
+\maketitle          
+
+% =====================================================================
+
+\begin{abstract}
+%\noindent
+%%  |ntheorem.sty| is a package for handling theorem-like environments.
+%%  Aditionally to several features for defining the layout of
+%%  theorem-like environments which can be regarded to be standard
+%%  requirements for a theorem-package, it provides solutions for
+%%  two related problems: placement of endmarks and generation of
+%%  lists of theorem-like environments.
+|ntherem.sty| là gói thể hiện các môi trường (tựa) định lý.
+Bên cạnh các tính năng giúp thay đổi cách thể hiện môi trường (tựa) định lý,
+gói còn giúp giải quyết vài vấn đề liên quan: đặt dấu kết thúc (|endmarks|),
+tạo bảng liệt kê các định lý.
+
+%%  In contrast to former approaches, it solves the problem of 
+%%  setting endmarks of theorem-like environments (theorems, 
+%%  definitions, examples, and proofs) \emph{automatically} at the 
+%%  right positions, even if the environment ends with a |displaymath| 
+%%  or (even nested) list environments, it also copes with the 
+%%  |amsmath| package.
+%%  This is done in the same manner as the handling of labels by
+%%  using the |.aux| file.
+\medskip
+Trái với các cách tiếp cận trước đây, gói giải quyết vấn đề đặt dấu
+kết thúc (|endmarks|) cho các môi trường tựa định lý (|theorem|,
+|definition|, |example|, |proof|) một cách tự động, chính xác, ngay cả
+đối với môi trường kết thúc bởi môi trường |displaymath| hoặc môi trường
+danh sách (thậm chí các môi trường này có thể lồng nhau -- |nested|);
+nhờ đó giải quyết được hoàn toàn các trục trặc khi dùng gói |amsmath|.
+Nguyên lý làm việc của gói giống như cách \LaTeX{} điều khiển việc
+đặt nhãn, bằng cách sử dụng các tập tin |.aux|.
+
+%%  It also introduces the generation of lists of theorem-like 
+%%  environments in the same manner as |listoffigures|. Additionally,
+%%  more comfortable referencing is supported.
+\medskip
+Gói cung cấp lệnh để tạo danh sách các môi trường tựa định lý,
+tương tự như khi liệt kê các hình vẽ bằng |\listoffigures|.
+% Ngoài ra, gói hỗ trợ 
+
+%%  After running \LaTeX\ several times (depending on the complexity
+%%  of references, in general, three runs are sufficient), the endmarks 
+%%  are set correctly, and theoremlists are generated.
+\medskip
+Sau khi biên dịch tài liệu vài lần (số lần tuỳ thuộc vào sự phức tạp
+của các tham khảo chéo; thường thì ba lần là đủ), các dấu kết thúc (|endmarks|)
+sẽ được đặt đúng chỗ, và danh sách các định lý sẽ được tạo ra.
+
+%%  Since |ntheorem.sty| uses the standard \LaTeX\ |\newtheorem|
+%%  command, existing documents can be switched to
+%%  |ntheorem.sty| without having to change the |.tex| file.
+%%  Also, it is compatible with \LaTeX\ files using |theorem.sty| 
+%%  written by Frank Mittelbach.
+\medskip
+Do gói |ntheorem.sty| sử dụng lệnh |\newtheorem| của \LaTeX{} chuẩn,
+các tài liệu cũ có thể chuyển qua dùng gói mà không cần thay đổi nội
+dung. Ngoài ra, gói còn tương thích với các tài liệu dùng gói |theorem.sty|
+của Frank Mitterbach.
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+\endinput

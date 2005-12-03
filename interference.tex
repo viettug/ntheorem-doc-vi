@@ -1,0 +1,109 @@
+\section{Possible Interferences}
+Since |ntheorem| reimplements the handling of theorem-environments
+completely, it is incompatible with every package also concerning
+those macros.
+
+Additionally, the |thmmarks| algorithm for placing endmarks 
+requires modifications of several environments (cf.\ Section 
+\ref{sec:code}).
+Thus, environments which are reimplemented or additionally defined
+by document options or styles are not covered by the endmark 
+algorithm of |ntheorem.sty|.
+
+The |[thref]| option changes the |\label| command and the treatment
+of labels when reading the |.aux| file. Thus it is potentially
+incompatible with all packages also changing |\label| (or
+|\newlabel|). Compatibility with babel's |\newlabel| isa
+achieved if babel is loaded before ntheorem.
+
+\subsection{Interfering Document Options.}
+
+|ntheorem.sty| also copes with the usual document options 
+|leqno| and |fleqn|\footnote{although for \texttt{fleqn} and 
+  long formulas
+  reaching to the right margin, equation numbers and endmarks can
+  be smashed over the formula since \texttt{fleqn} does not use
+  \texttt{\bslash eqno} for controlling the setting of the equation
+  number.}.
+If one of those options is used in the |\documentclass|
+declaration, it is automatically recognized by the |thmmarks| part
+of |ntheorem.sty|.
+
+If one of those options is not used in |\documentclass|, but
+with |amsmath| (see next section), it must not be specified 
+for |ntheorem|, since all |amsmath| environments detect this option 
+by themselves.
+
+\subsection{Combination with amslatex.}\label{sec:amslatex}
+
+|ntheorem.sty| interferes with |amsmath.sty| and |amsthm.sty|.
+
+Note, that the LaTeX amstex package |amstex.sty| (\LaTeX2.09) is
+obsolete and you should use |amsmath| and |amstext| for
+\LaTeXe\ instead.  Up to |ntheorem-1.18|, it is compatible with 
+|amsmath-1.x|. Since |ntheorem-1.19|, it is (hopefully) compatible 
+with |amsmath-2.x|.
+
+We would be happy if someone knowing and using |amsmath| would
+join the development and maintenance of this style.
+
+\subsubsection{amsmath}
+
+Compatibility with amsmath (end marks for math environments, and 
+handling of labels in math environments) is provided in the option
+|[amsmath]|, (i.e., if |\usepackage{amsmath}| is used then
+\begin{itemize}
+\item |\usepackage[thmmarks]{ntheorem}| must be completed to \\
+|\usepackage[amsmath,thmmarks]{ntheorem}|), and also
+\item |\usepackage[thref]{ntheorem}| must be completed to \\
+|\usepackage[amsmath,thref]{ntheorem}|).
+\end{itemize}
+Note, that |amsmath| has to be loaded \emph{before} |ntheorem| 
+since the definitions have to be overwritten.
+
+\subsubsection{amsthm}
+
+|amsthm.sty| conflicts with the definition of theorem
+layouts in |theorem.sty|, some features of |amsthm.sty|
+have been incorporated into option |[amsthm]| which has
+to be used \emph{instead of} |\usepackage{amsthm}|.
+
+The Option provides theoremstyles |plain|, |definition|, and 
+|remark|, and a |proof| environment as in |amsthm.sty|. 
+
+The |\newtheorem*| command is defined even without this
+option. Note that |\newtheorem*| always switches to the
+nonumbered version of the current theoremstyle which
+thus must be defined.
+
+The command |\newtheoremstyle| is not taken over from 
+|amsthm.sty|. Also, |\swapnumbers| is not implemented.
+Here, the user has to express his definitions by the 
+|\newtheoremstyle| command provided by |ntheorem.sty|,
+including the use of |\theoremheaderfont| and |\theorembodyfont|.
+The options |[amsthm]| and |[standard]| are in conflict
+since they both define an environment |proof|.
+
+Thus, we recommend not to use
+|amsthm|, since the features for defining theorem-like
+environments in |ntheorem.sty|---following 
+|theorem.sty|---seem to be more intuitive and user-friendly.
+
+\subsection{Babel}\label{sec:babel}
+
+The |[thref]| option interferes with the |babel| package, thus in 
+case that |babel| is used, |ntheorem| has to be loaded \emph{after} 
+|babel|.
+
+\subsection{Hyperref}\label{sec:hyperref}
+
+Since |hyperref| redefines the \LaTeX\ |\contentsline|-command, it breaks
+with |ntheorem| below version 1.17. Since version 1.17, the option 
+|[hyperref]| makes |ntheorem| work with |hyperref|.
+Theoremlists will then get linked list.
+
+WARNING: The definition and redefinition of Theorem List Layouts
+(see Section~\ref{sec:listtypes}) isn't yet working with
+the |hyperref|-package. 
+
+\endinput

@@ -1,0 +1,679 @@
+%\section{The User-Interface}
+\section{Sử dụng gói}
+
+% =====================================================================
+
+%\subsection{How to include the package}
+\subsection{Nạp gói}
+
+%The package |ntheorem.sty| is included by
+Gói |ntheorem.sty| có thể nạp như sau
+\begin{command}
+  \usepackage[`\meta{options}']{ntheorem}
+\end{command}
+%% where the optional parameter \meta{options} selects predefined
+%% configurations and special requirements. 
+với \meta{options} là danh sách các tuỳ chọn và các yêu cầu đặc biệt.
+
+%% The following \meta{options} are available by now, concerning three
+%% independent issues:
+\medskip
+Các tuỳ chọn được cho nhờ \meta{options} như sau: % liên quan đến ba vấn đề độc lập:
+\begin{description}
+%% \item[Predefining environments:] (see Section~\ref{sec:standard})
+%%   With [standard] and [noconfig], it can be chosen, if and what
+%%   file is used for activating a (user-defined) standard set of 
+%%   theorem environments.
+\item\DescribeOptions{standard,noconfig}\option{standard} \option{noconfig}\\
+	xem Mục~\vref{sec:standard}. Với một
+	trong hai tùy chọn |standard| và |noconfig|,
+	bạn có thể lựa chọn việc sử dụng hoặc không tập hợp
+	các môi trường |THM| đã được định nghĩa sẵn.
+%% \item[Compatibility with amsthm:] option [amsthm] provides 
+%%        compatibility with the theorem-layout
+%%       commands of the |amsthm|-package (see Section~\ref{sec:amslatex}).
+\item\DescribeOption{amsthm}\option{amsthm}\\
+	tùy chọn |amsthm| khi được dùng sẽ bảo đảm tính tương thích với các môi trường
+	|THM| cung cấp bởi gói |amsthm|. Xem Mục~\vref{sec:amslatex}.
+%\item[Activation of endmarks:]
+\item\DescribeOption{thmmarks}\option{thmmarks}\\
+%% [thmmarks] enables the automatical placement of endmarks 
+%%     (see \ref{sec:general}); when using the |amsmath|-package,
+%%     [thmmarks] must be complemented by [amsmath] 
+%%     (see Section~\ref{sec:amslatex}).
+	tuỳ chọn |thmmarks| đồng ý để gói |ntheorem.sty| tự động đặt dấu kết thúc
+	(|endmarks|) (xem Mục~\ref{sec:general}); khi dùng với gói |amsthm|,
+	tùy chọn |thmmarks| phải được dùng kèm với tuỳ chọn |amsmath|.
+	Xem thêm ở Mục~\ref{sec:amslatex}.
+%% \item[Activation of extended reference features:]
+%% [thref] enables the extended reference features 
+%%     (see Section~\ref{sec-ExtRef}); when using the |amsmath|-package,
+%%     [thref] must be complemented by [amsmath] 
+%%     (see Section~\ref{sec:amslatex}).
+\item\DescribeOption{thref}\option{thmref}\\
+	tuỳ chọn |thref| cho phép mở rộng khả năng tham khảo chéo. Xem Mục~\vref{sec-ExtRef};
+	khi dùng với gói |amsthm|, tuỳ chọn này phải đi kèm với tuỳ chọn |amsmath|.
+	Xem thêm ở Mục~\ref{sec:amslatex}.
+%% \item[Compatibility with hyperref:] option [hyperref] provides
+%%       compability with the |hyperref|-package 
+%%       (see section~\ref{sec:hyperref}).
+\item\DescribeOption{hyperref}\option{hyperref}\\
+	tuỳ chọn |hyperref| bảo đảm tương thích với gói |hyperref|.
+	Xem Mục~\vref{sec:hyperref}.
+\end{description}
+
+Dưới đây là một ví dụ:
+\begin{example}
+  \usepackage{hyperref}
+  \usepackage[hyperref,thmmarks,noconfig]{ntheorem}
+\end{example}
+Với cách nạp gói như trên, bạn sẽ phải tự định nghĩa các môi trường |THM|,
+các dấu kết thúc sẽ được định vị tự động. Vì ta dùng gói |hyperref|,
+ta phải bảo đảm tính tương thích nhờ tuỳ chọn |hyperref|.
+
+% =====================================================================
+
+%\subsection{Defining New Theorem Sets}
+\subsection{Định nghĩa THM mới}
+
+\DescribeMacro{\newtheorem}\macro{newtheorem}\\
+%% The syntax and semantics is exactly the same as in standard
+%% \LaTeX{}: the command |\newtheorem| defines a new ``theorem set'' 
+%% or ``theorem-like structure''.
+%% Two required arguments name the new environment set and give the 
+%% text to be typeset with each instance of the new ``set'', while
+%% an optional argument determines how the ``set'' is enumerated:
+Cú pháp của lệnh hoàn toàn giống như của lệnh chuẩn |\newtheorem|.
+Lệnh sẽ định nghĩa một |THM| mới. Có hai tham số bắt buộc là tên
+của môi trường và tên của |THM|. Tham số bổ sung chỉ ra cách đánh số
+môi trường.
+\begin{description}
+   \item\exmacro{newtheorem\{vidu\}\{Ví dụ\}}\\
+%%       The theorem set {\envfont foo} (whose name is \texttt{bar})
+%%       uses its own counter.
+	Định nghĩa môi trường |vidu|, với tên là |Ví dụ|
+	(như vậy, bạn sẽ có |Ví dụ 1|, |Ví dụ 2|, \ldots). Môi trường
+	này sử dụng bộ đếm riêng |vidu|, và bạn có thể thay đổi giá trị
+	giá trị bộ đếm này, chẳng hạn |\setcounter{vidu}0|.
+   \item\exmacro{newtheorem\{vidu2\}{[vidu]}\{Ví dụ khác\}}\\
+%%       The theorem set {\envfont foo2} (printed name \texttt{bar2})
+%%       uses the same counter as the theorem set \texttt{foo}.
+	Định nghĩa môi trường |vidu2|, với tên là |Ví dụ khác|.
+	Môi trường này sẽ sử dụng cùng bộ đếm của môi trường |vidu|
+	trong ví dụ trước.
+   \item\exmacro{newtheorem\{baitap\}\{Bài tập\}{[section]}}\\
+%%       The theorem set {\envfont foo3} (printed name \texttt{bar}) is
+%%       enumerated within the counter \texttt{section}, i.e.\ with every
+%%       new |\section| the enumeration begins again with 1, and
+%%       the enumeration is composed from the section-number and the
+%%       theorem counter itself.
+	Định nghĩa môi trường |baitap| (với tên là |Bài tập|), sử
+	dụng bộ đếm thay đổi theo mục (|section|). Nếu bạn đang ở Mục số 5 chẳng hạn,
+	bạn sẽ có |Bài tập 5.1|, |Bài tập 5.2|, \ldots Mỗi khi chuyển qua mục mới,
+	bộ đếm sẽ được đặt về không, nghĩa là bạn sẽ có |Bài tập 6.1|, |Bài tập 6.2|, \ldots,
+	|Bài tập 7.1|, |Bài tập 7.2|, \ldots
+\end{description}
+
+%% For every environment \meta{name}\ defined by |\newtheorem|,
+%% \emph{two} enviroments \meta{name} and \meta{name|*|}\ are defined.
+%% In the main document, they have exactly the same effect, but
+%% the latter causes no entry in the respective list of theorems
+%% (cf.\ |\section| and |\section*|), see also Section 
+Khi gọi lệnh |\newtheorem| để tạo môi trường \meta{name}, thực ra sẽ có hai môi
+trường được tạo ra, là \meta{name} và \meta{name|*|}. Điểm khác biệt duy nhất
+giữa hai môi trường  này, cũng giống như sự khác biệt duy nhất giữa hai lệnh
+|\section| và |\section*|, là môi trường \meta{name|*|} sẽ không đưa |THM|
+vào trong danh sách liệt kê các |THM|. Trong các ví dụ ở trên, bạn sẽ có chẳng hạn
+hai môi trường |baitap| và |baitap*|. Xem thêm Mục~\vref{sec:thmlists}.
+
+\medskip
+\DescribeMacro\renewtheorem\macro{renewtheorem}\\
+%%
+%% Theorem sets can be redefined by |\renewtheorem|, with the same arguments
+%% as explained for |\newtheorem|. When redefining a theorem set, the 
+%% counter is not re-initialized. 
+Định nghĩa lại môi trường đã có. Cách dùng tương tự như của |\newtheorem|.
+Bộ đếm sẽ được khởi tạo lại.
+
+% =====================================================================
+
+%% \subsection{Defining the Layout of Theorem Sets}
+\subsection{Thay đổi kiểu dáng}
+
+\label{sec:general}
+
+%% For theorem-like environments, the user can set parameters
+%% by setting several switches and then calling |\newtheorem|.
+%% The layout of a theorem set is defined with the values of the switches
+%% at the time |\newtheorem| is called.
+Với các môi trường tựa định lý, bạn có thể thay đổi vài tham số (tuỳ chọn) trước
+khi gọi lệnh |\newtheorem| để tinh chỉnh cách thể hiện môi trường
+như ý bạn; các cài đặt nhờ tham số đó sẽ có tác dụng mỗi khi bạn
+sử dụng môi trường.
+
+% =====================================================================
+
+%% \subsubsection{Common Parameters for all Theorem Sets}
+\subsubsection{Các tham số chung}
+
+\DescribeMacro\theorempreskipamount
+\DescribeMacro\theorempostskipamount
+\macro{theorempreskipamount} \macro{theorempreskipamount}\\ 
+%% These additional parameters affect the vertical space around 
+%% theorem environments:
+%% |\theorempreskipamount| and |\theorempostskipamount| define,
+%% respectively, the spacing before and after such an environment.
+%% These parameters apply for all theorem sets and can be manipulated
+%% with the ordinary length macros.  They are rubber lengths,
+%% (`\textsf{skips}'), and therefore can contain \texttt{plus} and
+%% \texttt{minus} parts.
+Các tham số bổ sung này ảnh hưởng đến khoảng cách theo chiều đứng --
+trên (|\theorempreskipamount|) và dưới (|\theorempostskipamount|) môi trường |THM|.
+Hai tham số này ảnh hưởng đến mọi môi trường |THM| và có thể điều chỉnh
+nhờ các lệnh thông thường điều khiển biến độ dài. Chúng là các chiều dài
+dạng |rubber|, vì thế có thể chứa các phần với dấu cộng hoặc trừ.
+
+%\subsubsection{Parameters for Individual Sets}
+\subsubsection{Cho từng THM cụ thể}
+
+%% The layout of individual theorem sets can be further determined
+%% by switches controlling the appearance of the headers and the
+%% header-body-layout:
+Cách thể hiện của mỗi |THM| có thể tinh chỉnh nhờ các lệnh điều khiển sau đây.
+
+\begin{description}
+\item
+\DescribeMacro\theoremstyle
+  \exmacro{theoremstyle\{\meta{style}\}}\\
+%%  The general structure of the 
+%%  theorem layout is defined via its |\theoremstyle|. |\ntheorem|
+%%  provides several predefined styles including those of
+%%  Frank Mittelbach's |theorem.sty| 
+	Xác định kiểu dáng của |THM|. Các kiểu được cung cấp với với |\ntheorem|
+	bao gồm cả kiểu có trong gói |theorem.sty|. Xem liệt kê các kiểu
+	ở Mục~\vref{sec:predefdstyles}.
+%  Additional styles can be defined by |\newtheoremstyle| 
+	Ở Mục~\vref{sec:newtheoremstyle} có nói về cách định nghĩa kiểu mới.
+\item
+\DescribeMacro\theoremheaderfont
+  \exmacro{theoremheaderfont\{\meta{fontcmds}\}}\\
+  %% The theorem header is set
+  %%in the font specified by \meta{fontcmds}.
+  Dùng \meta{fontcmds} để xác định |font| cho phần |header| của |THM|
+
+%%   In contrast to |theorem.sty|, |\theoremheaderfont| can be set 
+%%   individually for each environment type. 
+	Không như |theorem.sty|, lệnh |\theoremheaderfont| cho phép đổi
+	|font| cho từng kiểu |THM|.
+\item
+\DescribeMacro\theorembodyfont
+  \exmacro{theorembodyfont\{\meta{fontcmds}\}}\\
+  %The theorem body is set
+  %%in the font specified by \meta{fontcmds}.
+  Xác định |font| cho phần thân (nội dung) |THM|.
+\item 
+\DescribeMacro\theoremseparator
+  \exmacro{theoremseparator\{\meta{sep}\}}\\
+%%\meta{thing} %%separates the 
+%%   header from the body of the theorem-environment. 
+%%   E.g., \meta{thing} can be
+%%   ``:'' or ``.''.
+	Dùng \meta{sep} để ngăn cách phần |header| và phần thân của |THM|.
+	Thường thì \meta{sep} là dấu hai chấm (|:|) hoặc chấm (|.|).
+\item 
+\DescribeMacro\theoremindent
+%%   |\theoremindent{|\meta{dimen}|}| can be used to indent the theorem wrt.\
+%%   the surrounding text.
+	\exmacro{theoremindent\{\meta{dimen}\}}\\
+	dùng để xác định |indent| (khoảng cách so với lề bên trái).
+
+\DANGER
+%% It's a `\textsf(dimen)', so the user shouldn't try to specify a
+%% \texttt{plus} or \texttt{minus} part, cause this leads to an error.
+	Ở đây, \meta{dimen} là kích thước thật sự. Nếu bạn dùng kiểu |rubber|
+	với các dấu |plus| hoặc |minus| trong phần \meta{dimen}, bạn sẽ gặp lỗi.
+\item
+\DescribeMacro\theoremnumbering
+  \exmacro{theoremnumbering\{\meta{style}\}}\\
+%%   specifies the appearance of
+%%   the numbering of the theorem set. Possible \meta{styles} are
+   Kiểu đánh số cho |THM|. Các giá trị có thể là:
+  |arabic| (default), |alph|, |Alph|, |roman|,
+  |Roman|, |greek|, |Greek| và |fnsymbol|. 
+
+%%   Clearly, if a theorem-environment uses the counter of another
+%%   environment type, also the numbering style of that environment
+%%   is used. 
+	Rõ ràng, nếu môi trường |THM| sử dụng bộ đếm từ môi trường |XYZ| khác,
+	thì kiểu đánh số của môi trường |THM| sẽ thừa hưởng từ |XYZ|.
+\item
+\DescribeMacro\theoremsymbol
+  \exmacro{theoremsymbol\{\meta{thing}\}}\\
+%%   This is only active if
+%%   |ntheorem.sty| is loaded with option |[thmmarks]|. 
+%%   \meta{thing} is set as an endmark at the end of every instance
+%%   of the environment.
+%%   If no symbol should appear, say |\theoremsymbol{}|.
+	Lệnh này chỉ các tác dụng khi gói |ntheorem.sty| được nạp với tuỳ chọn |thmmarks|.
+	Ở đây, \meta{thing} sẽ được dùng như |endmark|, tức dấu kết thúc cho |THM|.
+	Nếu không muốn dùng |endmark| cho riêng môi trường |THM| nào, 
+	dùng lệnh |\theoremsymbol{}|.
+\end{description}
+
+%% The flexibility provided by these command should relieve the
+%% users from the ugly hacking in |\newtheorem| to fit most of  
+%% the requirements stated by publishers or supervisors.
+Nhờ các lệnh điều khiển trên, bạn có thể linh hoạt tạo ra các |THM| như ý,
+mà không phải nhọc công và phải quan tâm nhiều đến yếu tố kỹ thuật.
+
+\medskip
+\DescribeMacro\theoremclass\exmacro{theoremclass\{\meta{theorem-type}\}}\\
+%% With the command |\theoremclass{|\meta{theorem-type}|}| 
+%% (where \meta{theorem-type} must be an already defined theorem type),
+%% these parameters can be set to the values which were used when
+%% |\newtheorem| was called for \meta{theorem-type}. 
+Với lệnh này, \meta{theomrem-type} là kiểu |THM| đã được định nghĩa.
+Với cách gọi này, các thiết lập về kiểu dáng ?????????
+
+%% With |\theoremclass{LaTeX}|, the standard \LaTeX\ layout can be
+%% chosen.
+Với |\theoremclass{LaTeX}|, kiểu dáng chuẩn của \LaTeX{} cho các |THM|
+sẽ được dùng.
+
+%\subsubsection{Font Selection}
+\subsubsection{Lựa chọn font}
+
+%% From the document structuring point of view, theorem environments 
+%% are regarded as special parts inside a document. Furthermore,
+%% the theorem header is only a distinguished part of a theorem
+%% environment.
+Xét về mặt cấu trúc, mỗi |THM| là một phần đặc biệt
+của tài liệu, trong đó, phần |header| được thiết kế để dễ dàng
+phân biệt với phần còn lại của môi trường.
+%% Thus, |\theoremheaderfont| inherits characteristics of 
+%% |\theorembodyfont| which also inherits in characteristics of 
+%% the font of the surrounding environment.
+%% Thus, if for example |\theorembodyfont| is |\itshape| and 
+%% |\theoremheaderfont| is |\bfseries| the font selected for the 
+%% header will have the characteristics `bold extended italic'. 
+%% If this is not desired, the corresponding property has to be
+%% explicitly overwritten in |\theoremheaderfont|, e.g.
+%% by |\theoremheaderfont{\normalfont\bfseries}|
+Vì vậy, lệnh |\theoremheaderfont| thừa hưởng các đặc trưng của |\theorembodyfont|,
+và đến lượt mình, |\theorembodyfont| thừa hưởng các thuộc tính của phần
+tài liệu bên ngoài |THM| đang xét.
+
+\medskip
+Ví dụ:
+nếu |\theorembodyfont| là |\itshape| và |\theoremheaderfont| là |\bfseries|,
+thì phần |header| thực tế có kiểu \textbf{\textit{đậm và nghiêng}}.
+
+\medskip
+Nếu điều này làm bạn không vừa ý, cụ thể là bạn muốn phần |header|
+chỉ được in đậm, có thể làm như sau:
+\begin{example}
+  \theoremheaderfont{\normalfont\bfseries}
+\end{example}
+
+
+%% \subsubsection{Predefined theorem styles}
+\subsubsection{Các kiểu đã định nghĩa}
+
+\label{sec:predefdstyles}
+
+%% The following theorem styles are predefined, covering those
+%% from |theorem.sty|:
+Các kiểu dáng định lý sau đã có sẵn (như trong gói |theorem.sty|):
+\begin{deflist}{nonumberbreak:}
+   \item[plain]
+%%       This theorem style emulates the original \LaTeX{} definition,
+%%       except that additionally the parameters
+%%       |\theorem...skipamount| are used.
+		Như kiểu dáng của \LaTeX{} chuẩn,
+		ngoại trừ tham số bổ sung |\theorem...skipamount|  được dùng.
+   \item[break]
+%%       In this style, the theorem header is followed by a line break.
+		Phần |header| ngăn cách với phần thân |THM| bởi dòng mới\footnote{thực ra là một dấu ngắt dòng}.
+   \item[change]
+%%       Header number and text are interchanged, without a line break.
+		Chỉ số và tên |THM| hoán đổi vị trí. Tuy nhiên, phần
+		|header| sẽ theo sau ngay bởi phần thân |THM| (so sánh với kiểu
+   \item[changebreak]
+%%       Like \texttt{change}, but with a line break after the header.
+		Là sự kết hợp hai kiểu |change| và |break|.
+   \item[margin]
+%%       The number is set in the left margin, without a line break.
+		Chỉ số được bố trí ở lề trái, không ngắt dòng sau phần |header|.
+   \item[marginbreak]
+%%       Like \texttt{margin}, but with a line break after the header.
+		Như |margin|, nhưng ngắt dòng sau phần |header|.
+   \item[nonumberplain]
+%%       Like \texttt{plain}, without number (e.g.\ for proofs).
+		Như |plain|, nhưng không đánh số (dùng cho chứng minh,\ldots)
+   \item[nonumberbreak]
+%%       Like \texttt{break}, without number.
+		Tổ hợp |break| và |nonumberplain|.
+   \item[empty]
+%%       No number, no name. Only the optional argument is typeset.
+		Phần |header| chỉ gồm tên riêng (nếu có), còn chỉ số và tên của
+		|THM| được bỏ qua.
+\end{deflist}
+
+%\subsubsection{Default Setting}
+\subsubsection{Thiết lập mặc định}
+
+%% If no option is given, i.e.\ |ntheorem.sty| is loaded by
+%% |\usepackage{ntheorem.sty}|, the following default is set up:
+Khi không có tùy chọn nào được chỉ ra, nghĩa là gói |ntheorem.sty|
+được nạp đơn giản nhờ |\usepackage{ntheorem}|, các thiết lập sau
+sẽ được dùng:
+\begin{example} 
+  \theoremstyle{plain}
+  \theoremheaderfont{\normalfont\bfseries}
+  \theorembodyfont{\itshape}
+  \theoremseparator{}
+  \theoremindent0cm
+  \theoremnumbering{arabic}
+  \theoremsymbol{}
+\end{example}
+%% Thus, by only saying |\newtheorem{...}{...}|, the user gets
+%% the same layout as in standard \LaTeX.
+Vì vậy, bằng cách dùng |\newtheorem{...}{...}|, bạn thu được
+cách thể hiện giống hệt trong \LaTeX{} chuẩn.
+
+\subsubsection{A Standard Set of Theorems}\label{sec:standard}
+
+A standard configuration of theorem sets is provided within
+the file |ntheorem.std|, which will be included by the option
+|[standard]|. It uses the |amssymb| and |latexsym| (automatically
+loaded) packages and defines the following sets:
+\begin{nlist}{Definitions:}
+ \item[Theorems:] % |Theorem|, |Lemma|, |Proposition|,
+  |Corollary|, |Satz|, |Korollar|,
+ \item[Definitions:] |Definition|,
+ \item[Examples:] |Example|, |Beispiel|,
+ \item[Remarks:] |Anmerkung|, |Bemerkung|, |Remark|,
+ \item[Proofs:] |Proof| and |Beweis|.
+\end{nlist}
+These theorem sets seem to be the most frequently used environments 
+in english and german
+documents.
+
+The layout is defined to be theoremstyle |plain|, bodyfont |\itshape|,
+Headerfont |\bfseries|, and endmark (theoremsymbol)
+|\ensuremath{_\Box}| for all theorem-like environments\footnote{Note, 
+that mathmode is ensured for the symbol.}.
+For the definition-, remark- and example-like sets,
+the above setting is used, except bodyfont |\upshape|.
+The proof-like sets are handled a bit differently. There, the layout 
+is defined as theoremstyle |nonumberplain|, bodyfont |\upshape|,
+headerfont |\scshape| and endmark |\ensuremath{_\blacksquare}|. 
+For a more detailed information look at 
+|ntheorem.std| or at the code-section.
+
+\subsubsection{Customization and Local Settings}
+
+Since the user should not change |ntheorem.std|,
+we've added the possibility to use an own configuration-file.
+If one places the file |ntheorem.cfg| in the path searched by
+\TeX, this file is read automatically (if |[standard]|
+is not given). The usage of |ntheorem.cfg| can be prevented by the
+|[noconfig]| option. Thus, just
+a copy of |ntheorem.std| to |ntheorem.cfg| must be made
+which then can freely be modified by the user. Note, that if a 
+configuration-file exists, this will always be used (I.e.\ with 
+option |standard| and an existing configuration-file, the |.cfg| 
+file will be used and the |.std| file won't.
+
+\subsection{Generating Theoremlists}\label{sec:thmlists}
+
+\DescribeMacro\listtheorems
+Similar to the \LaTeX\ command |\listoffigures|, 
+any theorem set defined with a |\newtheorem| statement
+may be listed at any place in your document by
+\begin{quote}
+ |\listtheorems{|\meta{list}|}|
+\end{quote}
+The argument \meta{list} is a comma-separated list
+of the theorem sets to be listed. 
+For a theorem set \meta{name}, only the instances are listed 
+which are instantiated by |\begin{|\meta{name}|}|. Those
+instantiated by  |\begin{|\meta{name}|*}| are omitted
+(cf.\ |\section| and |\section*|).
+
+For example,
+ |\listtheorems{Corollary,Lemma}|
+leads to a list of all instances of one of the theorem sets 
+``Corollary'' or ``Lemma''.
+Note, that the set name given to the command is the first 
+argument which is specified by |\newtheorem| which is also
+the one to be used in |\begin{theorem} ... \end{theorem}|.
+
+If |\listtheorems| is called for a set name which is not defined
+via |\newtheorem|, the user is informed that a list is generated,
+but there will be no typeset output at all.
+
+\subsubsection{Defining the List Layout}
+
+\DescribeMacro\theoremlisttype
+Theoremlists can be formatted in different ways. Analogous to
+theorem layout, there are several predefined types which can be
+selected by
+\begin{quote}
+ |\theoremlisttype{|\meta{type}|}|
+\end{quote}
+The following four \meta{type}s are available (for examples, the
+user is referred to section \ref{sec:examples}).
+\begin{deflist}{allname}
+ \item[all] List any theorem of the specified set by number,
+   (optional) name and pagenumber. This one is also the
+  default value.
+ \item[allname] Like |all|, additionally with leading theoremname.
+ \item[opt] Analogous to |all|, but only the theorems which have an 
+    optional name are listed.
+ \item[optname] Like |opt|, with leading theoremname.
+\end{deflist}
+
+\subsubsection{Writing Extra Stuff to Theorem File}
+
+Similar to |\addcontentsline| and |\addtocontents|, 
+additional entries to theoremlists are supported.
+Since entries to theoremlists are a bit more intricate than
+entries to the lists maintained by standard \LaTeX\, 
+|\addcontentsline| and |\addtocontents| cannot be used in a
+straightforward way\footnote{for a theorem, its number has
+to be stored explicitly since different theorem sets can use
+the same counter. Also, it is optional to reset the counter for
+each section.}.
+
+\DescribeMacro\addtheoremline
+Analogous  to |\addcontentsline|, an extra entry for a theorem
+list can be made by
+\begin{quote}
+ |\addtheoremline{|\meta{name}|}{|\meta{text}|}|
+\end{quote}
+where \meta{name} is the name of a valid theorem set and \meta{text}
+is the text, which should appear in the list. For example, 
+\begin{quote}
+ |\addtheoremline{Example}{Extra Entry with number}|
+\end{quote}
+ \addtheoremline{Example}{Extra Entry with number}
+generates an entry with the following characteristics:
+\begin{itemize}
+ \item The Label of the theorem ``Example'' is used.
+ \item The current value of the counter for ``Example'' is used
+ \item The current pagenumber is used.
+ \item The specified text is the optional text for the theorem.
+\end{itemize}
+Thus, the above command has the same effect as it would be for
+\begin{quote}
+ |\begin{Example}[Extra Entry with number] \end{Example}|
+\end{quote}
+except, that there would be no output of the theorem, and the counter
+isn't advanced.
+
+\DescribeMacro{\addtheoremline*}
+Alternatively you can use
+\begin{quote}
+ |\addtheoremline*{Example}{Extra Entry}|
+\end{quote}
+ \addtheoremline*{Example}{Extra Entry}
+which is the same as above, except that the entry appears without
+number.
+
+\DescribeMacro\addtotheoremfile
+Sometimes, e.g.\ for long lists, special control sequences 
+(e.g.\ a pagebreak) or additional text should be inserted into a 
+list. This is done by
+\begin{quote}
+ |\addtotheoremfile[|\meta{name}|]{|\meta{text}|}|
+\end{quote}
+where \meta{name} is the name of a theorem set and
+\meta{text} is the text to be written into the theorem file.
+If the optional argument \meta{name} is omitted, the given
+text is inserted in every list, otherwise it is only inserted 
+for the given theorem set.
+
+\subsection{For Experts: Defining Layout Styles}
+\subsubsection{Defining New Theorem Layouts}\label{sec:newtheoremstyle}
+
+\DescribeMacro\newtheoremstyle
+Additional layout styles for theorems can be defined by
+\begin{quote}
+ |\newtheoremstyle{|\meta{name}|}{|\meta{head}|}{|\meta{opt-head}|}|.
+\end{quote} 
+After this, |\theoremstyle{|\meta{name}|}| is a valid
+|\theoremstyle|.
+Here, \meta{head} has to be a statement using two arguments, 
+|##1|, containing the keyword, and |##2|, containing the number. 
+\meta{opt-head} has to be a statement using three arguments where
+the additional argument |##3| contains the optional parameter.
+
+Since \LaTeX\ implements theorem-like environments by |\trivlist|s,
+both header declarations must be of the form
+|\item[... \theorem@headerfont ...]...|, where
+the dotted parts can be formulated by the user.
+If there are some statements producing
+output after the |\item[...]|, you have to care about implicit
+spaces.
+
+Because of the |@|, if |\newtheoremstyle| is used in a
+|.tex| file, it has to be put between |\makeatletter| and
+|\makeatother|.
+
+For details, look at the code documentation or the
+definitions of the predefined theoremstyles.
+
+\DescribeMacro\renewtheoremstyle
+Theorem styles can be redefined by |\renewtheoremstyle|, with the 
+same arguments as explained for |\newtheoremstyle|.
+
+\subsubsection{Defining New Theorem List Layouts}\label{sec:listtypes}
+
+\DescribeMacro\newtheoremlisttype
+Analogous, additional layouts for theorem lists can be defined by
+\begin{quote}
+ |\newtheoremlisttype{|\meta{name}|}{|\meta{start}|}{|\meta{line}%
+ |}{|\meta{end}|}|.
+\end{quote}
+The first argument, \meta{name}, is the name of the listtype, 
+which can the be used as a valid |\theoremlisttype|. 
+\meta{start} is the sequence of commands to be executed at
+the very beginning of the list. 
+Corresponding, \meta{end} will be executed at the end of the list. 
+These two are set to do nothing in the standard-types.
+\meta{line} is the part to be called for every entry of the list. 
+It has to be a statement using four arguments: |##1| will be 
+replaced with the name of the theorem, |##2| with the number, 
+|##3| with the theorem's optional text and |##4| with the pagenumber.
+
+WARNING: Self-defined Layouts will break with the |hyperref|-package.
+
+\DescribeMacro\renewtheoremlisttype
+Theorem list types can be redefined by |\renewtheoremlisttype|, with 
+the same arguments as explained for |\newtheoremlisttype|.
+
+\subsection{Setting End Marks}
+
+The automatic placement of endmarks is activated by calling
+|ntheorem.sty| with the option |[thmmarks]|.
+Since then, the endmarks are set automatically, there are only 
+a few commands for dealing with very special situations.
+
+\DescribeMacro\qed
+\DescribeMacro\qedsymbol
+If in a single environment, the user wants to replace the standard
+endmark by some other, this can be done by saying |\qed|,
+if |\qedsymbol| has been defined by |\qedsymbol{|\meta{something}|}|
+(in option standard, |\qedsymbol| is defined to be the symbol
+used for proofs, since a potential use of this features is to
+close trivial corollaries without explicitly proving them).
+
+Additionally, if in a single environment of a theorem set, that 
+is defined without an endmark, the user wants to set an endmark, 
+this is done with |\qedsymbol| and |\qed| as described above.
+|\qedsymbol| can be redefined everywhere in the document.
+
+\DescribeMacro\NoEndMark
+\DescribeMacro\TheoremSymbol
+On the other hand, if in some situation, the user decides to set 
+the endmark manually (e.g.\ inside a figure or a minipage), the 
+automatic handling can be turned off by |\NoEndMark| for the
+current environment. 
+Then -- assumed that he current environment is of type \meta{name},
+the endmark can manually be set by just saying 
+|\|\meta{name}|Symbol|.
+
+Note that there must be no empty line in the input before the
+|\end{theorem}|, since then, the end mark is ignored (cf.\
+Theorem~\ref{ex-empty-line} in Section~\ref{sec:examples}).
+
+\subsection{Extended Referencing Features}
+
+The extended referencing features are activated by calling
+|ntheorem.sty| with the option |[thref]|.
+
+Often, when writing a paper, one changes propositions into
+theorems, theorems into corollaries, lemmata into remarks
+an so on. Then, it is necessary to adjust also the references,
+i.e., from ``|see Proposition~\ref{completeness}|'' to
+``|see Theorem~\ref{completeness}|''. For relieving the user 
+from this burden, the type of the respective labeled entities
+can be associated with the label itself:
+
+\begin{quote}
+|\label{|\meta{label}|}[|\meta{type}|]| 
+\end{quote}
+associates the type \meta{type} with \meta{label}. \\
+This task is automated for theorem-like environments:
+
+\begin{quote}
+|\begin{Theorem}[|\meta{name}|]\label{|\meta{label}|}|
+\end{quote}
+is equivalent to
+\begin{quote}
+|\begin{Theorem}[|\meta{name}|]\label{|\meta{label}|}[Theorem]|
+\end{quote}
+
+The additional information is used by
+\DescribeMacro\thref
+\begin{quote}
+|\thref{|\meta{label}|}|
+\end{quote}
+which outputs the respective environment-type \emph{and} the number,
+e.g., ``Theorem~42''. Note that \LaTeX\ has to be run twice after
+changing labels (similar to getting references OK; in the 
+intermediate run, warnings about undefined reference types can
+occur).
+
+The |[thref]| option interferes with the |babel| package, thus in 
+this case, |ntheorem| has to be loaded \emph{after} |babel|. It also
+interferes with |amsmath|; see Section~\ref{sec:amslatex}.
+
+
+\subsection{Miscellaneous}
+
+Inside a theorem-like environment \meta{env}, the name given as optional 
+argument is accessible by |\|\meta{env}|name|. 
+
+\endinput
