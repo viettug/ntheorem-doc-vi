@@ -25,10 +25,11 @@ Các tuỳ chọn được cho nhờ \meta{options} như sau: % liên quan đế
 %%   file is used for activating a (user-defined) standard set of 
 %%   theorem environments.
 \item\DescribeOptions{standard,noconfig}\option{standard} \option{noconfig}\\
-	xem Mục~\vref{sec:standard}. Với một
-	trong hai tùy chọn |standard| và |noconfig|,
+	xem Mục~\vref{sec:standard} và Mục~\vref{sec:private.thm}.
+	Với một trong hai tùy chọn |standard| và |noconfig|,
 	bạn có thể lựa chọn việc sử dụng hoặc không tập hợp
 	các môi trường |THM| đã được định nghĩa sẵn.
+%% 	Mặc định là tùy chọn |noconfig|.
 %% \item[Compatibility with amsthm:] option [amsthm] provides 
 %%        compatibility with the theorem-layout
 %%       commands of the |amsthm|-package (see Section~\ref{sec:amslatex}).
@@ -381,299 +382,519 @@ sẽ được dùng:
 Vì vậy, bằng cách dùng |\newtheorem{...}{...}|, bạn thu được
 cách thể hiện giống hệt trong \LaTeX{} chuẩn.
 
-\subsubsection{A Standard Set of Theorems}\label{sec:standard}
+%% \subsubsection{A Standard Set of Theorems}
+\subsubsection{Các THM chuẩn}
+\label{sec:standard}
 
-A standard configuration of theorem sets is provided within
-the file |ntheorem.std|, which will be included by the option
-|[standard]|. It uses the |amssymb| and |latexsym| (automatically
-loaded) packages and defines the following sets:
+%% A standard configuration of theorem sets is provided within
+%% the file |ntheorem.std|, which will be included by the option
+%% |[standard]|. It uses the |amssymb| and |latexsym| (automatically
+%% loaded) packages and defines the following sets:
+Các |THM| chuẩn (được định nghĩa sẵn) có trong tập tin |ntheorem.std|,
+được nạp nhờ tùy chọn |standard| của gói. Khi dùng tuỳ chọn này,
+các gói phụ thuộc |amssymb| và |latexsymb| được nạp tự động.
+Danh sách các |THM| như sau đây, là các |THM| hay dùng nhất
+trong các tài liệu tiếng Anh và tiếng Đức:
 \begin{nlist}{Definitions:}
- \item[Theorems:] % |Theorem|, |Lemma|, |Proposition|,
+ \item[Theorems:]  |Theorem|, |Lemma|, |Proposition|,
   |Corollary|, |Satz|, |Korollar|,
  \item[Definitions:] |Definition|,
  \item[Examples:] |Example|, |Beispiel|,
  \item[Remarks:] |Anmerkung|, |Bemerkung|, |Remark|,
  \item[Proofs:] |Proof| and |Beweis|.
 \end{nlist}
-These theorem sets seem to be the most frequently used environments 
-in english and german
-documents.
+%% These theorem sets seem to be the most frequently used environments 
+%% in english and german
+%% documents.
 
-The layout is defined to be theoremstyle |plain|, bodyfont |\itshape|,
-Headerfont |\bfseries|, and endmark (theoremsymbol)
-|\ensuremath{_\Box}| for all theorem-like environments\footnote{Note, 
-that mathmode is ensured for the symbol.}.
-For the definition-, remark- and example-like sets,
-the above setting is used, except bodyfont |\upshape|.
-The proof-like sets are handled a bit differently. There, the layout 
-is defined as theoremstyle |nonumberplain|, bodyfont |\upshape|,
-headerfont |\scshape| and endmark |\ensuremath{_\blacksquare}|. 
-For a more detailed information look at 
-|ntheorem.std| or at the code-section.
+%% The layout is defined to be theoremstyle |plain|, bodyfont |\itshape|,
+%% Headerfont |\bfseries|, and endmark (theoremsymbol)
+%% |\ensuremath{_\Box}| for all theorem-like environments\footnote{Note, 
+%% that mathmode is ensured for the symbol.}.
+Với các |THM| thuộc họ `|Theorems|', kiểu |THM| đưọc dùng là |plain|,
+với |font| của phần thân |THM| là |\itshape|, của phần |header|
+là |\bfseries|, dấu kết thúc môi trường là |\ensuremath{_\Box}|.
+%% For the definition-, remark- and example-like sets,
+%% the above setting is used, except bodyfont |\upshape|.
 
-\subsubsection{Customization and Local Settings}
+Với họ `|Definitions|', `|Remarks|' và `|Examples|', các thiết lập cũng
+tương tự, ngoại trừ phần |body| có |font|  là |\upshape|.
+%% The proof-like sets are handled a bit differently. There, the layout 
+%% is defined as theoremstyle |nonumberplain|, bodyfont |\upshape|,
+%% headerfont |\scshape| and endmark |\ensuremath{_\blacksquare}|. 
 
-Since the user should not change |ntheorem.std|,
-we've added the possibility to use an own configuration-file.
-If one places the file |ntheorem.cfg| in the path searched by
-\TeX, this file is read automatically (if |[standard]|
-is not given). The usage of |ntheorem.cfg| can be prevented by the
-|[noconfig]| option. Thus, just
-a copy of |ntheorem.std| to |ntheorem.cfg| must be made
-which then can freely be modified by the user. Note, that if a 
-configuration-file exists, this will always be used (I.e.\ with 
-option |standard| and an existing configuration-file, the |.cfg| 
-file will be used and the |.std| file won't.
+\medskip
+Riêng họ `|Proofs|' thì có vài điểm khác biệt nhỏ: họ này sử dụng
+kiểu |nonumberplain|, |font| cho phần thân là |\upshape|,
+cho phần |header| là |\scshape|, còn dấu kết thúc là |\ensuremath{_\blacksquare}|.
 
-\subsection{Generating Theoremlists}\label{sec:thmlists}
+\medskip
+Để biết thêm chi tiết, bạn có thể đọc trực tiếp mã nguồn
+các định nghĩa trong tập tin |ntheorem.std|.
+%% For a more detailed information look at 
+%% |ntheorem.std| or at the code-section.
+
+%% \subsubsection{Customization and Local Settings}
+\subsubsection{THM chuẩn cá nhân}
+\label{sec:private.thm}
+
+%% Since the user should not change |ntheorem.std|,
+%% we've added the possibility to use an own configuration-file.
+%% If one places the file |ntheorem.cfg| in the path searched by
+%% \TeX, this file is read automatically (if |[standard]|
+%% is not given). The usage of |ntheorem.cfg| can be prevented by the
+%% |[noconfig]| option. Thus, just
+%% a copy of |ntheorem.std| to |ntheorem.cfg| must be made
+%% which then can freely be modified by the user. Note, that if a 
+%% configuration-file exists, this will always be used (I.e.\ with 
+%% option |standard| and an existing configuration-file, the |.cfg| 
+%% file will be used and the |.std| file won't.
+Rõ ràng, mỗi người dùng có thể muốn có riêng mình các |THM|
+chuẩn, tương tự như các |THM| được cung cấp trong |ntheorem.std|.
+Tuy nhiên, không nên thay đổi tập tin |ntheorem.std|.
+Có các khác, hay hơn, là dùng tập tin |ntheorem.cfg|.
+Nội dung của |ntheorem.cfg| cũng tương tự như |ntheorem.std|,
+nơi đặt định nghĩa các môi trường |THM| hay dùng nhất (chuẩn)
+của người dùng.
+
+\medskip
+Nơi để tập tin |ntheorem.cfg| là bất kỳ đâu mà \TeX{} có thể tìm
+thấy. Điều đáng lưu ý là, tập tin này được nạp tự động,
+trừ khi bạn chỉ ra tuỳ chọn |noconfig| khi nạp gói |ntheorem|;
+và khi tập tin |ntheorem.cfg| được dùng, thì tập tin |ntheorem.std|
+sẽ bị bỏ qua, kể cả khi bạn dùng tùy chọn |standard| cho gói.
+
+%\subsection{Generating Theoremlists}
+\subsection{Danh sách THM}
+\label{sec:thmlists}
 
 \DescribeMacro\listtheorems
-Similar to the \LaTeX\ command |\listoffigures|, 
-any theorem set defined with a |\newtheorem| statement
-may be listed at any place in your document by
-\begin{quote}
- |\listtheorems{|\meta{list}|}|
-\end{quote}
-The argument \meta{list} is a comma-separated list
-of the theorem sets to be listed. 
-For a theorem set \meta{name}, only the instances are listed 
-which are instantiated by |\begin{|\meta{name}|}|. Those
-instantiated by  |\begin{|\meta{name}|*}| are omitted
-(cf.\ |\section| and |\section*|).
+%% Similar to the \LaTeX\ command |\listoffigures|, 
+%% any theorem set defined with a |\newtheorem| statement
+%% may be listed at any place in your document by
+Tương tự, như lệnh \LaTeX{} chuẩn |\listoffigures|,
+danh sách các |THM| được định nghĩa với |\newtheorem|
+có thể được liệt kê nhờ lệnh |\listtheorems|:
+\begin{command}
+  \listtheorems{`\meta{list}'}
+\end{command}
+%% The argument \meta{list} is a comma-separated list
+%% of the theorem sets to be listed. 
+%% For a theorem set \meta{name}, only the instances are listed 
+%% which are instantiated by |\begin{|\meta{name}|}|. Those
+%% instantiated by  |\begin{|\meta{name}|*}| are omitted
+%% (cf.\ |\section| and |\section*|).
+Đối số của lệnh là \meta{list}, danh sách các |THM| cần
+được liệt kê, trong đó các |THM| cách nhau bởi dấu phảy:
+%% For example,
+%%  |\listtheorems{Corollary,Lemma}|
+\begin{example}
+  \listheorems{theorem,thm,dinhly}
+\end{example}
+%% leads to a list of all instances of one of the theorem sets 
+%% ``Corollary'' or ``Lemma''.
+Trong ví dụ trên, các |THM| sẽ được liệt kê gồm |theorem|, |thm|,
+|dinhly| --- ở đây, |theorem|, |thm| và |dinhly| tương ứng
+với các môi trường |\begin{theorem}...|, |\begin{thm}...|,
+|\begin{dinhly}...| --- là các (môi trường) |THM| được tạo nhờ |\newtheorem|.
+Để ý rằng, các |THM| sao, ví dụ |\begin{dinhly*}...|, sẽ không
+có trong danh sách trên. Điều này cũng tương tự như
+các xử lý của |\section| và |\section*| trong lệnh |\tableofcontents|.
 
-For example,
- |\listtheorems{Corollary,Lemma}|
-leads to a list of all instances of one of the theorem sets 
-``Corollary'' or ``Lemma''.
-Note, that the set name given to the command is the first 
-argument which is specified by |\newtheorem| which is also
-the one to be used in |\begin{theorem} ... \end{theorem}|.
+%% Note, that the set name given to the command is the first 
+%% argument which is specified by |\newtheorem| which is also
+%% the one to be used in |\begin{theorem} ... \end{theorem}|.
 
-If |\listtheorems| is called for a set name which is not defined
-via |\newtheorem|, the user is informed that a list is generated,
-but there will be no typeset output at all.
+%% If |\listtheorems| is called for a set name which is not defined
+%% via |\newtheorem|, the user is informed that a list is generated,
+%% but there will be no typeset output at all.
+\medskip
+Nếu trong trong danh sách \meta{list} có |THM| nào đó chưa được định
+nghĩa (có thể do bạn gõ sai chính tả), danh sách |THM| vẫn được tạo ra,
+nhưng có thể trong kết quả xuất bạn không thấy gì cả! Gói sẽ cảnh
+báo bạn điều này.
 
-\subsubsection{Defining the List Layout}
+%% \subsubsection{Defining the List Layout}
+\subsubsection{Thay đổi kiểu danh sách THM}
 
 \DescribeMacro\theoremlisttype
-Theoremlists can be formatted in different ways. Analogous to
-theorem layout, there are several predefined types which can be
-selected by
-\begin{quote}
- |\theoremlisttype{|\meta{type}|}|
-\end{quote}
-The following four \meta{type}s are available (for examples, the
-user is referred to section \ref{sec:examples}).
+%% Theoremlists can be formatted in different ways. Analogous to
+%% theorem layout, there are several predefined types which can be
+%% selected by
+Danh sách các |THM| có thể thay đổi cách thể hiện.
+Điều này có thể làm được nhờ chọn kiểu cho danh sách:
+\begin{command}
+  \theoremlisttype{`\meta{type}'}
+\end{command}
+%% The following four \meta{type}s are available (for examples, the
+%% user is referred to section \ref{sec:examples}).
+Các giá trị có thể của \meta{type} như sau đây. Bạn có thể
+xem thêm ở Mục~\vref{sec:examples} về ví dụ:
 \begin{deflist}{allname}
- \item[all] List any theorem of the specified set by number,
-   (optional) name and pagenumber. This one is also the
-  default value.
- \item[allname] Like |all|, additionally with leading theoremname.
- \item[opt] Analogous to |all|, but only the theorems which have an 
-    optional name are listed.
- \item[optname] Like |opt|, with leading theoremname.
+ \item[all]
+%%  	List any theorem of the specified set by number,
+%%    (optional) name and pagenumber. This one is also the
+%%   default value.
+	Liệt kê các |THM| với các thông tin gồm chỉ số |THM|,
+	tên riêng (nếu có) của |THM| và số trang. Đây là kiểu mặc định.
+ \item[allname]
+%%  Like |all|, additionally with leading theoremname.
+	Tương tự |all|, nhưng có kèm theo tên |THM|.
+ \item[opt]
+%%  	Analogous to |all|, but only the theorems which have an 
+%%     optional name are listed.
+	Tương tự |all|, nhưng chỉ các |THM| có tên riêng mới được liệt kê.
+ \item[optname]
+%%  	Like |opt|, with leading theoremname.
+	Tương tự |opt|, nhưng kèm theo tên |THM|.
 \end{deflist}
 
-\subsubsection{Writing Extra Stuff to Theorem File}
+%% \subsubsection{Writing Extra Stuff to Theorem File}
+\subsubsection{Ghi thông tin vào danh sách THM}
 
-Similar to |\addcontentsline| and |\addtocontents|, 
-additional entries to theoremlists are supported.
-Since entries to theoremlists are a bit more intricate than
-entries to the lists maintained by standard \LaTeX\, 
-|\addcontentsline| and |\addtocontents| cannot be used in a
-straightforward way\footnote{for a theorem, its number has
-to be stored explicitly since different theorem sets can use
-the same counter. Also, it is optional to reset the counter for
-each section.}.
+%% Similar to |\addcontentsline| and |\addtocontents|, 
+%% additional entries to theoremlists are supported.
+%% Since entries to theoremlists are a bit more intricate than
+%% entries to the lists maintained by standard \LaTeX\, 
+%% |\addcontentsline| and |\addtocontents| cannot be used in a
+%% straightforward way\footnote{for a theorem, its number has
+%% to be stored explicitly since different theorem sets can use
+%% the same counter. Also, it is optional to reset the counter for
+%% each section.}.
+Tương tự hai lệnh |\addcontentsline| và |\addtocontents|,
+bạn có thể ghi thêm các thông tin bổ sung vào danh sách |THM|.%
+\footnote{%
+	Không thể dùng lệnh \texttt{\bslash addcontentsline} và \texttt{\bslash addtocontents}
+	một cách trực tiếp để ghi thông tin vào tập tin \texttt{.thm},
+	lý do là, so với các phần tử của bảng Mục lục, phần tử của danh sách \texttt{THM}
+	phức tạp hơn nhiều.%
+}
 
+\medskip
 \DescribeMacro\addtheoremline
-Analogous  to |\addcontentsline|, an extra entry for a theorem
-list can be made by
-\begin{quote}
- |\addtheoremline{|\meta{name}|}{|\meta{text}|}|
-\end{quote}
-where \meta{name} is the name of a valid theorem set and \meta{text}
-is the text, which should appear in the list. For example, 
-\begin{quote}
- |\addtheoremline{Example}{Extra Entry with number}|
-\end{quote}
+%% Analogous  to |\addcontentsline|, an extra entry for a theorem
+%% list can be made by
+Tương tự lệnh |\addtocontentsline|:
+\begin{command}
+  \addtheoremline{`\meta{name}'}{`\meta{text}'}
+\end{command}
+%% where \meta{name} is the name of a valid theorem set and \meta{text}
+%% is the text, which should appear in the list. For example, 
+với \meta{name} là |THM| (đã được định nghĩa) và \meta{text}
+là phần nội dung bạn muốn sẽ xuất hiện trong danh sách. Ví dụ
+\begin{example}
+  \addtheoremline{Example}{Extra Entry with number}
+\end{example}
  \addtheoremline{Example}{Extra Entry with number}
-generates an entry with the following characteristics:
+%% generates an entry with the following characteristics:
+sẽ sinh ra trong danh sách |THM| một phần tử với các thông tin sau:
 \begin{itemize}
- \item The Label of the theorem ``Example'' is used.
- \item The current value of the counter for ``Example'' is used
- \item The current pagenumber is used.
- \item The specified text is the optional text for the theorem.
+%%  \item The Label of the theorem ``Example'' is used.
+%%  \item The current value of the counter for ``Example'' is used
+%%  \item The current pagenumber is used.
+%%  \item The specified text is the optional text for the theorem.
+\item Nhãn của môi trường ``Example'',
+\item Chỉ số hiện tại của ``Example'',
+\item Số trang nơi lệnh trên xuất hiện
+\item Đoạn |Extra Entry with number| như là tên riêng của |THM|.
 \end{itemize}
-Thus, the above command has the same effect as it would be for
-\begin{quote}
- |\begin{Example}[Extra Entry with number] \end{Example}|
-\end{quote}
-except, that there would be no output of the theorem, and the counter
-isn't advanced.
+%% Thus, the above command has the same effect as it would be for
+Và như thế, kết quả ở trên giống hệt như khi bạn dùng
+\begin{example}
+  \begin{Example}[Extra Entry with number]
+  ...
+  \end{Example}
+\end{example}
+%% except, that there would be no output of the theorem, and the counter
+%% isn't advanced.
+ngoại trừ rằng không có nội dung nào của |THM| xuất hiện, và chỉ số
+|THM| vẫn giữ nguyên, không tăng.
 
+\medskip
 \DescribeMacro{\addtheoremline*}
-Alternatively you can use
-\begin{quote}
- |\addtheoremline*{Example}{Extra Entry}|
-\end{quote}
+%% Alternatively you can use
+Bạn cũng có thể dùng
+\begin{command}
+  \addtheoremline*{Example}{Extra Entry}
+\end{command}
  \addtheoremline*{Example}{Extra Entry}
-which is the same as above, except that the entry appears without
-number.
+%% which is the same as above, except that the entry appears without
+%% number.
+với kết quả tương tự khi dùng |\addtheoremline|, nhưng
+thông tin xuất hiện trong danh sách |THM| sẽ không có chỉ số |THM|.
 
+\medskip
 \DescribeMacro\addtotheoremfile
-Sometimes, e.g.\ for long lists, special control sequences 
-(e.g.\ a pagebreak) or additional text should be inserted into a 
-list. This is done by
-\begin{quote}
- |\addtotheoremfile[|\meta{name}|]{|\meta{text}|}|
-\end{quote}
-where \meta{name} is the name of a theorem set and
-\meta{text} is the text to be written into the theorem file.
-If the optional argument \meta{name} is omitted, the given
-text is inserted in every list, otherwise it is only inserted 
-for the given theorem set.
+%% Sometimes, e.g.\ for long lists, special control sequences 
+%% (e.g.\ a pagebreak) or additional text should be inserted into a 
+%% list. This is done by
+Có vài trường hợp, ví dụ khi danh sách |THM| quá dài, bạn có thể
+muốn thêm vài lệnh điều khiển, hoặc nội dung nào đó vào danh sách.
+Điều này có thể đạt được nhờ
+\begin{command}
+  \addtotheoremfile[`\meta{name}']{`\meta{text}'}
+\end{command}
+%% where \meta{name} is the name of a theorem set and
+%% \meta{text} is the text to be written into the theorem file.
+%% If the optional argument \meta{name} is omitted, the given
+%% text is inserted in every list, otherwise it is only inserted 
+%% for the given theorem set.
+với \meta{name} là |THM| nào đó, \meta{text} là mã lệnh hay đoạn văn,\ldots
+bạn muốn thêm vào danh sách |THM| \meta{name}.
+Tham số \meta{name} có thể bỏ qua, và khi đó,
+\meta{text} sẽ được chèn vào mọi danh sách.
 
-\subsection{For Experts: Defining Layout Styles}
-\subsubsection{Defining New Theorem Layouts}\label{sec:newtheoremstyle}
+%% \subsection{For Experts: Defining Layout Styles}
+\subsection{Định nghĩa kiểu (danh sách) THM}
+
+Chỉ đọc phần này nếu bạn có khả năng lập trình với \LaTeX{}.
+
+%% \subsubsection{Defining New Theorem Layouts}
+\subsubsection{Định nghĩa kiểu THM}
+
+\label{sec:newtheoremstyle}
 
 \DescribeMacro\newtheoremstyle
-Additional layout styles for theorems can be defined by
-\begin{quote}
- |\newtheoremstyle{|\meta{name}|}{|\meta{head}|}{|\meta{opt-head}|}|.
-\end{quote} 
-After this, |\theoremstyle{|\meta{name}|}| is a valid
-|\theoremstyle|.
-Here, \meta{head} has to be a statement using two arguments, 
-|##1|, containing the keyword, and |##2|, containing the number. 
-\meta{opt-head} has to be a statement using three arguments where
-the additional argument |##3| contains the optional parameter.
+%% Additional layout styles for theorems can be defined by
+Kiểu |THM| có thể định nghĩa như sau:
+\begin{command}
+  \newtheoremstyle{`\meta{name}'}{`\meta{head}'}{`\meta{opt-head}'}
+\end{command} 
+%% After this, |\theoremstyle{|\meta{name}|}| is a valid
+%% |\theoremstyle|.
+Sau lệnh trên, kiểu \meta{name} sẽ hợp lệ, và bạn có thể dùng \meta{name}
+làm đối só của lệnh |\theoremstyle|.
 
-Since \LaTeX\ implements theorem-like environments by |\trivlist|s,
-both header declarations must be of the form
-|\item[... \theorem@headerfont ...]...|, where
-the dotted parts can be formulated by the user.
-If there are some statements producing
-output after the |\item[...]|, you have to care about implicit
-spaces.
+\medskip
+%% Here, \meta{head} has to be a statement using two arguments, 
+%% |##1|, containing the keyword, and |##2|, containing the number. 
+%% \meta{opt-head} has to be a statement using three arguments where
+%% the additional argument |##3| contains the optional parameter.
+Ở đây, \meta{head} là nhóm các lệnh điều khiển,
+phải sử dụng hai tham số, |##1| (chứa từ khóa) và |##2|
+(chứa chỉ số). Phần \meta{opt-head} phải dùng tham số thứ ba |##3|,
+chứa phần tham số bổ sung.
 
-Because of the |@|, if |\newtheoremstyle| is used in a
-|.tex| file, it has to be put between |\makeatletter| and
-|\makeatother|.
+%% Since \LaTeX\ implements theorem-like environments by |\trivlist|s,
+%% both header declarations must be of the form
+%% |\item[... \theorem@headerfont ...]...|, where
+%% the dotted parts can be formulated by the user.
+%% If there are some statements producing
+%% output after the |\item[...]|, you have to care about implicit
+%% spaces.
+\medskip
+Vì \LaTeX{} tạo các |THM| nhờ |\trivlist|, cả hai phần khai báo \meta{head}
+và \meta{opt-head} phải có dạng |\item[... \theorem@headerfont ...]...|, ở đó phần |...|
+được thiết lập tuỳ ý bởi người dùng. Nếu nhóm lệnh nào đó sinh ra các
+nội dung (|output|) đằng sau |\item[...]|, bạn cần cẩn thận với các khoảng trắng.
 
-For details, look at the code documentation or the
-definitions of the predefined theoremstyles.
+\medskip
+%% Because of the |@|, if |\newtheoremstyle| is used in a
+%% |.tex| file, it has to be put between |\makeatletter| and
+%% |\makeatother|.
+Nếu phần khai báo có sử dụng tới các lệnh |@|, và nếu |\newtheoremstyle|
+sẽ được dùng trong tập tin |.tex|, bạn cần đặt lệnh |@| vào cặp |\makeatletter|
+và |\makeatother|.
 
+\medskip
+%% For details, look at the code documentation or the
+%% definitions of the predefined theoremstyles.
+Để biết thêm chi tiết, bạn xem tài liệu về mã nguồn của |ntheorem.sty|.
+
+\medskip
 \DescribeMacro\renewtheoremstyle
-Theorem styles can be redefined by |\renewtheoremstyle|, with the 
-same arguments as explained for |\newtheoremstyle|.
+%% Theorem styles can be redefined by |\renewtheoremstyle|, with the 
+%% same arguments as explained for |\newtheoremstyle|.
+Kiểu |THM| có thể định nghĩa lại, nhờ |\renewtheoremstyle|.
+Các dùng cũng tương tự như |\newtheoremstyle|.
 
-\subsubsection{Defining New Theorem List Layouts}\label{sec:listtypes}
+%% \subsubsection{Defining New Theorem List Layouts}
+\subsubsection{Định nghĩa kiểu danh sách THM}
+
+\label{sec:listtypes}
 
 \DescribeMacro\newtheoremlisttype
-Analogous, additional layouts for theorem lists can be defined by
-\begin{quote}
- |\newtheoremlisttype{|\meta{name}|}{|\meta{start}|}{|\meta{line}%
- |}{|\meta{end}|}|.
-\end{quote}
-The first argument, \meta{name}, is the name of the listtype, 
-which can the be used as a valid |\theoremlisttype|. 
-\meta{start} is the sequence of commands to be executed at
-the very beginning of the list. 
-Corresponding, \meta{end} will be executed at the end of the list. 
-These two are set to do nothing in the standard-types.
-\meta{line} is the part to be called for every entry of the list. 
-It has to be a statement using four arguments: |##1| will be 
-replaced with the name of the theorem, |##2| with the number, 
-|##3| with the theorem's optional text and |##4| with the pagenumber.
+%% Analogous, additional layouts for theorem lists can be defined by
+Kiểu danh sách |THM| có thể tinh chỉnh nhờ
+\begin{command}
+  \newtheoremlisttype{`\meta{name}'}{`\meta{start}'}{`\meta{line}'}{`\meta{end}'}
+\end{command}
+%% The first argument, \meta{name}, is the name of the listtype, 
+%% which can the be used as a valid |\theoremlisttype|. 
+%% \meta{start} is the sequence of commands to be executed at
+%% the very beginning of the list. 
+%% Corresponding, \meta{end} will be executed at the end of the list. 
+%% These two are set to do nothing in the standard-types.
+%% \meta{line} is the part to be called for every entry of the list. 
+%% It has to be a statement using four arguments: |##1| will be 
+%% replaced with the name of the theorem, |##2| with the number, 
+%% |##3| with the theorem's optional text and |##4| with the pagenumber.
+Tham số đầu tiên \meta{name} là tên của kiểu danh sách, sẽ được dùng
+cho làm đối số cho lệnh |\theoremlisttype|. Tham số \meta{start} (tương ứng, \meta{end})
+là chuỗi lệnh sẽ được thi hành mỗi khi bắt đầu (tương ứng, kết thúc) danh sách.
+(Trong các kiểu chuẩn, cả hai phần này đều rỗng.)
+Tham số \meta{line} là chuỗi lệnh được thực thi cho mỗi phần tử của danh sách;
+trong chuỗi lệnh này có thể sử dụng bốn tham số: |##1| sẽ đại diện cho
+tên |THM|, |##2| cho chỉ số, |##3| cho tên riêng và |##4| cho số trang.
 
-WARNING: Self-defined Layouts will break with the |hyperref|-package.
+\medskip
+%% 
+%% WARNING: Self-defined Layouts will break with the |hyperref|-package.
+\underline{\textsc{Chú ý:}} Các kiểu do người dùng định nghĩa có thể
+đụng độ với gói |hyperref|.
+%% 
 
+\medskip
 \DescribeMacro\renewtheoremlisttype
-Theorem list types can be redefined by |\renewtheoremlisttype|, with 
-the same arguments as explained for |\newtheoremlisttype|.
+%% Theorem list types can be redefined by |\renewtheoremlisttype|, with 
+%% the same arguments as explained for |\newtheoremlisttype|.
+Dùng để định nghĩa lại kiểu đã có.
 
-\subsection{Setting End Marks}
+%% \subsection{Setting End Marks}
+\subsection{Dấu kết thúc}
 
-The automatic placement of endmarks is activated by calling
-|ntheorem.sty| with the option |[thmmarks]|.
-Since then, the endmarks are set automatically, there are only 
-a few commands for dealing with very special situations.
+%% The automatic placement of endmarks is activated by calling
+%% |ntheorem.sty| with the option |[thmmarks]|.
+%% Since then, the endmarks are set automatically, there are only 
+%% a few commands for dealing with very special situations.
+Các dấu kết thúc sẽ tự động đặt vào cuối thân |THM| khi dùng tuỳ chọn
+|thmmarks| cho gói |ntheorem|. Vì sự tự động đó,
+một vài lệnh dưới đây dùng để xử lý
+các dấu kết thúc trong vài trường hợp rất đặc biệt.
 
+\medskip
 \DescribeMacro\qed
-\DescribeMacro\qedsymbol
-If in a single environment, the user wants to replace the standard
-endmark by some other, this can be done by saying |\qed|,
-if |\qedsymbol| has been defined by |\qedsymbol{|\meta{something}|}|
-(in option standard, |\qedsymbol| is defined to be the symbol
-used for proofs, since a potential use of this features is to
-close trivial corollaries without explicitly proving them).
+\DescribeMacro\qedsymbol\macro{qed} \macro{qedsymbol}\\
+%% If in a single environment, the user wants to replace the standard
+%% endmark by some other, this can be done by saying |\qed|,
+%% if |\qedsymbol| has been defined by |\qedsymbol{|\meta{something}|}|
+%% (in option standard, |\qedsymbol| is defined to be the symbol
+%% used for proofs, since a potential use of this features is to
+%% close trivial corollaries without explicitly proving them).
+Trong một môi trường đơn lẻ,\footnote{%
+Điều này có nghĩa, bạn muốn thay đổi dấu kết thúc cho
+một \texttt{THM} cụ thể nào đó mà thôi!}
+bạn có thể muốn thay dấu kết thúc chuẩn
+bởi dấu khác, theo ý bạn. Khi đó, hãy dùng |\qed|, nếu trước đó bạn
+đã định nghĩa dấu kết thúc bằng |\qedsymbol{|\meta{something}|}|
+(trong kiểu chuẩn ứng với tùy chọn |standard| của gói, |\qedsymbol| được
+định nghĩa là ký hiệu dùng cho môi trường |proof|, các hệ quả đơn giản
+không đi kèm với chứng minh tường minh).
 
-Additionally, if in a single environment of a theorem set, that 
-is defined without an endmark, the user wants to set an endmark, 
-this is done with |\qedsymbol| and |\qed| as described above.
-|\qedsymbol| can be redefined everywhere in the document.
+%% Additionally, if in a single environment of a theorem set, that 
+%% is defined without an endmark, the user wants to set an endmark, 
+%% this is done with |\qedsymbol| and |\qed| as described above.
+%% |\qedsymbol| can be redefined everywhere in the document.
+\medskip
+Ngoài ra, với một môi trường |THM| đơn lẻ mà khi định nghĩa bạn đã không chỉ
+ra dấu kết thúc cho |THM| đó, bạn vẫn có thể đặt dấu kết thúc
+nhờ |\qedsymbol| và |\qed| như vừa nói trên.
 
+\medskip
 \DescribeMacro\NoEndMark
 \DescribeMacro\TheoremSymbol
-On the other hand, if in some situation, the user decides to set 
-the endmark manually (e.g.\ inside a figure or a minipage), the 
-automatic handling can be turned off by |\NoEndMark| for the
-current environment. 
-Then -- assumed that he current environment is of type \meta{name},
-the endmark can manually be set by just saying 
-|\|\meta{name}|Symbol|.
+\macro{NoEndMark} \macro{TheoremSymbol}\\
+%% On the other hand, if in some situation, the user decides to set 
+%% the endmark manually (e.g.\ inside a figure or a minipage), the 
+%% automatic handling can be turned off by |\NoEndMark| for the
+%% current environment. 
+Trong một số trường hợp khác, bạn có thể muốn đặt dấu kết thúc vào vị trí
+đúng như bạn chỉ ra, ví dụ bên trong môi trường |figure| hay |minipage|.
+Khi đó, tính năng tự động đặt dấu kết thúc cho |THM| hiện tại
+có thể tắt nhờ |\NoEndMark|.
+%% Then -- assumed that he current environment is of type \meta{name},
+%% the endmark can manually be set by just saying 
+%% |\|\meta{name}|Symbol|.
+Sau khi gọi lệnh đó cho |THM| \meta{name}, bạn có thể đặt dấu kết thúc vào bất kỳ đâu,
+bằng cách gọi lệnh |\|\meta{name}|Symbol| --- chẳng hạn |\dinhlySymbol|.
+Đối với tài liệu này, việc gọi |\TheoremSymbol| sẽ cho \TheoremSymbol.
 
-Note that there must be no empty line in the input before the
-|\end{theorem}|, since then, the end mark is ignored (cf.\
-Theorem~\ref{ex-empty-line} in Section~\ref{sec:examples}).
+\medskip
+%% Note that there must be no empty line in the input before the
+%% |\end{theorem}|, since then, the end mark is ignored (cf.\
+%% Theorem~\ref{ex-empty-line} in Section~\ref{sec:examples}).
+Chú ý rằng, dòng cuối cùng trước khi kết thúc môi trường |THM|,
+ví dụ trước |\end{dinhly}|, không được là dòng trắng; bởi nếu không,
+dấu kết thúc sẽ bị bỏ qua.
+Xem thêm ví dụ \ref{ex-empty-line} về điều này ở Mục~\vref{sec:examples}.
 
-\subsection{Extended Referencing Features}
+%% \subsection{Extended Referencing Features}
+\subsection{Tham khảo mở rộng}
 
-The extended referencing features are activated by calling
-|ntheorem.sty| with the option |[thref]|.
+%% The extended referencing features are activated by calling
+%% |ntheorem.sty| with the option |[thref]|.
+Tính năng tham khảo mở rộng có thể kích hoạt nhờ tuỳ chọn
+|thref| khi nạp lớp |ntheorem|.
 
-Often, when writing a paper, one changes propositions into
-theorems, theorems into corollaries, lemmata into remarks
-an so on. Then, it is necessary to adjust also the references,
-i.e., from ``|see Proposition~\ref{completeness}|'' to
-``|see Theorem~\ref{completeness}|''. For relieving the user 
-from this burden, the type of the respective labeled entities
-can be associated with the label itself:
+\medskip
+%% Often, when writing a paper, one changes propositions into
+%% theorems, theorems into corollaries, lemmata into remarks
+%% an so on. Then, it is necessary to adjust also the references,
+%% i.e., from ``|see Proposition~\ref{completeness}|'' to
+%% ``|see Theorem~\ref{completeness}|''. For relieving the user 
+%% from this burden, the type of the respective labeled entities
+%% can be associated with the label itself:
+Thường thì khi soạn tài liệu, ta có thể thay đổi\footnote{Thay đổi ở đây,
+không có nghĩa là thay đổi nội dung, mà là thay đổi về tên gọi.}
+từ mệnh đề
+sang định lý, từ định lý sang hệ quả, từ bổ đề sang chú ý,
+\ldots. Khi sự thay đổi đó xảy ra, các tham khảo chéo cần phải
+phải đổi theo. Ví dụ, nếu trước đây bạn dùng 
+``|xem Mệnh đề~\ref{completeness}|'', thì bây giờ bạn có thể phải đổi
+thành ``|xem Bổ đề~\ref{completeness}|''. Rõ ràng, công việc đó
+quả là tỉ mỉ! Gói |ntheorem| cung cấp tính năng
+tham khảo chéo mở rộng, giúp bạn giải quyết vấn đề này.
+Lệnh
+\begin{command}
+  \label{`\meta{label}'}[`\meta{type}']
+\end{command}
+%% associates the type \meta{type} with \meta{label}.
+sẽ gán kiểu \meta{type} với nhãn \meta{label}.
+%% 
+%% \\
+%% This task is automated for theorem-like environments:
+%% \medskip
+Việc này được thực hiện tự động với các môi trường |THM|:
+\begin{command}
+  \begin{Theorem}[`\meta{name}']\label{`\meta{label}'}
+\end{command}
+%% is equivalent to
+tương đương với
+\begin{command}
+  \begin{Theorem}[`\meta{name}']\label{`\meta{label}'}[Theorem]
+\end{command}
 
-\begin{quote}
-|\label{|\meta{label}|}[|\meta{type}|]| 
-\end{quote}
-associates the type \meta{type} with \meta{label}. \\
-This task is automated for theorem-like environments:
+\medskip
+%% The additional information is used by
+\DescribeMacro\thref\macro{thref}
+\begin{command}
+  \thref{`\meta{label}'}
+\end{command}
+Bây giờ, lệnh gọi như trên sẽ sinh ra, chẳng hạn ``Định lý~42''.
+Để ý rằng, cần phải biên dịch tài liệu ít nhất hai lần sau khi có
+sự thay đổi về nhãn, để các tham khảo chéo được chính xác.
+%% which outputs the respective environment-type \emph{and} the number,
+%% e.g., ``Theorem~42''. Note that \LaTeX\ has to be run twice after
+%% changing labels (similar to getting references OK; in the 
+%% intermediate run, warnings about undefined reference types can
+%% occur).
 
-\begin{quote}
-|\begin{Theorem}[|\meta{name}|]\label{|\meta{label}|}|
-\end{quote}
-is equivalent to
-\begin{quote}
-|\begin{Theorem}[|\meta{name}|]\label{|\meta{label}|}[Theorem]|
-\end{quote}
-
-The additional information is used by
-\DescribeMacro\thref
-\begin{quote}
-|\thref{|\meta{label}|}|
-\end{quote}
-which outputs the respective environment-type \emph{and} the number,
-e.g., ``Theorem~42''. Note that \LaTeX\ has to be run twice after
-changing labels (similar to getting references OK; in the 
-intermediate run, warnings about undefined reference types can
-occur).
-
-The |[thref]| option interferes with the |babel| package, thus in 
-this case, |ntheorem| has to be loaded \emph{after} |babel|. It also
-interferes with |amsmath|; see Section~\ref{sec:amslatex}.
+%% The |[thref]| option interferes with the |babel| package, thus in 
+%% this case, |ntheorem| has to be loaded \emph{after} |babel|. It also
+%% interferes with |amsmath|; see Section~\ref{sec:amslatex}.
+\medskip
+Tuỳ chọn |thmref| ảnh hưởng tới gói |babel|, do đó, khi tuỳ chọn này
+được dùng, gói |ntheorem| cần phải nạp \underline{sau} gói |babel|.
+Tuỳ chọn cũng ảnh hưởng tới gói |amsmath|. Xem Mục~\vref{sec:amslatex}.
 
 
-\subsection{Miscellaneous}
+%% \subsection{Miscellaneous}
+\subsection{Linh tinh}
 
-Inside a theorem-like environment \meta{env}, the name given as optional 
-argument is accessible by |\|\meta{env}|name|. 
+%% Inside a theorem-like environment \meta{env}, the name given as optional 
+%% argument is accessible by |\|\meta{env}|name|. 
+\underline{Bên trong} môi trường |THM| \meta{env}, tên riêng của |THM|
+có thể lấy được nhờ |\|\meta{env}|name|. Chẳng hạn |\dinhlyname|
+sẽ cho tên riêng của |THM| |dinhly|.
 
 \endinput
