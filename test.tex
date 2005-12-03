@@ -1,9 +1,10 @@
 \documentclass[12pt]{article}
 
-\usepackage{ntheorem}
+\usepackage[thref,thmmarks,standard]{ntheorem}
 \usepackage[utf8x]{vietnam}
 
 \let\:\overline
+\def\cW{\mathrm{W}}
 
 \theoremstyle{marginbreak}
 \newtheorem{thm}{Định lý}
@@ -17,8 +18,10 @@
 \begin{document}
 
 \begin{thm}[Ánh xạ Weingarten]
+\label{test}
 Nếu $k_1$, $k_2$ là các giá trị riêng của ánh xạ Weingarten của $X$,
 thì $kk_1$, $kk_2$ là các giá trị riêng của ánh xạ Weingarten của $\:X$.
+Đây là \thmname.
 \end{thm}
 
 \begin{thm2}[Ánh xạ Weingarten]
@@ -26,4 +29,12 @@ Nếu $k_1$, $k_2$ là các giá trị riêng của ánh xạ Weingarten của $
 thì $kk_1$, $kk_2$ là các giá trị riêng của ánh xạ Weingarten của $\:X$.
 \end{thm2}
 
+\begin{Proof}
+Thật vậy, nếu $v$ là một véc tơ riêng ứng với giá trị riêng $k_1$ của $\cW$,
+thì $\cW(v)=k_1v$. Sử dụng (\ref{eq:W.W}), ta có
+$\:\cW(T^{-1}v) = k\cdot T^{-1}(k_1v)=kk_1\cdot T^{-1}v$.
+Vì $w=T^{-1}v\not=0$, ta có $w$ là véc tơ riêng của $\cW$ ứng với giá trị riêng $kk_1$.
+\end{Proof}
+
+Đây là ví dụ \thref{test}.
 \end{document}
