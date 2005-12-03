@@ -9,13 +9,14 @@
 %% (such as \textsc{Theorem} or \textsc{Remark}), a number 
 %% which serializes the instances of the same type throughout the
 %% document, and an optional name (such as ``Correctness Theorem'').
-Một môi trường tựa định lý, ta gọi tắt là |THM|, được minh họa
-như ở Hình~\ref{fig:THM}. Với mỗi |THM|, các tên |định lý|, |hệ quả|, |bổ đề|, |tiên đề|,
+Một môi trường tựa định lý, ta gọi tắt là (môi trường) |THM|,
+được minh họa như ở Hình~\ref{fig:THM}.
+Với mỗi |THM|, các tên |định lý|, |hệ quả|, |bổ đề|, |tiên đề|,
 |định nghĩa|, |ví dụ|, |ghi chú|, |chứng minh|,\ldots
 được gọi là \emph{tên của} |THM|.
 Phần |header| của |THM| bao gồm tên của |THM|, chỉ số của |THM|,
 tên tuỳ chọn (hay tên riêng) của |THM|. Phần nội dung của |THM|
-còn gọi là \emph{thân} của |THM|. Để ý rằng, tên của |THM| khác
+còn gọi là \emph{thân} (|body|) của |THM|. Để ý rằng, tên của |THM| khác
 với tên của môi trường |THM|.\footnote{Trong thực tế, thường tên
 của môi trường \texttt{THM} và tên của \texttt{THM} có sự tương ứng
 1-1, ví dụ \texttt{menhde} ứng với \texttt{Mệnh đề},
@@ -25,7 +26,7 @@ Trong ví dụ sau,
 \begin{example}
   \newtheorem{foobar}{Menh de}
 \end{example}
-ta có |THM| với tên là |Menh de|, nhưng tên của môi trường
+ta có |THM| |foobar|, với tên là |Menh de|, nhưng tên của môi trường
 tương ứng là |foobar|. Đôi khi, ta sẽ gọi \emph{môi trường} |THM| thay cho
 \emph{tên của môi trường} |THM|.
 %% dùng để chỉ loại của cấu trúc (ví dụ định lý hay
