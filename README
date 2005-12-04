@@ -1,6 +1,9 @@
 Bundle:
 	ntheorem-doc-vn
 
+License:
+	LPPL
+
 Title:
 	User's Manual for `ntheorem' package
 	(Vietnames version)
