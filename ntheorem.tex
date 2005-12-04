@@ -16,6 +16,7 @@
 \usepackage[utf8x]{vietnam}
 \usepackage{indentfirst}
 \usepackage{ktv-buildnum}
+\ifpdf
 \usepackage[
 	ps2pdf,
 	naturalnames=true,
@@ -25,12 +26,19 @@
 	pdfauthor={Wolfgang May - Andreas Schlechte. Translator: kyanh <kyanh@o2.pl>},
 	pdfsubject={displaymath},
 	pdfkeywords={typesetting, displaymath, theorem}]{hyperref}
+\else
+	\def\texorpdfstring#1#2{#1}
+\fi
 \usepackage{url}
 \usepackage{varioref}
 \usepackage[varioref]{vnhook}
 \usepackage[dvips]{graphicx}
 
 \usepackage[thmmarks,thref,noconfig]{ntheorem}
+
+\ifpdf
+\input pd1supp.def
+\fi
 
 % =====================================================================
 

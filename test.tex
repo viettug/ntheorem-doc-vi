@@ -2,10 +2,14 @@
 
 % =====================================================================
 
-\usepackage{amsmath}
-\usepackage[thref,thmmarks,standard,amsmath]{ntheorem}
-
 \usepackage[utf8x]{vietnam}
+
+\usepackage{amsmath}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{varioref}
+
+\usepackage[thref,thmmarks,standard,amsmath,hyperref]{ntheorem}
 
 % =====================================================================
 
@@ -47,4 +51,15 @@ Vì $w=T^{-1}v\not=0$, ta có $w$ là véc tơ riêng của $\cW$ ứng với gi
 \end{Proof}
 
 Đây là ví dụ về tham khảo mở rộng: Xem \thref{test} (cho bởi \verb#\thref{test}#)
+
+\begin{thm}[Nhị thức Newtown]
+Newtown đã tìm ra được
+\begin{equation}
+(a+b)^n=\sum_{k=0}^n{n\choose k}a^{n-k}b^k
+\end{equation}
+\end{thm}
+
+Danh sách các định lý:
+
+\listtheorems{thm,thm2}
 \end{document}
