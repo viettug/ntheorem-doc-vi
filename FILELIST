@@ -10,6 +10,7 @@
 ./src/README.src
 ./src/ntheorem-doc-vn.tex
 ./src/example.tex
+./src/license.tex
 ./src/intro.tex
 ./src/test.tex
 ./src/user-interface.tex
