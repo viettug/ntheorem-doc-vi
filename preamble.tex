@@ -10,12 +10,19 @@
 \newbox\yaktmpbox
 
 \newenvironment{thmbox}{%
-	\setbox\yaktmpbox=\hbox\bgroup%
-	\kern-\leftmargin
+	\setbox\yaktmpbox=%
+	\hbox\bgroup%
+	\kern-\leftmargin %
 	\kern-6.45pt % value found by try-and-error. What is the exact one?
-	\vbox\bgroup\ignorespaces%
+	\vbox\bgroup%
+	\kern-6pt
+	\ignorespaces%
 }{%
-	\egroup\egroup\fcolorbox{black}{yellow!20}{\box\yaktmpbox}%
+	\kern-10pt
+	\egroup%
+	\egroup%
+	\fcolorbox{black}{yellow!20}{\box\yaktmpbox}%
+	\ignorespacesafterend%
 }
 
 \lstnewenvironment{command}{%
