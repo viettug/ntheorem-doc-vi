@@ -1,8 +1,8 @@
 ./FILELIST
 ./README
 ./ntheorem-doc-vn.pdf
-./ntheorem/test.tex
-./ntheorem/test.pdf
+./test.tex
+./test.pdf
 
 ./src
 ./src/TODO

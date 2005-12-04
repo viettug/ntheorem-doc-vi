@@ -45,7 +45,7 @@ dist:
 	@rm -f distro/*$(VERSION).*
 	@cp *.tex TODO README.src src/
 	@zip -9r distro/$(DOC)-$(VERSION).zip \
-		README FILELIST \
+		README FILELIST COPYING \
 		$(DOC).pdf \
 		test.tex \
 		test.pdf \
