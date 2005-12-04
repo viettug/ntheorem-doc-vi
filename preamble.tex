@@ -18,7 +18,7 @@
 	\kern-6pt
 	\ignorespaces%
 }{%
-	\kern-10pt
+	\kern-pt
 	\egroup%
 	\egroup%
 	\fcolorbox{black}{yellow!20}{\box\yaktmpbox}%
@@ -27,12 +27,12 @@
 
 \lstnewenvironment{command}{%
   \lstset{columns=flexible,frame=single,backgroundcolor=\ifprint\color{white}\else\color{blue!20}\fi,%
-    xleftmargin=\fboxsep,xrightmargin=\fboxsep,escapeinside=`',gobble=1}\ttfamily}{}
+    xleftmargin=\fboxsep,xrightmargin=\fboxsep,escapeinside=`',gobble=1}\ttfamily\color{black}}{}
 \lstnewenvironment{example}[1][]{%
   \lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,frame=single,%
     backgroundcolor=\ifprint\color{white}\else\color{yellow!20}\fi,xleftmargin=\fboxsep,%
     xrightmargin=\fboxsep,gobble=1,%
-    }\lstset{#1}}{}
+    }\lstset{#1}\color{black}}{}
 \def\option#1{%
 	\ifprint
 		\fcolorbox{black}{white}{\texttt{#1}}\vspace*{.2cm}%
