@@ -1,128 +1,208 @@
-\section{Examples}\label{sec:examples}
+%% \section{Examples}
+\section{Ví dụ}
 
-The setting is as follows. 
-\begin{itemize}
- \item For Theorems:
-  \begin{verbatim}
-   \theoremstyle{marginbreak}
-   \theoremheaderfont{\normalfont\bfseries}\theorembodyfont{\slshape}
-   \theoremsymbol{\ensuremath{\diamondsuit}}
-   \theoremseparator{:}
-   \newtheorem{Theorem}{Theorem}\end{verbatim}
- \item For Lemmas:
-  \begin{verbatim}
-   \theoremstyle{changebreak}
-   \theoremsymbol{\ensuremath{\heartsuit}}
-   \theoremindent0.5cm
-   \theoremnumbering{greek}
-   \newtheorem{Lemma}{Lemma}\end{verbatim}
- \item For Corollaries:
-  \begin{verbatim}
-   \theoremindent0cm
-   \theoremsymbol{\ensuremath{\spadesuit}}
-   \theoremnumbering{arabic}
-   \newtheorem{Corollary}[Theorem]{Corollary}\end{verbatim}
- \item For Examples:
-  \begin{verbatim}
-   \theoremstyle{change}
-   \theorembodyfont{\upshape}
-   \theoremsymbol{\ensuremath{\ast}}
-   \theoremseparator{}
-   \newtheorem{Example}{Example}\end{verbatim}
- \item For Definitions:
-  \begin{verbatim}
-   \theoremstyle{plain}
-   \theoremsymbol{\ensuremath{\clubsuit}}
-   \theoremseparator{.}
-   \newtheorem{Definition}{Definition}\end{verbatim}
- \item For Proofs:
-  \begin{verbatim}
-   \theoremheaderfont{\sc}\theorembodyfont{\upshape}
-   \theoremstyle{nonumberplain}
-   \theoremseparator{}
-   \theoremsymbol{\rule{1ex}{1ex}}
-   \newtheorem{Proof}{Proof}\end{verbatim}
-\end{itemize}
-Note, that parts of the setting are inherited. For instance, the
-fonts are not reset before defining ``Lemma'', so the font setting 
-of ``Theorem'' is used.
+\label{sec:examples}
 
-\begin{Example}[Simple one]
- The first example is just a text. 
+%% The setting is as follows. 
+Các thiết lập được dùng như sau đây.
+Chú ý rằng, các thiết lập tuân theo nguyên tắc thừa kế. Ví dụ,
+thiết lập |font| không được khởi tạo về trạng thái bình thường khi ta
+khai báo môi trường |Lemma|, vì thế |Lemma| sẽ thừa kế các thiết lập
+của môi trường |Theorem|.
 
- In the next examples, it is shown how an endmark is put at a
- displaymath, a single equation and both types of eqnarrays.
+\medskip
+Một số ví dụ có dùng lệnh |\color| được cung cấp bởi gói |xcolor.sty|.
+
+\medskip 
+%% \begin{itemize}
+%%  \item For Theorems:
+%% \item 
+Định lý:
+\begin{command}
+  \theoremstyle{marginbreak}
+  \theoremheaderfont{\normalfont\bfseries}\theorembodyfont{\slshape}
+  \theoremsymbol{\ensuremath{\diamondsuit}}
+  \theoremseparator{:}
+  \newtheorem{Theorem}{Theorem}\end{command}
+%%  \item For Lemmas:
+%% \item 
+Bổ đề:
+\begin{command}
+  \theoremstyle{changebreak}
+  \theoremsymbol{\ensuremath{\heartsuit}}
+  \theoremindent0.5cm
+  \theoremnumbering{greek}
+  \newtheorem{Lemma}{Lemma}\end{command}
+%%  \item For Corollaries:
+%% \item
+ Hệ quả:
+\begin{command}
+  \theoremindent0cm
+  \theoremsymbol{\ensuremath{\spadesuit}}
+  \theoremnumbering{arabic}
+  \newtheorem{Corollary}[Theorem]{Corollary}\end{command}
+%%  \item For Examples:
+%% \item 
+Ví dụ:
+\begin{command}
+  \theoremstyle{change}
+  \theorembodyfont{\upshape}
+  \theoremsymbol{\ensuremath{\ast}}
+  \theoremseparator{}
+  \newtheorem{Example}{Example}\end{command}
+%%  \item For Definitions:
+%% \item
+ Định nghĩa
+\begin{command}
+  \theoremstyle{plain}
+  \theoremsymbol{\ensuremath{\clubsuit}}
+  \theoremseparator{.}
+  \newtheorem{Definition}{Definition}\end{command}
+%%  \item For Proofs:
+Chứng minh:
+\begin{command}
+  \theoremheaderfont{\sc}\theorembodyfont{\upshape}
+  \theoremstyle{nonumberplain}
+  \theoremseparator{}
+  \theoremsymbol{\rule{1ex}{1ex}}
+  \newtheorem{Proof}{Proof}\end{command}
+%% \end{itemize}
+%% Note, that parts of the setting are inherited. For instance, the
+%% fonts are not reset before defining ``Lemma'', so the font setting 
+%% of ``Theorem'' is used.
+
+%% \begin{thmbox}
+{\color{-red!75!green!50}
+\begin{Example}[Ví dụ đơn giản]
+%%  The first example is just a text. 
+Một chiều đi trên con đường này, Hoa điệp vàng trải dưới chân tôi,\ldots 
+
+%%  In the next examples, it is shown how an endmark is put at a
+%%  displaymath, a single equation and both types of eqnarrays.
+	Các ví dụ tiếp theo minh họa cho việc đặt các dấu kết thúc
+	ở các biểu thức toán, phương trình đơn lẻ và các dãy phương trình.
 \end{Example}
+%% \end{thmbox}
+}
 
-\begin{Theorem}[Long Theorem]
- The examples are put into this theorem environment. 
+%% \begin{thmbox}
+{%\color{red!60}
+\begin{Theorem}[Định lý dài]
+\label{thm:verylong}
+%% The examples are put into this theorem environment. 
+Ví dụ về môi trường |Theorem|, lồng bên trong nó là
+các môi trường khác như |Example|, |Lemma|,\ldots Khi đang
+ở ngay trong môi trường |Theorem|, chữ có màu đen; khi ở trong
+các môi trường sâu hơn, màu của môi trường sẽ đổi khác để dễ phân biệt.
 
-The next example will not appear in the list of examples since
-it is written as
-\begin{quote}
- |\begin{Example*} ... \end{Example*}|
-\end{quote}
-\begin{Example*}[Ending with a displayed formula]
-Look, the endmark is really at the bottom of the line:
+\medskip
+%% The next example will not appear in the list of examples since
+%% it is written as
+Ví dụ tiếp theo sẽ không xuất hiện trong danh sách |Example|,
+vì nó được dùng với dạng sao:
+\begin{command}
+  \begin{Example*}
+    ...
+  \end{Example*}
+\end{command}
+{\color{red!60}
+\begin{Example*}%[Ending with a displayed formula]
+[kết thúc với biểu thức toán]
+%% Look, the endmark is really at the bottom of the line:
+Hãy để ý vị trí dấu kết thúc ở dưới dòng biểu diễn công thức
 \[ f^{(n)}(z) =
    \frac{n!}{2\pi i} \int \limits _{\partial D}
             \frac{f(\zeta)}{(\zeta-z)^{n+1}} d\zeta \]
-\end{Example*}
-At this point, we add an additional entry without number 
-in the Example list:
-\begin{verbatim}
-\addtheoremline*{Example}{Extra Entry}\end{verbatim}
+\end{Example*}}
+%% At this point, we add an additional entry without number 
+%% in the Example list:
+Bây giờ, ta sẽ ghi vài thông tin bổ sung vào danh sách |THM| (|Example|);
+thông tin được ghi sẽ không gồm chỉ số |THM|:
+\begin{command}
+  \addtheoremline*{Example}{Extra Entry}
+\end{command}
 \addtheoremline*{Example}{Extra Entry}
-\begin{Lemma}[Display with array]
-Lemmata are indented and numbered with greek symbols.
-Also for displayed arrays of this form, it looks good:
-\begin{verbatim}
-\[\begin{array}{l}
-     a = \begin{array}[t]{l}
-           first\ line \\
-           second\ line
+{\color{red!75!green}
+\begin{Lemma}%[Display with array]
+[Biểu thức trong mảng (dãy) phương trình]
+%% Lemmata are indented and numbered with greek symbols.
+%% Also for displayed arrays of this form, it looks good:
+Bổ để (|Lemma|) được thụt đầu dòng và đánh chỉ số với chữ số Hy Lạp.
+
+\medskip
+%% Ngoài ra, các biểu thức như sau đây trông có vẻ như ý:
+Xét ví dụ sau đây, trông có vẻ tốt:
+\begin{command}
+ \[\begin{array}{l}
+      a = \begin{array}[t]{l}
+            first\ line \\
+            second\ line
          \end{array}%
-     \mbox{try to put this text in the lowest line}\end{array}\] \end{verbatim}
-Just try to get this with the presented array structure ... without
-using dirty tricks, you can position the outer array either [t], [c],
-or [b], and you will not get the desired effect.
+     \mbox{\color{green}{try to put this text in the lowest line}}
+   \end{array}
+  \]
+\end{command}
+%% Just try to get this with the presented array structure ... without
+%% using dirty tricks, you can position the outer array either [t], [c],
+%% or [b], and you will not get the desired effect.
+Nhưng biểu diễn như trên mà không sử dụng các mẹo đặc biệt nào
+(thử để lựa chọn các vị trí |[t]|, |[c]|, |[b]|),
+kết quả có thể không như ý:
 \[\begin{array}{l}
-     a = \begin{array}[t]{l}
-           first\ line \\
-           second\ line
-         \end{array} \mbox{try to put this text in the lowest line}
+   a = \begin{array}[t]{l}
+         first\ line \\
+         second\ line
+       \end{array}%
+   \mbox{\color{green}{try to put this text in the lowest line}}
   \end{array}\]
-\end{Lemma}
-\begin{Lemma}[Equation]
-For |equation|s, we decided to put the endmark after the equation
-number, which is vertically centered.
-Currently, we do not know, how to get the equation number centered and
-the endmark at the bottom (one has to know the internal height of the
-math material) ... If anyone knows, please inform us.
+\end{Lemma}}
+{\color{green!75!red}
+\begin{Lemma}[Phương trình]
+%% For |equation|s, we decided to put the endmark after the equation
+%% number, which is vertically centered.
+%% Currently, we do not know, how to get the equation number centered and
+%% the endmark at the bottom (one has to know the internal height of the
+%% math material) ... If anyone knows, please inform us.
+Với các phương trình có đánh số, dấu kết thúc sẽ được đặt sau chỉ số
+phương trình, và được canh giữa theo chiều đứng. Hiện tại, chưa có thuật
+toán để bố trí chỉ số phương trình canh giữa (theo chiều đứng),
+còn dấu kết thúc lại được đặt vào cuối phương trình --- việc này đỏi hòi
+phải biết chiều cao của nội dung phương trình. Nếu ai đó biết,
+vui lòng báo cho tác giả của |ntheorem|.
 \begin{equation}
  \int_{\gamma} f(z)\, dz := \int_a^b f(\gamma (t)) \gamma'(t) \, dt
 \end{equation}
-\end{Lemma}
+\end{Lemma}}
 
-With the |break|-theoremstyles, if the environment is labeled and 
-written as
-\begin{quote}
-|\begin{Lemma}[Breakstyle]\label{breakstyle}|
-\end{quote}
+%% With the |break|-theoremstyles, if the environment is labeled and 
+%% written as
+Với kiểu |break|, nếu sử dụng việc đánh nhãn như sau
+\begin{command}
+  \begin{Lemma}[Breakstyle]\label{breakstyle}
+\end{command}
+{\color{red!75!green!50!blue}
 \begin{Lemma}[Breakstyle]\label{breakstyle}
-you see, there is a leading space \dots \\
-If a percent (comment) (or an explicit |\ignorespaces|) is put directly 
-after the label, e.g.
-\begin{quote}
- |\begin{Lemma}[Breakstyle]\label{breakstyle}%|, 
-\end{quote}
-the space disappears.
+%% you see, there is a leading space \dots \\
+%% If a percent (comment) (or an explicit |\ignorespaces|) is put directly 
+%% after the label, e.g.
+thì như bạn thấy, xuất hiện các khoảng trắng thừa \ldots \\
+Nếu dấu phần trăm (chú thích) được đặt ngay sau lệnh tạo nhãn
+(hoặc dùng lệnh |\ignorespaces|), ví dụ
+\begin{command}
+  \begin{Lemma}[Breakstyle]\label{breakstyle}% 
+\end{command}
+%% the space disappears.
+thì khoảng trắng thừa sẽ mất.
 
-From the predefined styles, this is exactly the case for the break-styles.
-That's no bug, it's \LaTeX-immanent.
+%% From the predefined styles, this is exactly the case for the break-styles.
+%% That's no bug, it's \LaTeX-immanent.
+\medskip
+Với các kiểu đã được định nghĩa bởi |ntheorem|, điều này chỉ xảy ra
+chỉ với kiểu |break|. Đây không phải là lỗi, mà chính là cách xử lý của \LaTeX{}.
 
-\noindent
-The example goes on with an |eqnarray|:
+\medskip
+%% The example goes on with an |eqnarray|:
+Ví dụ với |eqnarray|:
 \begin{eqnarray}
 f(z) &=&
    \frac{1}{2\pi i}
@@ -132,8 +212,9 @@ f(z) &=&
    \int \limits_0^{2\pi}
       f(z_0 + re^{it}) dt
 \end{eqnarray}
-\end{Lemma}
+\end{Lemma}}
 
+{\color{green}
 \begin{Proof}[of nothing]
 \begin{eqnarray*}
 f(z) &=&
@@ -144,27 +225,35 @@ f(z) &=&
    \int \limits_0^{2\pi}
       f(z_0 + re^{it}) dt
 \end{eqnarray*}
-\end{Proof}
-That's it (the end of the Theorem).
+\end{Proof}}
+%% That's it (the end of the Theorem).
+Đến đây là kết thúc Định lý~\ref{thm:verylong}.
 \end{Theorem}
+%% \end{thmbox}
+}
 
-
-If there are some environments in the same thm-environment,
-the last gets the endmark:
-\begin{Definition}[With a list]
+%% If there are some environments in the same thm-environment,
+%% the last gets the endmark:
+Nếu có nhiều môi trường cùng bên trong một môi trường |THM|,
+môi trường cuối cùng mới có dấu kết thúc
+\begin{Definition}[với danh sách]
 \begin{equation}
  \int_{\gamma} f(z)\, dz := \int_a^b f(\gamma (t)) \gamma'(t) \, dt
 \end{equation}
 \begin{itemize}
-\item you've seen, how it works for text and
-\item math environments,
-\item and it works for lists.
+%% \item you've seen, how it works for text and
+%% \item math environments,
+%% \item and it works for lists.
+\item như vậy, bạn đã thấy dấu kết thúc làm việc thế nào với văn bản
+\item với biểu thức toán
+\item và với danh sách.
 \end{itemize}
 \end{Definition}
 
 \begin{Corollary}[Q.E.D.]
-And here is a trivial corollary, which is ended by
-|\qedsymbol{\textrm{q.e.d}}| and |\qed|.
+%% And here is a trivial corollary, which is ended by
+Đây là hệ quả tầm thường, kết thúc bởi
+|\qedsymbol{\textrm{q.e.d}}|  và |\qed|.
 \qedsymbol{q.e.d}\qed
 \end{Corollary}
 
@@ -172,26 +261,33 @@ And here is a trivial corollary, which is ended by
 \[ f^{(n)}(z) =
    \frac{n!}{2\pi i} \int \limits _{\partial D}
             \frac{f(\zeta)}{(\zeta-z)^{n+1}} d\zeta \]
-If there is some text after an environment, the endmark is put
-after the text.
+%% If there is some text after an environment, the endmark is put
+%% after the text.
+Nếu có văn bản theo sau môi trường, dấu kết thúc sẽ đặt sau văn bản đó.
 \end{Example}
 
-The next one is done by the following sequence. Note, that 
-|~\hfill~| is inserted to prevent \LaTeX\ from using its nested list 
-management (a verbatim is also a trivlist),
-i.e.\ this causes \LaTeX\ to start the |verbatim|-Part in a new line.
-\begin{quote}
-|\begin{Example}| \\
-|~\hfill~| \\
-|\begin{verbatim}| \\
-|And, it also works for verbatim|\\
-|... when the \end{verbatim} is in the|\\
-|same line as the text ends. \end{verbatim}|\\
-|                           ^| this space is important !!\\
-|\end{Example}|
-\end{quote}
+%% The next one is done by the following sequence. Note, that 
+%% |~\hfill~| is inserted to prevent \LaTeX\ from using its nested list 
+%% management (a verbatim is also a trivlist),
+%% i.e.\ this causes \LaTeX\ to start the |verbatim|-Part in a new line.
+\medskip
+Ví dụ tiếp theo được cho bởi mã nguồn sau đây. Chú ý rằng,
+lệnh |~\hfill~| được chèn vào để ngăn cản \LaTeX{} quản lý danh sách lồng nhau
+theo cách của chính \LaTeX{} (môi trường |verbatim| là danh sách |\trivlist|).
+Có nghĩa là, việc này sẽ khiến \LaTeX{} bắt đầu môi trường |verbatim|
+với một dòng mới.
+\begin{command}
+  \begin{Example}
+  ~\hfill~
+  \begin{verbatim}
+  And, it also works for verbatim
+  ... when the \end{verbatim} is in the
+  same line as the text ends. \end{verbatim}
+                                ^ this space is important !!
+  \end{Example}
+\end{command}
 
-\begin{Example}[Using |verbatim|]
+\begin{Example}[dùng `verbatim']
 ~\hfill~
 \begin{verbatim}
 And, it also works for verbatim
@@ -199,14 +295,16 @@ And, it also works for verbatim
 same line as the text ends. \end{verbatim}
 \end{Example}
 
-There must be no empty line in the input before the |\end{theorem}|
-(since then, the end mark is ignored) \\
-\begin{quote}
-|\begin{Theorem}| \\ 
-|some text ... but no end mark| \\
-| | \\
-|\end{Theorem}|
-\end{quote}
+%% There must be no empty line in the input before the |\end{theorem}|
+%% (since then, the end mark is ignored) \\
+Không được chừa dòng trắng trước |\end{theorem}|, bởi làm thế
+sẽ bỏ qua dấu kết thúc.
+\begin{command}
+  \begin{Theorem}
+   some text ... but no end mark
+   
+  \end{Theorem}
+\end{command}
 
 \begin{Theorem}\label{ex-empty-line}
 some text ... but no end mark
@@ -214,53 +312,67 @@ some text ... but no end mark
 \end{Theorem}
 
 
-Now, there is a corollary which should appear with a different
-name in the list of corollaries:
-\begin{quote}
- |\begin{Corollary*}[title in text]\label{otherlabel}| \\
- |...|\\
- |\end{Corollary*}|
- |\addtheoremline{Corollary}{title in list}| \\
-\end{quote}
+%% Now, there is a corollary which should appear with a different
+%% name in the list of corollaries:
+Bây giờ là hệ quả sẽ xuất hiện với tên riêng hơi khác
+trong danh sách |Corollary|:
+\begin{command}
+  \begin{Corollary*}[title in text]\label{otherlabel}
+  ...
+  \end{Corollary*}
+  \addtheoremline{Corollary}{title in list}
+\end{command}
 \begin{Corollary*}[title in text]\label{otherlabel}\ignorespaces
 \begin{center}
-   It also works in the \\
-   center \\
-   environment.  
+   Thể hiện trong \\
+   môi trường \\
+   canh giữa.  
 \end{center}
 \end{Corollary*}
 \addtheoremline{Corollary}{title in list}
 
-\begin{Theorem}[Quote]
+\begin{Theorem}[trích dẫn]
 \begin{quote}
-In quote environments, the text is normally indented from left 
-and right by the same space. The endmark is not indented from the 
-right margin, i.e., it is typeset to the right margin of the
-surrounding text.
+%% In quote environments, the text is normally indented from left 
+%% and right by the same space. The endmark is not indented from the 
+%% right margin, i.e., it is typeset to the right margin of the
+%% surrounding text.
+Trong môi trường trích dẫn |quote|, nội dung thường được thụt vào ở tất
+cả các dòng ở cả bên trái và bên phải. Tuy nhiên, dấu kết thúc sẽ không
+vẫn được đặt đúng vào lề bên phải.
 \end{quote}
 \end{Theorem}
 
-Here is an example for turning off the endmark automatics and
-manual handling:
+%% Here is an example for turning off the endmark automatics and
+%% manual handling:
+Dưới đây là ví dụ về việc tắt/bật việc đặt dấu kết thúc tự động.
 
-\begin{verbatim}
-\begin{Theorem}[Manual End Mark]\label{somelabel}
-a line of text with a manually set endmark \hfill\TheoremSymbol \\
-some more text, but no automatic endmark set. \NoEndMark
-\end{Theorem}\end{verbatim}
+\begin{command}
+  \begin{Theorem}[Manual End Mark]\label{somelabel}
+  a line of text with a manually set endmark \hfill\TheoremSymbol\\
+  some more text, but no automatic endmark set. \NoEndMark
+  \end{Theorem}
+\end{command}
 
 \begin{Theorem}[Manual End Mark]\label{somelabel}
 a line of text with a manually set endmark \hfill\TheoremSymbol \\
 some more text, but no automatic endmark set. \NoEndMark
 \end{Theorem}
-Also, one should note, that |\hfill| is inserted to set
-the endmark at the right margin.
 
-\begin{Example}[Quickie] It also works for short one's. 
+%% Also, one should note, that |\hfill| is inserted to set
+%% the endmark at the right margin.
+Để ý rằng, lệnh |\hfill| được chèn vào trước dấu kết thúc
+để đặt dấu đó vào lề bên phải.
+
+\begin{Example}[nhanh hơn]
+%%  It also works for short one's. 
+Dấu kết thúc được tự động đặt trở lại...
 \end{Example}
 
-If you are tired of the greek numbers and the indentation for lemmata ... 
-you can redefine it:
+%% If you are tired of the greek numbers and the indentation for lemmata ... 
+%% you can redefine it:
+Nếu bạn không thích dùng chỉ số là chữ số Hy Lạp và cách thụt đầu dòng cho
+|Lemma|, bạn có thể định nghĩa lại:
 \theoremstyle{changebreak}
 \theoremheaderfont{\normalfont\bfseries}\theorembodyfont{\slshape}
 \theoremsymbol{\ensuremath{\heartsuit}}
@@ -269,180 +381,260 @@ you can redefine it:
 \theoremindent0cm
 \theoremnumbering{arabic}
 \renewtheorem{Lemma}{Lemma}
-\begin{quote}
-|\theoremstyle{changebreak}| \\
-|\theoremheaderfont{\normalfont\bfseries}\theorembodyfont{\slshape}| \\
-|\theoremsymbol{\ensuremath{\heartsuit}}|\\
-|\theoremsymbol{\ensuremath{\diamondsuit}}|\\
-|\theoremseparator{:}|\\
-|\theoremindent0.5cm|\\
-|\theoremnumbering{arabic}|\\
-|\renewtheorem{Lemma}{Lemma}|
-\end{quote}
+\begin{command}
+  \theoremstyle{changebreak}
+  \theoremheaderfont{\normalfont\bfseries}\theorembodyfont{\slshape}
+  \theoremsymbol{\ensuremath{\heartsuit}}
+  \theoremsymbol{\ensuremath{\diamondsuit}}
+  \theoremseparator{:}
+  \theoremindent0.5cm
+  \theoremnumbering{arabic}
+  \renewtheorem{Lemma}{Lemma}
+\end{command}
 \begin{Lemma}
-  another lemma, with arabic numbering ... note that the numbering
-  continues.
+%%   another lemma, with arabic numbering ... note that the numbering
+%%   continues.
+	Bây giờ là bổ đề khác, với cách đánh số dùng chữ số Ả Rập. Chú ý rằng
+	chỉ số vẫn tiếp tục tăng.
 \end{Lemma}
 
-the optional argument (i.e.\ the `theorem'-name) can be accessed by
-|\|\meta{env}|name|. 
+%% the optional argument (i.e.\ the `theorem'-name) can be accessed by
+%% |\|\meta{env}|name|. 
+Tham số bổ sung xác định tên riêng của |THM| có thể lấy được nhờ 
+chẳng hạn |\Theoremname| hoặc |Examplename|,\ldots --- điều này chỉ
+có thể làm bên trong môi trường |THM| hiện tại mà thôi.
 
-\begin{quote}
-|\begin{Theorem}[somename]|\\
-|Obviously, we are in Theorem~\Theoremname|.\\
-|\end{Theorem}|
-\end{quote}
-\begin{Theorem}[somename]
+\begin{command}
+  \begin{Theorem}[\color{red}{some name}\normalcolor]
+  Obviously, we are in Theorem~\Theoremname.
+  \end{Theorem}
+\end{command}
+\begin{Theorem}[\color{red}{some name}\normalcolor]
 Obviously, we are in Theorem~\Theoremname.
 \end{Theorem}
 
-This feature can e.g.\ be used for automatically generating
-executable code and a commented solution sheet:
-\begin{quote}
-|\begin{exercise}[quicksort]| \\
-\meta{the exercise text} \\
-|\begin{verbatimwrite}{solutions/\exercisename.c}|\\
-\meta{C-code} \\
-|\end{verbatimwrite}|\\
-|\verbatiminput{solutions/\exercisename.c}|\\
-|\end{exercise}|
-\end{quote}
-This will write the C-code to a file |solutions/quicksort.c| and 
-type it also on the solution sheet.
+%% This feature can e.g.\ be used for automatically generating
+%% executable code and a commented solution sheet:
+Tính năng có thể dùng, chẳng hạn để sinh ra tự động các mã
+cho môi trường chú thích, |verbatim|,\ldots:
+\begin{command}
+  \begin{exercise}[quicksort]
+   `\meta{the exercise text}'
+  \begin{verbatimwrite}{solutions/\exercisename.c}
+   `\meta{C-code}'
+  \end{verbatimwrite}
+  \verbatiminput{solutions/\exercisename.c}
+  \end{exercise}
+\end{command}
+%% This will write the C-code to a file |solutions/quicksort.c| and 
+%% type it also on the solution sheet.
+Đoạn mã trên sẽ viết mã \meta{C-code} vào tập tin |solutions/quicksort.c|,
+và sau đó nạp vào nhờ lệnh |\verbatiminput|.
 
-Now, we define an environment |KappaTheorem| which uses the same 
-style parameters as Theorems and is numbered together with
-Corollaries (Theorems are also numbered with Corollaries).
-Note that we define a complex header text and a complex end mark.
+%% Now, we define an environment |KappaTheorem| which uses the same 
+%% style parameters as Theorems and is numbered together with
+%% Corollaries (Theorems are also numbered with Corollaries).
+%% Note that we define a complex header text and a complex end mark.
+\medskip
+Bây giờ, ta định nghĩa môi trường |KappaTheorem| sử dụng cùng kiểu
+như môi trường |Theorem|, được đánh số tiếp theo các Hệ quả (|Corollary|)
+(các |Theorem| cũng được đánh số theo |Corollary|). Để ý rằng,
+ta sẽ đưa ra phần |header| và phần dấu kết thúc khá phức tạp.
 
-|\theoremclass{Theorem}|\\
-|\theoremsymbol{\ensuremath{a\atop b}}| \\
-|\newtheorem{KappaTheorem}[Corollary]{\(\kappa\)-Theorem}|
+\begin{command}
+  \theoremclass{Theorem}
+  \theoremsymbol{\ensuremath{a\atop b}}
+  \newtheorem{KappaTheorem}[Theorem]{\(\kappa\)-Theorem}
+\end{command}
 
 \theoremclass{Theorem}
 \theoremsymbol{\ensuremath{a\atop b}}
 \newtheorem{KappaTheorem}[Theorem]{\(\kappa\)-Theorem}
 
 \begin{KappaTheorem}[1st \(\kappa\)-Theorem]\label{kappatheorem1}
-That's the first Kappa-Theorem. 
+Đây là định lý |kappa| đầu tiên. 
 \end{KappaTheorem}
 
-\subsection{Extended Referencing Features}\label{sec-ExtRef}[Section]
+% =====================================================================
 
-The standard |\label| command is extended by an optional argument
-which is intended to contain the ``name'' of the structure which
-is labeled, allowing more comfortable referencing; e.g., this
-section has been started with
+%% \subsection{Extended Referencing Features}
+\subsection{Tham khảo mở rộng}%
+\label{sec-ExtRef}[Mục]
 
-\begin{quote}
-|\subsection*{Extended Referencing Features}%|\\
-|\label{sec-ExtRef}[Section]|
-\end{quote}
+%% The standard |\label| command is extended by an optional argument
+%% which is intended to contain the ``name'' of the structure which
+%% is labeled, allowing more comfortable referencing; e.g., this
+%% section has been started with
+Lệnh |\label| chuẩn được mở rộng: bây giờ nó có thể nhận thêm tham số
+bổ sung dùng để xác định tên cấu trúc dùng để đánh nhãn -- nhờ đó
+việc tham khảo chéo được linh hoạt hơn.
+Ví dụ, mục này được đánh nhãn như sau:
+\begin{command}
+  \subsection*{....}%
+  \label{sec-ExtRef}[Mu.c]
+\end{command}
 
-As already stated, for theorem-like environments the optional 
-argument is filled in automatically, i.e., 
-\begin{quote}
+%% As already stated, for theorem-like environments the optional 
+%% argument is filled in automatically, i.e., 
+Như đã nói, với môi trường |THM|, phần tham số bổ sung của |\label|
+sẽ được tự động thêm vào. Do đó, 
+\begin{command}
 |\begin{Theorem}[Manual End Mark]\label{somelabel}|
-\end{quote}
-(cf.\ page~\pageref{somelabel}) is equivalent to
-\begin{quote}
+\end{command}
+%% (cf.\ page~\pageref{somelabel}) is equivalent to
+tương đương với (xem \vpageref{somelabel})
+\begin{command}
 |\begin{Theorem}[Manual End Mark]\label{somelabel}[Theorem]|
+\end{command}
+
+%% |\thref{|\meta{label}|}| additionally outputs the contents
+%% of the optional argument which has been associated with \meta{label}:
+Lệnh |\thref{|\meta{label}|}| sẽ sinh ra thông tin bổ sung, cho biết
+tên |THM| tương ứng với tham số bổ sung của |\label|. Ví dụ:
+
+\begin{command}
+  This is \thref{sec-ExtRef}
+  ... \thref{somelabel}
+  ... \thref{otherlabel}
+  ... \thref{kappatheorem1}
+\end{command}
+sẽ cho ta
+%% generates
+\begin{quote}
+This is \thref{sec-ExtRef}.
+  ... \thref{somelabel}
+  ... \thref{otherlabel}
+  ... \thref{kappatheorem1}
 \end{quote}
 
-|\thref{|\meta{label}|}| additionally outputs the contents
-of the optional argument which has been associated with \meta{label}:
+%% Here one must be careful that the handling of the optional 
+%% argument is automated
+%% only for environments defined by |\newtheorem|, i.e., \emph{not} 
+%% for sectioning, equations, or enumerations. 
+Phải cẩn thận: việc xử lý tham số bổ sung
+được tiến hành tự động chỉ cho các môi trường được định nghĩa nhờ |\newtheorem|,
+nghĩa là sẽ không có sự quản lý cho các Mục (|\section|),
+phương trình (|equation|) hay danh sách (|enumerate|).
 
-\begin{quote}
-|This is \thref{sec-ExtRef}| \\
-|A theorem end mark has been set manually in \thref{somelabel}.| \\
-|A center environment has been shown in \thref{otherlabel}.| \\
-|The first Kappa-Theorem has been given in \thref{kappatheorem1}.|
-\end{quote}
+%% Calling |\thref{|\meta{label}|}| for a label which has been
+%% set without an optional argument can result in different unintended
+%% results: If \meta{label} is not inside a theorem-like environment, an
+%% error message is obtained, otherwise the type of the surrounding
+%% theorem-like environment is output, e.g., calling |\thref{label}| 
+%% then results in ``Theorem~\meta{number}''!
+Việc gọi |\thref{|\meta{label}|}| cho các nhãn chưa được thiết lập với
+phần tham số bổ sung sẽ sinh ra các kết quả khó tưởng tượng: nếu \meta{label}
+không ở bên trong môi trường |THM|, lỗi sẽ sinh ra; ngược lại, tên |THM|
+hiện tại sẽ được dùng, ví dụ việc gọi |\thref{xxxlabel}|
+sẽ sinh ra chẳng hạn ``Định lý~\meta{number}''!
 
-generates
-\begin{quote}
-This is \thref{sec-ExtRef}. \\
-A theorem end mark has been set manually in \thref{somelabel}.
-A center environment has been shown in \thref{otherlabel}. 
-The first Kappa-Theorem has been given in \thref{kappatheorem1}.
-\end{quote}
+\medskip
+Chú ý rằng không có hỗ trợ cho các tham khảo chéo phức, như ``xem Định lý~5 và~7''.%
+\footnote{This would require plural-forms
+for different languages and handling of \texttt{\bslash ref}-lists, probably
+splitting into different sublists for different environments. If 
+someone is interested in programming this, please contact us;
+\color{red}{it seems to be algorithmically easy, but tedious.}}
 
-Here one must be careful that the handling of the optional 
-argument is automated
-only for environments defined by |\newtheorem|, i.e., \emph{not} 
-for sectioning, equations, or enumerations. 
+%% Additionally, currently there is no support for multiple references 
+%% such as ``see Theorems~5 and~7'' (this would require plural-forms
+%% for different languages and handling of |\ref|-lists, probably
+%% splitting into different sublists for different environments)\footnote{If 
+%% someone is interested in programming this, please contact us; it 
+%% seems to be algorithmically easy, but tedious.}.
 
-Calling |\thref{|\meta{label}|}| for a label which has been
-set without an optional argument can result in different unintended
-results: If \meta{label} is not inside a theorem-like environment, an
-error message is obtained, otherwise the type of the surrounding
-theorem-like environment is output, e.g., calling |\thref{label}| 
-then results in ``Theorem~\meta{number}''!
-Additionally, currently there is no support for multiple references 
-such as ``see Theorems~5 and~7'' (this would require plural-forms
-for different languages and handling of |\ref|-lists, probably
-splitting into different sublists for different environments)\footnote{If 
-someone is interested in programming this, please contact us; it 
-seems to be algorithmically easy, but tedious.}.
+%% \subsection{List of Theorems and Friends}
+\subsection{Danh sách THM}
 
-\subsection{List of Theorems and Friends}
+%% Note, that we put the following lists into the |quote|-environment
+%% to emphazise them from the surrounding text. So the lists
+%% are indented slightly at the margin.
+%% Chú ý rằng, ở đây các danh sách được bố trí trong các môi trường đặc biệt
+%% để nhấn mạnh kết quả, còn thực tế, chúng sẽ được thể hiện với lề trái
+%% khác ở đây một chút!.
 
-Note, that we put the following lists into the |quote|-environment
-to emphazise them from the surrounding text. So the lists
-are indented slightly at the margin.
+%% With 
+\medskip
+Với
+\begin{command}
+  \addtotheoremfile{Added into all theorem lists}
+\end{command}
+%% in every list, an additional line of text would be inserted.
+%% But it isn't actually done in this documentation since we want
+%% to use different list formats.
+thì ở mọi danh sách, dòng ``|Added into all theorem lists|''
+sẽ được chèn vào. Tuy nhiên, trong tài liệu này, ta không làm như thế,
+vì ta dùng định dạng khác của danh dách |THM|.
 
-With 
-\begin{quote}
-|\addtotheoremfile{Added into all theorem lists}|,
-\end{quote}
-in every list, an additional line of text would be inserted.
-But it isn't actually done in this documentation since we want
-to use different list formats.
+%% Only for the list of Examples, this one is added: 
+\medskip Để chèn chỉ danh sách các ví dụ (|Example|), có thể làm chẳng hạn
+\begin{command}
+  \addtotheoremfile[Example]{\color{blue}{Only concerning Example lists}}
+\end{command}
+\addtotheoremfile[Example]{\color{blue}{Only concerning Example lists}}
 
-Only for the list of Examples, this one is added: 
-\begin{quote}
- |\addtotheoremfile[Example]{Only concerning Example lists}|
-\end{quote}
-\addtotheoremfile[Example]{Only concerning Example lists}
+%% With
+\medskip
+Với
+\begin{command}
+  \theoremlisttype{all}
+  \listtheorems{Lemma} 
+\end{command}
+%% all lemmas are listed:
+mọi bổ đề sẽ được liệt kê
 
-With
-\begin{quote}
- |\theoremlisttype{all}| \\
- |\listtheorems{Lemma}|, 
-\end{quote}
-all lemmas are listed:
-\begin{quote}
+\bigskip
+{\color{red!75!green!50!blue}
  \theoremlisttype{all}
- \listtheorems{Lemma}
-\end{quote}
+ \listtheorems{Lemma}}
+\bigskip
 
-From the examples, only those are listed which have an optional name: 
-\begin{quote}
- |\theoremlisttype{opt}| \\
- |\listtheorems{Example}|
-\end{quote}
-leads to
-\begin{quote}
+%% From the examples, only those are listed which have an optional name: 
+Như ta thấy trong kết quả trên, xuất hiện dòng chỉ toàn dấu chấm.
+Ta sử dụng kiểu danh sách |opt| để liệt kê chỉ các bổ đề có tên riêng:
+\begin{command}
+  \theoremlisttype{opt}
+ \listtheorems{Example}
+\end{command}
+%% leads to
+cho ta kết quả
+
+\bigskip
+{\color{red!75!green!50!blue}
  \theoremlisttype{opt}
  \listtheorems{Example}
-\end{quote}
-One should note the line \emph{Only concerning example lists}, which
-was added by the |\addtotheoremfile|-statement above.
+}
 
-For the next list, another layout, using the |tabular|-environment, 
-is defined:
-\begin{verbatim}
+\bigskip
+%% One should note the line \emph{Only concerning example lists}, which
+%% was added by the |\addtotheoremfile|-statement above.
+Như ta thấy, dòng chữ ``\color{blue}{Only concerning Example lists}\normalcolor''
+xuất hiện ở cuối danh sách --- ta đã thêm dòng này nhờ |\addtotheoremfile|
+ở ví dụ trên.
+
+\medskip
+%% For the next list, another layout, using the |tabular|-environment, 
+%% is defined:
+Bây giờ ta định nghĩa kiểu danh sách mới, sử dụng môi trường |tabular|:
+\begin{command}
   \newtheoremlisttype{tab}%
-    {\begin{tabular*}{\linewidth}{@{}lrl@{\extracolsep{\fill}}r@{}}}%
+   {\begin{tabular*}{\linewidth}%
+    {@{}lrl@{\extracolsep{\fill}}r@{}}}%
     {##1&##2&##3&##4\\}%
-    {\end{tabular*}}\end{verbatim}
-Thus, by saying
-\begin{quote}
- |\theoremlisttype{tab}|\\
- |\listtheorems{Theorem,Lemma},|
-\end{quote}
-theorems and lemmata are listed:
-\begin{quote}
+   {\end{tabular*}}
+\end{command}
+%% Thus, by saying
+Sử dụng kiểu mới |tab| như sau:
+\begin{command}
+  \theoremlisttype{tab}
+  \listtheorems{Theorem,Lemma}
+\end{command}
+%% theorems and lemmata are listed:
+Các định lý và bổ đề sẽ được liệt kê theo kiểu mới:
+
+\bigskip
+{\color{red!75!green!50!blue}
+%% \begin{quote}
   \DeleteShortVerb{\|}
     \newtheoremlisttype{tab}%
     {\begin{tabular*}{\linewidth}{@{}lrl@{\extracolsep{\fill}}r@{}}}%
@@ -450,31 +642,46 @@ theorems and lemmata are listed:
     {\end{tabular*}}
    \theoremlisttype{tab}
    \listtheorems{Theorem,Lemma}
-  \MakeShortVerb{\|}
-\end{quote}
+  \MakeShortVerb{\|}%
+%% \end{quote}%
+}
 
-\LaTeX-lists can also be used to format the theoremlist.
-The input
-\begin{verbatim}
+\vskip-12pt
+
+%% \LaTeX-lists can also be used to format the theoremlist.
+%% The input
+Cũng có thể sử dụng môi trường tạo danh sách của \LaTeX{}
+để tạo kiểu mới như sau đây:
+\begin{command}
   \newtheoremlisttype{list}%
     {\begin{trivlist}\item}
     {\item[##2 ##1:]\ ##3\dotfill ##4}%
     {\end{trivlist}}
   \theoremlisttype{list}
-  \listtheorems{Corollary}\end{verbatim}
-leads to%
-\begin{quote}%
+  \listtheorems{Corollary}
+\end{command}
+%% leads to%
+Kết quả với kiểu mới bây giờ là
+
+{\color{red!75!green!50!blue}
+%% \begin{quote}%
 \DeleteShortVerb{\|}%
   \newtheoremlisttype{list}%
     {\begin{trivlist}}%
     {\item[##2 ##1:]\ ##3\dotfill ##4}%
     {\end{trivlist}}%
-  \theoremlisttype{list}\listtheorems{Corollary}%
+  \theoremlisttype{list}%
+  \listtheorems{Theorem}%
   \MakeShortVerb{\|}%
-\end{quote}%
-In this example, after the item, \verb*!\ ! is used instead of 
-\verb*! !, because in the latter case, |\dotfill| will produce an 
-error if the optional argument (|##3|) 
-is missing.
+%% \end{quote}%
+}
+
+%% In this example, after the item, \verb*!\ ! is used instead of 
+%% \verb*! !, because in the latter case, |\dotfill| will produce an 
+%% error if the optional argument (|##3|) 
+%% is missing.
+Trong ví dụ này, sau mỗi phần tử |\item| của danh sách,
+lệnh \verb*#\ # được dùng thay cho \verb*# #, vì trong trường hợp sau,
+lệnh |\dotfill| sẽ báo lỗi nếu phần tham số bổ sung |##3| không có.	
 
 \endinput
