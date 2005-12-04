@@ -1,0 +1,16 @@
+Below
+`$@':	stands for `ntheorem-doc-vn',
+`$':	stands for shell prompt.
+
+Preparing cross-references:
+	$ latex $@
+	$ latex $@
+
+If you're a *nix user:
+	$ sed -e 's/|hyperpage//g' $@.idx > $@.jdx
+	$ makeindex -s gind.ist -o $@.ind $@.jdx
+
+Finally:
+	$ latex $@
+	$ dvips $@.dvi -o$@.ps
+	$ ps2pdf $@.ps
