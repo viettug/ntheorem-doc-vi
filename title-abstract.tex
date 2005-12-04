@@ -1,21 +1,26 @@
-% =====================================================================
+\def\thanks#1{ $\langle$#1$\rangle$}
+
+\font\ftitle=vnrsc1728
+\font\fsign=vnrsc1200
 
 \title{%An Extension of the \LaTeX-Theorem Evironment%
 	%\thanks{This 
 	%         file has version number \fileversion{}, last revised \filedate.}
-	Mở rộng môi trường định lý của \LaTeX{}
+	\ftitle Mở rộng môi trường định lý% của \LaTeX{}
+	\vskip5mm
 }
 \author{%
+	\fsign
 	Wolfgang May\thanks{\url{may@informatik.uni-freiburg.de}}
-	\qquad 
-	Andreas Schlechte\thanks{\url{ntheorem@andreas-schlechte.de}}\\[2mm]
-	\emph{\underline{Biên dịch:}} kyanh\thanks{\url{kyanh@o2.pl}}%
+	\\[2mm]
+	\fsign Andreas Schlechte\thanks{\url{ntheorem@andreas-schlechte.de}}\\[3mm]
+	\emph{\fsign \underline{Biên dịch:}} \fsign kyanh\thanks{\url{kyanh@o2.pl}}%
 }
 \date{%
+	\vskip5mm
 	Bản dịch số \textbf{\the\buildnum}\\[2mm]
 	\fcolorbox{black}{red!20}{cho \textbf{ntheorem} bản \textbf{1.24} (2004/09/20)}}
-
-\maketitle          
+\maketitle
 
 % =====================================================================
 

@@ -13,15 +13,26 @@
 % =====================================================================
 
 \usepackage{latexsym}
-\usepackage[thmmarks,thref,noconfig]{ntheorem}
 \usepackage[utf8x]{vietnam}
 \usepackage{indentfirst}
 \usepackage{ktv-buildnum}
-\usepackage{hyperref}
+\usepackage[
+	ps2pdf,
+	naturalnames=true,
+	hypertexnames=false,
+	colorlinks,draft=false,
+	pdftitle={ntheorem Manual, Vietnamese edition},
+	pdfauthor={Wolfgang May - Andreas Schlechte. Translator: kyanh <kyanh@o2.pl>},
+	pdfsubject={displaymath},
+	pdfkeywords={typesetting, displaymath, theorem}]{hyperref}
 \usepackage{url}
 \usepackage{varioref}
 \usepackage[varioref]{vnhook}
-\usepackage{graphicx}
+\usepackage[dvips]{graphicx}
+
+\usepackage[thmmarks,thref,noconfig]{ntheorem}
+
+% =====================================================================
 
 \newif\ifprint
 \include{preamble}
@@ -29,7 +40,7 @@
 % =====================================================================
 
 \parindent0pt
-%\hfuzz2pt
+\hfuzz2000pt
 \setlength{\textwidth}{360pt}
 
 \setlength{\hoffset}{1cm}
@@ -86,48 +97,54 @@
 \theoremheaderfont{\normalfont\bfseries}\theorembodyfont{\slshape}
 \theoremsymbol{\ensuremath{\diamondsuit}}
 \theoremseparator{:}
-\newtheorem{Theorem}{Theorem}
+\newtheorem{Theorem}{Định lý}
 
 \theoremstyle{changebreak}
 \theoremsymbol{\ensuremath{\heartsuit}}
 \theoremindent0.5cm
 \theoremnumbering{greek}
-\newtheorem{Lemma}{Lemma}
+\newtheorem{Lemma}{Bổ đề}
 
 \theoremindent0cm
 \theoremsymbol{\ensuremath{\spadesuit}}
 \theoremnumbering{arabic}
-\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Corollary}[Theorem]{Hệ quả}
 
 \theoremstyle{change}
 \theorembodyfont{\upshape}
 \theoremsymbol{\ensuremath{\ast}}
 \theoremseparator{}
-\newtheorem{Example}{Example}
+\newtheorem{Example}{Ví dụ}
 
 \theoremstyle{plain}
 \theoremsymbol{\ensuremath{\clubsuit}}
 \theoremseparator{.}
-\newtheorem{Definition}{Definition}
+\newtheorem{Definition}{Định nghĩa}
 
 \theoremheaderfont{\sc}\theorembodyfont{\upshape}
 \theoremstyle{nonumberplain}
 \theoremseparator{}
 \theoremsymbol{\rule{1ex}{1ex}}
-\newtheorem{Proof}{Proof}%
+\newtheorem{Proof}{Chứng minh}%
 
 % =====================================================================
 
 \begin{document}
 
-%\input title-abstract
+\input title-abstract % //
+\newpage
+\tableofcontents
 \pagebreak
-%\input intro
-\input user-interface
-%\input interference
-%\input endmarks
-%\input help
+\input thanks
+\input intro % //
+\input user-interface % //
+\input interference % //
+%% %% %% %% \input endmarks % // for devels only
+\input help % // almost for devels only
+\input example
 
+\newpage
+\PrintIndexX
 \end{document}
 
 % =====================================================================
