@@ -1,34 +1,62 @@
-\section{The End Mark Algorithm}
+%% \section{The End Mark Algorithm}
+\section{Thuật toán đặt dấu kết thúc}
 
- \subsection{The Idea}
 
- The handling of endmarks with |thmmarks.sty| is based on the same
- two-pass principle as the handling of labels: the necessary information
- about endmarks is contained in the |.aux| file.
+%%  \subsection{The Idea}
+\subsection{Ý tưởng}
 
- With |thmmarks.sty|, \TeX\ is always aware whether it is in
- some theorem-like environment.
- There, potential positions for endmarks can be
+
+%%  The handling of endmarks with |thmmarks.sty| is based on the same
+%%  two-pass principle as the handling of labels: the necessary information
+%%  about endmarks is contained in the |.aux| file.
+Thuật toán xử lý dấu kết thúc của |ntheorem| được xây dựng cùng ý tưởng
+với việc xử lý các nhãn của \LaTeX{}: các thông tin cần thiết về dấu kết thúc
+sẽ được để trong tập tin |.aux|.
+
+\medskip
+%%  With |thmmarks.sty|, \TeX\ is always aware whether it is in
+%%  some theorem-like environment.
+%%  There, potential positions for endmarks can be
+Với gói |thmmarks|, \TeX{} luôn cẩn thận quan sát xem liệu nó có đang
+ở trong một môi trường |THM| hay không. Vị trí tương lai của
+dấu kết thúc có thể là
  \begin{enumerate}
-  \item\label{elist:1} at the end of simple text lines in open text, 
-  \item\label{elist:2} at the end of displaymaths, 
-  \item\label{elist:3} at the end of equations or equationarrays, or 
-  \item\label{elist:4} at the end of text lines at the end of lists (or, more general, 
-   |trivlists|, such as |verbatim| or |center|).
+  \item\label{elist:1} %at the end of simple text lines in open text, 
+  	cuối dòng văn bản đơn giản,
+  \item\label{elist:2}% at the end of displaymaths, 
+  	cuối một biểu thức toán,
+  \item\label{elist:3} %at the end of equations or equationarrays, or 
+  	cuối môi trường phương trình hoặc dãy phương trình,
+  \item\label{elist:4} %at the end of text lines at the end of lists (or, more general, 
+%%    |trivlists|, such as |verbatim| or |center|).
+	hoặc cuối dòng cuối của một danh sách (tổng quát hơn, của danh sách |\trivlist|,
+	như |verbatim| hoặc |center|).
  \end{enumerate}
 
- The problem is, that in the cases (\ref{elist:2})--(\ref{elist:4}), the endmarks has to
- be placed in a box which is already shipped out, when
- |\end{...}| is processed.
- Thus, in those situations, \TeX\ needs to know from the |.aux|
- file, whether is has to put an endmark.
+%%  The problem is, that in the cases (\ref{elist:2})--(\ref{elist:4}), the endmarks has to
+%%  be placed in a box which is already shipped out, when
+%%  |\end{...}| is processed.
+%%  Thus, in those situations, \TeX\ needs to know from the |.aux|
+%%  file, whether is has to put an endmark.
+	Vấn đề là, trong các trường hợp (\ref{elist:2})--(\ref{elist:4}),
+	dấu kết thúc phải được đặt trong một |box| đã được thể hiện xong (|shipped out|),
+	khi gặp kết thúc môi trường |THM| bởi |\end{...}|.
+	Vì vậy, ở các trường hợp này, \TeX{} cần đọc thông tin từ tập tin từ |.aux|
+	xem, liệu nó có phải đặt dấu kết thúc hay không.
 
- When \TeX\ is in a theorem-like environment and comes to one of 
- the points mentioned in (\ref{elist:2})--(\ref{elist:4}),
- and the |.aux| file says that there is an endmark, then
- it is put there.
- Anyway, it maintains a counter of the potential positions of an end 
- mark in the current theorem-like environment.
+%%  When \TeX\ is in a theorem-like environment and comes to one of 
+%%  the points mentioned in (\ref{elist:2})--(\ref{elist:4}),
+%%  and the |.aux| file says that there is an endmark, then
+%%  it is put there.
+\medskip
+	Khi \TeX{} đang  ở trong môi trường |THM| và gặp một trong
+	các thời điểm nói ở (\ref{elist:2})--(\ref{elist:4}),
+	đồng thời tập tin |.aux| cho biết rằng đến lúc đặt dấu kết thúc,
+	\TeX{} sẽ làm công việc đó.
+	
+%%  Anyway, it maintains a counter of the potential positions of an end 
+%%  mark in the current theorem-like environment.
+	
  When it comes to an |\end{theorem}|, it looks if it is in
  situation (\ref{elist:1}) (then the endmark is simply put at the end of the
  current line).
