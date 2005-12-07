@@ -5,11 +5,23 @@
 \usepackage[utf8x]{vietnam}
 
 \usepackage{amsmath}
-\usepackage{amsmath}
-\usepackage{hyperref}
-\usepackage{varioref}
-
+%\usepackage{varioref}
 \usepackage[thref,thmmarks,standard,amsmath,hyperref]{ntheorem}
+\usepackage[]{hyperref}
+
+% =====================================================================
+
+\makeatletter
+%% \def\thref#1{%
+%%    \csname r@#1@type\endcsname
+%%    \expandafter\ifx\csname r@#1@type\endcsname\None
+%%      \PackageWarning{\basename}{thref: Reference Type of `#1' on page
+%%       \thepage \space undefined}\G@refundefinedtrue
+%%      \else\csname r@#1@type\endcsname~\fi%
+%%    \csname r@#1@type\endcsname  
+%% %% \expandafter\@setref\csname r@#1\endcsname\@firstoftwo{#1}     
+%%    \ref{#1}}
+\makeatother
 
 % =====================================================================
 
@@ -29,16 +41,21 @@
 
 % =====================================================================
 
+\parindent0pt
+
 \begin{document}
 
+\section{Mục đầu tiên}
+\label{sec:test}
+
 \begin{thm}[Ánh xạ Weingarten]
-\label{test}
 Nếu $k_1$, $k_2$ là các giá trị riêng của ánh xạ Weingarten của $X$,
 thì $kk_1$, $kk_2$ là các giá trị riêng của ánh xạ Weingarten của $\:X$.
 Đây là \thmname.
 \end{thm}
 
 \begin{thm2}[Ánh xạ Weingarten]
+\label{test}
 Nếu $k_1$, $k_2$ là các giá trị riêng của ánh xạ Weingarten của $X$,
 thì $kk_1$, $kk_2$ là các giá trị riêng của ánh xạ Weingarten của $\:X$.
 \end{thm2}
@@ -50,16 +67,24 @@ $\:\cW(T^{-1}v) = k\cdot T^{-1}(k_1v)=kk_1\cdot T^{-1}v$.
 Vì $w=T^{-1}v\not=0$, ta có $w$ là véc tơ riêng của $\cW$ ứng với giá trị riêng $kk_1$.
 \end{Proof}
 
-Đây là ví dụ về tham khảo mở rộng: Xem \thref{test} (cho bởi \verb#\thref{test}#)
+\section{Mục tiếp theo}
 
 \begin{thm}[Nhị thức Newtown]
 Newtown đã tìm ra được
-\begin{equation}
+\begin{equation}\label{eq:W.W}
 (a+b)^n=\sum_{k=0}^n{n\choose k}a^{n-k}b^k
 \end{equation}
 \end{thm}
 
-Danh sách các định lý:
+\section{Kiểm tra}
+
+Tham khảo mở rộng: Xem \thref{test} (cho bởi \verb#\thref{test}#)
+
+\bigskip
+Tham khảo thường: Xem \ref{sec:test} (mục), \ref{eq:W.W} (phương trình)
+
+\bigskip
+Danh sách định lý:
 
 \listtheorems{thm,thm2}
 \end{document}

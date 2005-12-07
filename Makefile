@@ -12,8 +12,8 @@ latex:
 clean:
 	@clean
 	@0texclean
-	@rm -fv $(DOC).thm
-	
+	@rm -fv *.thm
+
 index:
 	@sed -e 's/|hyperpage//g' $(DOC).idx > $(DOC).jdx
 	@makeindex -s gind.ist -o $(DOC).ind $(DOC).jdx
@@ -43,7 +43,7 @@ dist:
 	@mkdir -p {src,distro}
 	@rm -fv src/*
 	@rm -f distro/*$(VERSION).*
-	@cp *.tex TODO README.src src/
+	@cp *.tex TODO README.src Makefile src/
 	@zip -9r distro/$(DOC)-$(VERSION).zip \
 		README FILELIST COPYING \
 		$(DOC).pdf \
@@ -58,5 +58,3 @@ example:
 	@latex test
 	@dvips test.dvi
 	@ps2pdf test.ps
-
-	

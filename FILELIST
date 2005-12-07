@@ -5,9 +5,9 @@
 ./test.tex
 ./test.pdf
 
-./src
 ./src/TODO
 ./src/README.src
+./src/Makefile
 ./src/ntheorem-doc-vn.tex
 ./src/example.tex
 ./src/license.tex
