@@ -7,7 +7,7 @@ Preparing cross-references:
 	$ latex $@
 
 If you're a *nix user:
-	$ sed -e 's/|hyperpage//g' $@.idx > $@.jdx
+	$ sed -e 's/|usage//g' $@.idx > $@.jdx
 	$ makeindex -s gind.ist -o $@.ind $@.jdx
 
 Finally:

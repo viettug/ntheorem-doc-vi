@@ -15,7 +15,7 @@ clean:
 	@rm -fv *.thm
 
 index:
-	@sed -e 's/|hyperpage//g' $(DOC).idx > $(DOC).jdx
+	@sed -e 's/|usage//g' $(DOC).idx > $(DOC).jdx
 	@makeindex -s gind.ist -o $(DOC).ind $(DOC).jdx
 
 doc: $(DOC)
@@ -24,7 +24,7 @@ $(DOC):
 	@rm -fv printctl.tex
 	@latex $@
 	@latex $@
-	@sed -e 's/|hyperpage//g' $@.idx > $@.jdx
+	@sed -e 's/|usage//g' $@.idx > $@.jdx
 	@makeindex -s gind.ist -o $@.ind $@.jdx
 	@latex $@
 	@dvips $@.dvi -o$@.ps
